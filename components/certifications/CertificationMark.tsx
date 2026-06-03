@@ -20,11 +20,13 @@ type CertificationMarkProps = {
   alt?: string;
 };
 
-const LOGO_IMAGE_IDS = new Set<CertId>(["bsti", "iso9001"]);
+function isLogoCertId(id: CertId): id is CertificationLogoId {
+  return id === "bsti" || id === "iso9001";
+}
 
 export function CertificationMark({ id, className, alt }: CertificationMarkProps) {
-  if (LOGO_IMAGE_IDS.has(id)) {
-    const src = CERTIFICATION_LOGOS[id as CertificationLogoId];
+  if (isLogoCertId(id)) {
+    const src = CERTIFICATION_LOGOS[id];
     const isBsti = id === "bsti";
     return (
       <div className={cn("relative flex items-center justify-center", className)}>
