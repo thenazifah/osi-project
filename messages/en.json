@@ -1,0 +1,518 @@
+{
+  "metadata": {
+    "title": "OSI — Global Fish Scale Exporter | Bulk B2B Supply",
+    "description": "Organic Scales International supplies pharmaceutical, cosmetic, and food-grade fish scales to buyers in 14+ countries. Request bulk quotes for tilapia, carp, and marine scale exports."
+  },
+  "nav": {
+    "wordmark": "OSI",
+    "tagline": "Export Grade. Global Scale.",
+    "about": "About",
+    "catalog": "Catalog",
+    "process": "Process",
+    "compliance": "Certifications",
+    "rfq": "RFQ",
+    "requestQuote": "Request Quote",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "markets": "Markets",
+    "faq": "FAQ",
+    "policy": "Policies",
+    "languages": {
+      "label": "Language",
+      "en": "English",
+      "ja": "Japanese",
+      "zh": "Chinese"
+    }
+  },
+  "trust": {
+    "badge": "Institutional Supplier",
+    "title": "Why procurement teams choose OSI",
+    "subtitle": "End-to-end export operations built for pharmaceutical, cosmetic, and food-grade scale supply at volume.",
+    "imageAlt": "Container ship at sea carrying international export freight",
+    "items": {
+      "iso": {
+        "title": "ISO-Aligned Quality",
+        "text": "Third-party lab verification and batch certification on every export lot."
+      },
+      "capacity": {
+        "title": "500MT Annual Capacity",
+        "text": "Scalable supply for recurring institutional programs and spot bulk orders."
+      },
+      "markets": {
+        "title": "14+ Export Markets",
+        "text": "Active shipments across Asia, Europe, Middle East, and the Americas."
+      },
+      "lab": {
+        "title": "Lab-Tested Output",
+        "text": "Pathogen screening, moisture analysis, and grade classification per spec."
+      },
+      "logistics": {
+        "title": "Export Logistics",
+        "text": "FOB Dhaka or CIF destination with full customs and phytosanitary support."
+      },
+      "sla": {
+        "title": "< 24h Quote SLA",
+        "text": "Dedicated procurement desk for RFQs, specs, and shipment coordination."
+      }
+    }
+  },
+  "hero": {
+    "sysLabel": "OSI.EXPORT.PLATFORM — EST. DHAKA, BD",
+    "platformBadge": "OSI.EXPORT.PLATFORM",
+    "headline1": "Precision-Grade",
+    "headline2": "Fish Scale",
+    "headline3": "Supply.",
+    "body": "Supplying pharmaceutical, cosmetic, and food-grade fish scale materials to institutional buyers across 14+ countries.",
+    "ctaPrimary": "Request Bulk Quote →",
+    "ctaSecondary": "Download Catalog ↓",
+    "statCountries": "14+ Countries",
+    "statProducts": "6 Product Lines",
+    "statIso": "ISO Compliant",
+    "marqueeLabel": "Export catalog",
+    "marqueeItems": {
+      "tilapia": "Tilapia Scales",
+      "carp": "Carp Scales",
+      "marine": "Marine Scales",
+      "moq": "MOQ Available",
+      "export": "Export Ready",
+      "origin": "Bangladesh Origin",
+      "pharma": "Pharmaceutical Grade"
+    },
+    "trustLine": "Trusted by institutional buyers in pharma, cosmetics, and food processing.",
+    "imageAlt": "Cargo containers prepared for international fish scale export",
+    "imageCaptionLabel": "Export corridor",
+    "imageCaption": "FOB Chittagong & Dhaka · CIF worldwide",
+    "capacityBadge": "Export ready"
+  },
+  "exportLogistics": {
+    "badge": "Sea Freight & Export",
+    "title": "From Dhaka to your port — full logistics control",
+    "subtitle": "OSI coordinates containerized sea freight, export declarations, and destination documentation so your procurement team receives compliant lots on schedule.",
+    "routeLabel": "Primary lane",
+    "routeValue": "Chittagong → APAC · EU · Americas",
+    "highlights": {
+      "fob": {
+        "title": "FOB & CIF programs",
+        "text": "Flexible incoterms with consolidation support for multi-container programs."
+      },
+      "docs": {
+        "title": "Export documentation",
+        "text": "COA, packing lists, certificates of origin, and phytosanitary bundles per lot."
+      },
+      "tracking": {
+        "title": "Shipment visibility",
+        "text": "Booking references, BL copies, and ETA updates shared with your desk."
+      }
+    },
+    "images": {
+      "heroAlt": "Container ship loaded for international export",
+      "cargo": "Container vessel at sea carrying export freight",
+      "port": "Container terminal and port cranes for bulk export",
+      "sea": "Cargo ship on open water — global delivery lane"
+    },
+    "cards": {
+      "cargo": {
+        "title": "Ocean freight",
+        "text": "Full-container and LCL options from Bangladesh ports to your destination."
+      },
+      "port": {
+        "title": "Port handling",
+        "text": "Stuffing, sealing, and customs clearance coordinated with licensed forwarders."
+      },
+      "sea": {
+        "title": "Global lanes",
+        "text": "Recurring programs to Japan, China, EU, Americas, and Middle East corridors."
+      }
+    }
+  },
+  "about": {
+    "label": "02 / INSTITUTIONAL PROFILE",
+    "title": "Built for Global\nProcurement Teams.",
+    "p1": "Organic Scales International is a Bangladesh fish scales exporter with deep sourcing networks across freshwater aquaculture regions. We supply export-grade raw materials to pharmaceutical manufacturers, cosmetic formulators, and food processors requiring consistent particle size, moisture content, and batch traceability.",
+    "p2": "Our operations prioritize sustainable harvesting partnerships and full chain-of-custody documentation. Every lot is traceable from collection point through drying, inspection, and export packaging — meeting institutional procurement standards for marine collagen raw material and bulk fish scales.",
+    "p3": "From our Dhaka procurement office, we coordinate FOB and CIF shipments to 14+ countries with dedicated export documentation, third-party lab certificates, and flexible MOQ structures for tilapia scales export and carp scale programs.",
+    "statYears": "Years of Export Operations",
+    "statCountries": "Countries Served",
+    "statCapacity": "Annual Export Capacity",
+    "statCategories": "Certified Scale Categories",
+    "imagePortAlt": "Export port with container handling for bulk shipments",
+    "imageExportAlt": "Stacked shipping containers ready for sea export",
+    "capabilitiesTitle": "Core capabilities",
+    "capabilities": {
+      "sourcing": {
+        "title": "Deep Sourcing Network",
+        "text": "Certified aquaculture partners across Bangladesh freshwater production zones."
+      },
+      "processing": {
+        "title": "Export Processing",
+        "text": "Sorting, cleaning, drying, and milling to client moisture and particle specs."
+      },
+      "docs": {
+        "title": "Documentation Ready",
+        "text": "COA, packing lists, certificates of origin, and compliance bundles per shipment."
+      }
+    }
+  },
+  "markets": {
+    "label": "02B / GLOBAL MARKETS",
+    "title": "Export corridors we\nserve today.",
+    "subtitle": "OSI coordinates recurring supply programs and spot bulk orders to institutional buyers worldwide, with grade-specific documentation for each destination market.",
+    "incotermsLabel": "Incoterms & freight",
+    "incoterms": "FOB Chittagong/Dhaka or CIF to your port. We support sea freight consolidation, reefer where required, and full export declaration packages for customs clearance at destination.",
+    "regions": {
+      "asiaPacific": {
+        "name": "Asia-Pacific",
+        "count": "6 markets",
+        "description": "Active supply to Japan, South Korea, China, Thailand, Vietnam, and Singapore for collagen and food-grade programs.",
+        "grades": "Pharma · Cosmetic · Food"
+      },
+      "europe": {
+        "name": "Europe",
+        "count": "4 markets",
+        "description": "Shipments to EU and UK buyers with full traceability documentation and allergen declarations.",
+        "grades": "Pharma · Cosmetic"
+      },
+      "middleEast": {
+        "name": "Middle East",
+        "count": "2 markets",
+        "description": "Halal-aligned processing available on request with dedicated batch records.",
+        "grades": "Food · Industrial"
+      },
+      "americas": {
+        "name": "Americas",
+        "count": "2 markets",
+        "description": "US and Canada institutional programs with MOQ-flexible scheduling and spec sheets.",
+        "grades": "Pharma · Custom"
+      }
+    }
+  },
+  "catalog": {
+    "label": "03 / PRODUCT CATALOG",
+    "subtitle": "Six export lines with documented MOQ, grade classification, and spec sheets available on request.",
+    "specsHint": "Technical data sheets include moisture %, particle size, and microbiological limits.",
+    "filterAll": "All",
+    "filterTilapia": "Tilapia",
+    "filterCarp": "Carp",
+    "filterMarine": "Marine",
+    "filterCustom": "Custom",
+    "moq": "MOQ: {kg}kg",
+    "viewSpecs": "View Specs →",
+    "categories": {
+      "tilapia": "Tilapia",
+      "carp": "Carp",
+      "marine": "Marine",
+      "custom": "Custom"
+    },
+    "tilapiaDriedPharma": {
+      "name": "Tilapia Dried Scales — Pharmaceutical Grade",
+      "description": "Low-moisture dried tilapia scales for collagen peptide extraction and pharmaceutical applications. Batch-tested for purity."
+    },
+    "tilapiaWetCollagen": {
+      "name": "Tilapia Wet Scales — Collagen Extract Grade",
+      "description": "Fresh-processed wet scales optimized for hydrolyzed collagen production. Ideal for cosmetic and nutraceutical manufacturers."
+    },
+    "carpFoodGrade": {
+      "name": "Carp Scales — Food Processing Grade",
+      "description": "Food-safe carp scales for gelatin, thickening agents, and specialty food applications. HACCP-aligned processing."
+    },
+    "carpCosmeticGrade": {
+      "name": "Carp Scales — Cosmetic Grade",
+      "description": "Refined carp scale material for premium skincare and beauty formulations. Consistent particle grading."
+    },
+    "marineIndustrial": {
+      "name": "Marine Mixed Scales — Industrial Grade",
+      "description": "Mixed marine species scales for industrial collagen, adhesive, and composite material applications at volume."
+    },
+    "customClientSpec": {
+      "name": "Custom Processed Scales — Client-Spec Grade",
+      "description": "Tailored drying, milling, and packaging per your technical specification. MOQ negotiable for dedicated programs."
+    }
+  },
+  "process": {
+    "label": "04 / TRACEABILITY WORKFLOW",
+    "title": "Traceability from pond to export container",
+    "subtitle": "Six controlled stages with lab release before any lot is cleared for international shipment.",
+    "imageAlt": "Cargo ship at sea — export delivery for institutional buyers",
+    "steps": {
+      "collection": {
+        "title": "Collection",
+        "description": "Sourced from certified aquaculture partners"
+      },
+      "sorting": {
+        "title": "Sorting",
+        "description": "Species and size classification"
+      },
+      "cleaning": {
+        "title": "Cleaning",
+        "description": "Decontamination and prep wash cycles"
+      },
+      "drying": {
+        "title": "Drying",
+        "description": "Controlled moisture reduction"
+      },
+      "inspection": {
+        "title": "Quality Inspection",
+        "description": "Lab sampling and grade certification"
+      },
+      "packaging": {
+        "title": "Packaging & Export",
+        "description": "Export-ready labeling and documentation"
+      }
+    },
+    "callouts": {
+      "iso": {
+        "label": "ISO Quality Assurance",
+        "text": "Every batch third-party verified"
+      },
+      "lab": {
+        "label": "Lab Tested Output",
+        "text": "Pathogen-free, grade-certified"
+      },
+      "export": {
+        "label": "Export Documentation",
+        "text": "Full compliance paperwork included"
+      }
+    }
+  },
+  "compliance": {
+    "label": "05 / CERTIFICATIONS & COMPLIANCE",
+    "title": "Verified credentials.\nExport-ready documentation.",
+    "subtitle": "OSI maintains current Bangladesh trade, quality, and environmental certifications required for institutional fish scale export programs.",
+    "badge": "Audit-Ready",
+    "download": "View certificate PDF",
+    "footnote": "Certificates available for buyer due diligence upon request. All documents are current and verified for export operations from Dhaka, Bangladesh.",
+    "certifications": {
+      "bsti": {
+        "name": "BSTI Certification",
+        "issuer": "Bangladesh Standards and Testing Institution",
+        "year": "2024",
+        "status": "Active"
+      },
+      "iso9001": {
+        "name": "ISO 9001:2015",
+        "issuer": "Accredited certification body",
+        "year": "2024",
+        "status": "Certified"
+      },
+      "tradeLicense": {
+        "name": "Trade License",
+        "issuer": "Dhaka City Corporation",
+        "year": "2024",
+        "status": "Valid"
+      },
+      "exportLicense": {
+        "name": "Export Registration",
+        "issuer": "Ministry of Commerce, Bangladesh",
+        "year": "2024",
+        "status": "Valid"
+      },
+      "irc": {
+        "name": "IRC Certificate",
+        "issuer": "National Board of Revenue (NBR)",
+        "year": "2024",
+        "status": "Valid"
+      },
+      "environmental": {
+        "name": "Environmental Clearance",
+        "issuer": "Department of Environment",
+        "year": "2023",
+        "status": "Compliant"
+      }
+    }
+  },
+  "faq": {
+    "label": "05B / PROCUREMENT FAQ",
+    "title": "Common questions\nfrom buyers.",
+    "subtitle": "Answers for sourcing managers evaluating Bangladesh fish scale suppliers for bulk programs.",
+    "supportLabel": "Need a custom answer?",
+    "supportText": "Email procurement@organicscales.com with your spec sheet — we respond within one business day.",
+    "items": {
+      "moq": {
+        "q": "What is the minimum order quantity?",
+        "a": "Standard MOQ is 500 kg per product line. Custom-processed grades start at 250 kg. Volume discounts apply above 2 MT per shipment."
+      },
+      "grades": {
+        "q": "Which grades do you supply?",
+        "a": "We export pharmaceutical, cosmetic, food-processing, and industrial grades across tilapia, carp, and marine categories, plus client-spec custom processing."
+      },
+      "shipping": {
+        "q": "What shipping terms do you offer?",
+        "a": "FOB Bangladesh or CIF to your port. We prepare commercial invoices, packing lists, certificates of origin, and lab COAs per batch."
+      },
+      "samples": {
+        "q": "Can we request pre-shipment samples?",
+        "a": "Yes. Sample kits (500 g–2 kg) are available for qualified institutional buyers after specification confirmation."
+      },
+      "payment": {
+        "q": "What are your payment terms?",
+        "a": "Typical terms are 30% advance, 70% against scanned BL copy. LC at sight available for established accounts."
+      },
+      "traceability": {
+        "q": "How is batch traceability handled?",
+        "a": "Each lot receives a unique batch ID linking collection date, processing stage, lab results, and export documentation."
+      }
+    }
+  },
+  "policy": {
+    "badge": "Legal & compliance",
+    "label": "05C / INSTITUTIONAL POLICIES",
+    "title": "Policies for\ninstitutional buyers.",
+    "subtitle": "Privacy, terms of use, and export quality standards governing how OSI handles data and commercial engagements.",
+    "tabs": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "quality": "Quality & Export"
+    },
+    "privacy": {
+      "intro": "Organic Scales International (OSI) respects the confidentiality of procurement inquiries and buyer data submitted through this website.",
+      "updated": "Last updated: May 2025. Contact procurement@organicscales.com for data requests.",
+      "sections": {
+        "s1": {
+          "title": "Information we collect",
+          "body": "We collect information you provide in RFQ forms (company name, contact details, product interest, quantities, and messages), technical logs (IP address, browser type), and communications you send to our procurement desk."
+        },
+        "s2": {
+          "title": "How we use information",
+          "body": "Data is used to respond to quotes, coordinate export shipments, maintain buyer records, improve our services, and meet legal obligations. We do not sell personal data to third parties."
+        },
+        "s3": {
+          "title": "Storage & security",
+          "body": "Inquiry data is stored in secured cloud infrastructure (Firebase/Google Cloud) with access restricted to authorized OSI staff. We apply industry-standard transport encryption (SSL/TLS) on this site."
+        },
+        "s4": {
+          "title": "Your rights",
+          "body": "Buyers may request access, correction, or deletion of personal data by emailing procurement@organicscales.com. We respond within 30 days where applicable under GDPR or local privacy laws."
+        }
+      }
+    },
+    "terms": {
+      "intro": "By using the OSI website and submitting procurement inquiries, you agree to the following terms.",
+      "updated": "Last updated: May 2025. Governing law: People's Republic of Bangladesh.",
+      "sections": {
+        "s1": {
+          "title": "Website use",
+          "body": "Content on this site is for institutional B2B evaluation only. You may not scrape, redistribute, or misrepresent OSI product specifications without written consent."
+        },
+        "s2": {
+          "title": "Quotes & contracts",
+          "body": "RFQ submissions do not constitute a binding contract. Prices, MOQ, grades, and delivery terms are confirmed only in a signed proforma invoice or sales agreement issued by OSI."
+        },
+        "s3": {
+          "title": "Product information",
+          "body": "Catalog descriptions and spec sheets are indicative. Final COA, moisture, particle size, and microbiological limits are defined per batch and buyer specification."
+        },
+        "s4": {
+          "title": "Limitation of liability",
+          "body": "OSI is not liable for indirect or consequential damages arising from use of this website. Liability for export lots is governed by the applicable sales contract and Incoterms agreed with the buyer."
+        }
+      }
+    },
+    "quality": {
+      "intro": "OSI quality and export policies align with institutional procurement requirements for fish scale raw materials.",
+      "updated": "Last updated: May 2025. Batch-specific COAs issued per shipment.",
+      "sections": {
+        "s1": {
+          "title": "Quality management",
+          "body": "Each lot undergoes sorting, cleaning, controlled drying, inspection, and third-party lab testing where required. Non-conforming material is segregated and not released for export."
+        },
+        "s2": {
+          "title": "Documentation",
+          "body": "Standard export packs include commercial invoice, packing list, certificate of origin, phytosanitary certificates where applicable, and certificate of analysis (COA) per batch."
+        },
+        "s3": {
+          "title": "Traceability",
+          "body": "Batch IDs link collection date, processing records, lab results, and export packaging. Buyers receive traceability summaries on request for audit purposes."
+        },
+        "s4": {
+          "title": "Claims & disputes",
+          "body": "Quality claims must be reported in writing within 14 days of arrival with batch ID and supporting evidence. OSI will review jointly with the buyer and propose remediation per contract terms."
+        }
+      }
+    }
+  },
+  "rfq": {
+    "badge": "Institutional RFQ",
+    "label": "06 / PROCUREMENT INQUIRY",
+    "title": "Request a\nBulk Quote.",
+    "subtitle": "Submit your specifications for pharmaceutical, cosmetic, or food-grade fish scales. Our Dhaka procurement desk responds to qualified institutional buyers within one business day.",
+    "formTitle": "Procurement inquiry form",
+    "formHint": "Fields marked * are required. Minimum order 100 kg.",
+    "sections": {
+      "company": "Company & contact",
+      "order": "Order details"
+    },
+    "placeholders": {
+      "companyName": "Legal company name"
+    },
+    "countryPlaceholder": "Select destination country",
+    "moqHint": "Standard MOQ 500 kg per line · custom from 250 kg",
+    "companyName": "Company Name",
+    "contactPerson": "Contact Person",
+    "email": "Email",
+    "country": "Country",
+    "quantity": "Quantity (kg)",
+    "productInterest": "Product Interest",
+    "products": {
+      "tilapia": "Tilapia Scales",
+      "carp": "Carp Scales",
+      "marine": "Marine Scales",
+      "custom": "Custom Order"
+    },
+    "message": "Message",
+    "messagePlaceholder": "Describe your specifications, delivery timeline, and incoterms preference...",
+    "submit": "Submit procurement inquiry",
+    "submitting": "Submitting inquiry…",
+    "submitAnother": "Submit another inquiry",
+    "successTitle": "Inquiry received",
+    "referenceLabel": "Reference",
+    "successBody": "Thank you. A procurement specialist will review your requirements and send a formal quote with MOQ, grades, and shipping terms within 24 hours.",
+    "stepsTitle": "What happens next",
+    "steps": {
+      "review": {
+        "title": "Specification review",
+        "text": "We validate grade, quantity, and destination requirements against current capacity."
+      },
+      "quote": {
+        "title": "Formal quote",
+        "text": "You receive pricing, MOQ, COA scope, and proposed incoterms (FOB/CIF)."
+      },
+      "ship": {
+        "title": "Export execution",
+        "text": "On approval, we coordinate processing, documentation, and sea freight booking."
+      }
+    },
+    "slaNote": "Business days · GMT+6 (Dhaka)",
+    "docsNote": "Include target moisture, particle size, or grade in your message for a faster quote.",
+    "officeLabel": "OSI Procurement Office",
+    "address": "House 12, Road 4, Dhaka 1207, Bangladesh",
+    "emailContact": "procurement@organicscales.com",
+    "sla": "Response SLA",
+    "slaValue": "< 24 Hours",
+    "timezone": "Timezone",
+    "timezoneValue": "GMT+6 (BST)",
+    "trustSsl": "SSL Secured",
+    "trustGdpr": "GDPR Compliant",
+    "trustNoSpam": "No Spam",
+    "errors": {
+      "companyName": "Company name is required",
+      "contactPerson": "Contact person is required",
+      "email": "Valid email is required",
+      "country": "Country is required",
+      "quantityKg": "Minimum quantity is 100 kg",
+      "productInterest": "Select at least one product category"
+    }
+  },
+  "footer": {
+    "ctaTitle": "Ready to secure bulk supply?",
+    "ctaSubtitle": "Institutional quotes from our Dhaka desk — typically within 24 hours.",
+    "ctaButton": "Request a Quote",
+    "mission": "Export-grade fish scales for global institutional procurement. Bangladesh origin. ISO compliant.",
+    "quickLinks": "Quick Links",
+    "language": "Language",
+    "contactLabel": "Procurement Office",
+    "address": "House 12, Road 4, Dhaka 1207, Bangladesh",
+    "copyright": "© 2025 Organic Scales International. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

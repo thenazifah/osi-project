@@ -1,0 +1,351 @@
+{
+  "metadata": {
+    "title": "OSI — 全球鱼鳞出口商 | 大宗B2B供应",
+    "description": "Organic Scales International向14个以上国家的买家供应医药级、化妆品级和食品级鱼鳞。索取罗非鱼、鲤鱼和海水鱼鳞的大宗报价。"
+  },
+  "nav": {
+    "wordmark": "OSI",
+    "tagline": "出口级品质。全球规模。",
+    "about": "关于",
+    "catalog": "产品",
+    "process": "流程",
+    "compliance": "认证",
+    "rfq": "询价",
+    "requestQuote": "索取报价",
+    "menuOpen": "打开菜单",
+    "menuClose": "关闭菜单",
+    "markets": "市场",
+    "faq": "常见问题",
+    "policy": "政策",
+    "languages": {
+      "label": "语言",
+      "en": "English",
+      "ja": "Japanese",
+      "zh": "Chinese"
+    }
+  },
+  "trust": {
+    "badge": "机构供应商",
+    "title": "采购团队选择OSI的原因",
+    "subtitle": "为医药、化妆品和食品级鱼鳞大宗出口打造的全流程体系。",
+    "imageAlt": "海上航行的集装箱货轮 — 国际出口货运",
+    "items": {
+      "iso": { "title": "ISO合规品质", "text": "每批出口均经第三方实验室验证与批次认证。" },
+      "capacity": { "title": "年产能500MT", "text": "支持定期项目与现货大宗订单。" },
+      "markets": { "title": "14+出口市场", "text": "活跃出货至亚洲、欧洲、中东和美洲。" },
+      "lab": { "title": "实验室检测", "text": "病原体筛查、水分与粒度分析。" },
+      "logistics": { "title": "出口物流", "text": "FOB达卡或CIF，全套报关与植检支持。" },
+      "sla": { "title": "24小时内报价", "text": "专属采购团队处理询价与装运。" }
+    }
+  },
+  "hero": {
+    "sysLabel": "OSI.EXPORT.PLATFORM — 达卡成立",
+    "platformBadge": "OSI.EXPORT.PLATFORM",
+    "headline1": "精密级",
+    "headline2": "鱼鳞",
+    "headline3": "供应。",
+    "body": "向14个以上国家的机构买家供应医药级、化妆品级和食品级鱼鳞原料。",
+    "ctaPrimary": "索取大宗报价 →",
+    "ctaSecondary": "下载目录 ↓",
+    "statCountries": "14+国家",
+    "statProducts": "6条产品线",
+    "statIso": "ISO合规",
+    "marqueeLabel": "出口产品",
+    "marqueeItems": {
+      "tilapia": "罗非鱼鳞",
+      "carp": "鲤鱼鳞",
+      "marine": "海水鱼鳞",
+      "moq": "可订MOQ",
+      "export": "出口就绪",
+      "origin": "孟加拉原产",
+      "pharma": "医药级"
+    },
+    "trustLine": "深受医药、化妆品与食品加工机构买家信赖。",
+    "imageAlt": "准备国际鱼鳞出口的集装箱货物",
+    "imageCaptionLabel": "出口通道",
+    "imageCaption": "FOB吉大港/达卡 · CIF全球到港",
+    "capacityBadge": "出口就绪"
+  },
+  "exportLogistics": {
+    "badge": "海运与出口",
+    "title": "从达卡到您的港口 — 全程物流管控",
+    "subtitle": "OSI协调集装箱海运、出口申报与目的港文件，确保合规批次按时交付您的采购团队。",
+    "routeLabel": "主要航线",
+    "routeValue": "吉大港 → 亚太 · 欧洲 · 美洲",
+    "highlights": {
+      "fob": { "title": "FOB与CIF方案", "text": "支持多柜项目的集运与拼箱。" },
+      "docs": { "title": "出口文件", "text": "每批附COA、装箱单、原产地证与植检文件。" },
+      "tracking": { "title": "出运可视", "text": "订舱号、提单副本与ETA与采购团队共享。" }
+    },
+    "images": {
+      "heroAlt": "装载国际出口货物的集装箱船",
+      "cargo": "海上航行的集装箱货轮",
+      "port": "大宗出口的集装箱码头与岸桥",
+      "sea": "公海货轮 — 全球交付航线"
+    },
+    "cards": {
+      "cargo": { "title": "海洋运输", "text": "从孟加拉港口至目的港的整柜与拼箱。" },
+      "port": { "title": "港口作业", "text": "与货代协调装箱、封柜与报关。" },
+      "sea": { "title": "全球航线", "text": "面向日本、中国、欧盟、美洲与中东的定期项目。" }
+    }
+  },
+  "about": {
+    "label": "02 / 机构简介",
+    "title": "为全球\n采购团队而建。",
+    "p1": "Organic Scales International是孟加拉鱼鳞出口商，在淡水养殖区拥有深厚的采购网络。我们为制药制造商、化妆品配方师和食品加工商供应出口级原材料，确保颗粒尺寸、水分含量和批次可追溯性一致。",
+    "p2": "我们的运营优先可持续采收合作伙伴关系和完整的保管链文件。每批货物从收集点经干燥、检验到出口包装全程可追溯，满足海洋胶原蛋白原料和大宗鱼鳞的机构采购标准。",
+    "p3": "从达卡采购办公室，我们协调向14个以上国家的FOB和CIF装运，提供专用出口文件、第三方实验室证书以及灵活的MOQ结构，适用于罗非鱼鳞出口和鲤鱼鳞项目。",
+    "statYears": "出口运营年数",
+    "statCountries": "服务国家数",
+    "statCapacity": "年出口产能",
+    "statCategories": "认证鳞类别",
+    "imagePortAlt": "大宗装运的出口港集装箱作业",
+    "imageExportAlt": "准备海运出口的集装箱堆场",
+    "capabilitiesTitle": "核心能力",
+    "capabilities": {
+      "sourcing": { "title": "深度采购网络", "text": "孟加拉淡水养殖区认证合作伙伴。" },
+      "processing": { "title": "出口加工", "text": "分拣、清洗、干燥、研磨按规格执行。" },
+      "docs": { "title": "文件齐全", "text": "COA、装箱单、原产地证及合规文件包。" }
+    }
+  },
+  "markets": {
+    "label": "02B / 全球市场",
+    "title": "当前服务的\n出口通道。",
+    "subtitle": "为全球机构买家协调定期供应与现货大宗订单。",
+    "incotermsLabel": "贸易术语",
+    "incoterms": "FOB吉大港/达卡或CIF目的港。海运、冷藏（如需要）及全套清关文件。",
+    "regions": {
+      "asiaPacific": { "name": "亚太", "count": "6个市场", "description": "活跃供应日本、韩国、中国、泰国、越南、新加坡。", "grades": "医药 · 化妆品 · 食品" },
+      "europe": { "name": "欧洲", "count": "4个市场", "description": "向欧盟和英国买家提供完整可追溯文件。", "grades": "医药 · 化妆品" },
+      "middleEast": { "name": "中东", "count": "2个市场", "description": "可按需提供Halal对齐加工。", "grades": "食品 · 工业" },
+      "americas": { "name": "美洲", "count": "2个市场", "description": "美国与加拿大机构项目，灵活MOQ。", "grades": "医药 · 定制" }
+    }
+  },
+  "catalog": {
+    "label": "03 / 产品目录",
+    "subtitle": "六条出口产品线，含MOQ、等级分类，可按需提供规格书。",
+    "specsHint": "技术数据表包含水分%、粒径及微生物限值。",
+    "filterAll": "全部",
+    "filterTilapia": "罗非鱼",
+    "filterCarp": "鲤鱼",
+    "filterMarine": "海水鱼",
+    "filterCustom": "定制",
+    "moq": "MOQ: {kg}kg",
+    "viewSpecs": "查看规格 →",
+    "categories": {
+      "tilapia": "罗非鱼",
+      "carp": "鲤鱼",
+      "marine": "海水鱼",
+      "custom": "定制"
+    },
+    "tilapiaDriedPharma": {
+      "name": "罗非鱼干鳞 — 医药级",
+      "description": "低水分干燥罗非鱼鳞，用于胶原肽提取和医药应用。批次纯度检测。"
+    },
+    "tilapiaWetCollagen": {
+      "name": "罗非鱼湿鳞 — 胶原提取级",
+      "description": "新鲜加工湿鳞，优化用于水解胶原蛋白生产。适合化妆品和营养品制造商。"
+    },
+    "carpFoodGrade": {
+      "name": "鲤鱼鳞 — 食品加工级",
+      "description": "食品安全鲤鱼鳞，用于明胶、增稠剂和特种食品应用。HACCP对齐加工。"
+    },
+    "carpCosmeticGrade": {
+      "name": "鲤鱼鳞 — 化妆品级",
+      "description": "精制鲤鱼鳞材料，用于高端护肤和美容配方。一致的颗粒分级。"
+    },
+    "marineIndustrial": {
+      "name": "海水混合鳞 — 工业级",
+      "description": "混合海水鱼种鳞，用于工业胶原蛋白、粘合剂和复合材料应用，大批量供应。"
+    },
+    "customClientSpec": {
+      "name": "定制加工鳞 — 客户规格级",
+      "description": "按您的技术规格定制干燥、研磨和包装。专用项目MOQ可协商。"
+    }
+  },
+  "process": {
+    "label": "04 / 可追溯工作流",
+    "title": "从养殖池到出口集装箱的全链追溯",
+    "subtitle": "六个受控阶段，任何批次在国际发运前须通过实验室放行。",
+    "imageAlt": "海上货轮 — 面向机构买家的出口交付",
+    "steps": {
+      "collection": {
+        "title": "收集",
+        "description": "来自认证水产养殖合作伙伴"
+      },
+      "sorting": {
+        "title": "分拣",
+        "description": "物种和尺寸分类"
+      },
+      "cleaning": {
+        "title": "清洗",
+        "description": "去污和预处理洗涤"
+      },
+      "drying": {
+        "title": "干燥",
+        "description": "受控水分降低"
+      },
+      "inspection": {
+        "title": "质量检验",
+        "description": "实验室取样和等级认证"
+      },
+      "packaging": {
+        "title": "包装与出口",
+        "description": "出口就绪标签和文件"
+      }
+    },
+    "callouts": {
+      "iso": {
+        "label": "ISO质量保证",
+        "text": "每批第三方验证"
+      },
+      "lab": {
+        "label": "实验室检测",
+        "text": "无病原体，等级认证"
+      },
+      "export": {
+        "label": "出口文件",
+        "text": "包含完整合规文件"
+      }
+    }
+  },
+  "compliance": {
+    "label": "05 / 认证与合规",
+    "title": "经核实的资质。\n出口就绪文件。",
+    "subtitle": "OSI持有孟加拉贸易、质量与环境认证，满足机构级鱼鳞出口项目的合规要求。",
+    "badge": "可审计",
+    "download": "查看证书PDF",
+    "footnote": "应买方尽职调查要求可提供证书副本。所有文件均为达卡出口业务的最新有效版本。",
+    "certifications": {
+      "bsti": { "name": "BSTI认证", "issuer": "孟加拉标准与测试机构", "year": "2024", "status": "有效" },
+      "iso9001": { "name": "ISO 9001:2015", "issuer": "认可认证机构", "year": "2024", "status": "已认证" },
+      "tradeLicense": { "name": "贸易许可证", "issuer": "达卡市政府", "year": "2024", "status": "有效" },
+      "exportLicense": { "name": "出口注册", "issuer": "孟加拉商务部", "year": "2024", "status": "有效" },
+      "irc": { "name": "IRC证书", "issuer": "国家税务局（NBR）", "year": "2024", "status": "有效" },
+      "environmental": { "name": "环境许可", "issuer": "环境部", "year": "2023", "status": "合规" }
+    }
+  },
+  "faq": {
+    "label": "05B / 采购常见问题",
+    "title": "买家常见\n问题解答。",
+    "subtitle": "评估孟加拉鱼鳞供应商时的参考回答。",
+    "supportLabel": "需要定制答复？",
+    "supportText": "请发送规格至 procurement@organicscales.com — 一个工作日内回复。",
+    "items": {
+      "moq": { "q": "最小订购量是多少？", "a": "标准MOQ为500公斤，定制加工250公斤起，2吨以上有折扣。" },
+      "grades": { "q": "供应哪些等级？", "a": "医药、化妆品、食品加工及工业级，涵盖罗非鱼、鲤鱼、海水鱼及定制加工。" },
+      "shipping": { "q": "提供哪些运输条款？", "a": "FOB孟加拉或CIF目的港，提供商业发票、COA与原产地证。" },
+      "samples": { "q": "能否提供样品？", "a": "合格机构买家可在确认规格后获得500克–2公斤样品套装。" },
+      "payment": { "q": "付款条件？", "a": "通常30%预付，70%凭提单副本。成熟账户可开即期信用证。" },
+      "traceability": { "q": "如何实现批次追溯？", "a": "每批均有唯一批次ID，关联采集、加工、检验与出口文件。" }
+    }
+  },
+  "policy": {
+    "badge": "法律与合规",
+    "label": "05C / 机构政策",
+    "title": "面向机构\n买家的政策。",
+    "subtitle": "隐私、使用条款及出口质量标准，说明OSI如何处理数据与商业合作。",
+    "tabs": { "privacy": "隐私政策", "terms": "服务条款", "quality": "质量与出口" },
+    "privacy": {
+      "intro": "Organic Scales International（OSI）尊重采购询价及买家数据的保密性。",
+      "updated": "最后更新：2025年5月。联系 procurement@organicscales.com",
+      "sections": {
+        "s1": { "title": "我们收集的信息", "body": "RFQ表单中的公司、联系人、产品意向、数量与留言，以及技术日志和邮件通信。" },
+        "s2": { "title": "信息用途", "body": "用于报价、协调出口、维护买家记录、改进服务及履行法律义务。不出售个人数据。" },
+        "s3": { "title": "存储与安全", "body": "数据存于Firebase/Google Cloud，仅授权人员可访问。本站采用SSL/TLS加密。" },
+        "s4": { "title": "您的权利", "body": "可通过邮件申请访问、更正或删除数据，我们将在适用法规下30日内回复。" }
+      }
+    },
+    "terms": {
+      "intro": "使用本网站并提交采购询价，即表示您同意以下条款。",
+      "updated": "最后更新：2025年5月。适用法律：孟加拉人民共和国。",
+      "sections": {
+        "s1": { "title": "网站使用", "body": "内容仅供机构B2B评估。未经书面同意不得抓取、转载或歪曲产品规格。" },
+        "s2": { "title": "报价与合同", "body": "RFQ不构成具有约束力的合同。价格、MOQ与交期以OSI形式发票或销售合同为准。" },
+        "s3": { "title": "产品信息", "body": "目录说明仅供参考。最终COA、水分与粒度按批次及买方规格确定。" },
+        "s4": { "title": "责任限制", "body": "OSI不对因使用本网站产生的间接损失负责。出口批次责任以销售合同及Incoterms为准。" }
+      }
+    },
+    "quality": {
+      "intro": "OSI质量与出口政策符合机构采购对鱼鳞原料的要求。",
+      "updated": "最后更新：2025年5月。每批装运出具批次COA。",
+      "sections": {
+        "s1": { "title": "质量管理", "body": "每批经分拣、清洗、控干、检验及必要的第三方检测。不合格品不出口。" },
+        "s2": { "title": "文件", "body": "标准出口文件包括商业发票、装箱单、原产地证、植检（如适用）及COA。" },
+        "s3": { "title": "可追溯性", "body": "批次ID关联采集、加工、检验与包装记录，可按需提供追溯摘要。" },
+        "s4": { "title": "索赔", "body": "到货后14日内书面提出质量索赔并附批次ID与证据，按合同约定处理。" }
+      }
+    }
+  },
+  "rfq": {
+    "badge": "机构询价",
+    "label": "06 / 采购询价",
+    "title": "索取\n大宗报价。",
+    "subtitle": "提交医药级、化妆品级或食品级鱼鳞规格。达卡采购团队将在一个工作日内回复合格机构买家。",
+    "formTitle": "采购询价表",
+    "formHint": "标有 * 的为必填项。最小订购量100公斤。",
+    "sections": { "company": "公司与联系人", "order": "订单详情" },
+    "placeholders": { "companyName": "公司法定名称" },
+    "countryPlaceholder": "选择目的国",
+    "moqHint": "标准MOQ每线500公斤 · 定制250公斤起",
+    "companyName": "公司名称",
+    "contactPerson": "联系人",
+    "email": "电子邮件",
+    "country": "国家",
+    "quantity": "数量（公斤）",
+    "productInterest": "产品兴趣",
+    "products": {
+      "tilapia": "罗非鱼鳞",
+      "carp": "鲤鱼鳞",
+      "marine": "海水鱼鳞",
+      "custom": "定制订单"
+    },
+    "message": "留言",
+    "messagePlaceholder": "描述您的规格、交货时间表和贸易术语偏好...",
+    "submit": "提交采购询价",
+    "submitting": "提交中…",
+    "submitAnother": "提交另一份询价",
+    "successTitle": "询价已收到",
+    "referenceLabel": "参考编号",
+    "successBody": "感谢提交。采购专员将审核您的需求，并在24小时内发送包含MOQ、等级和运输条款的正式报价。",
+    "stepsTitle": "后续流程",
+    "steps": {
+      "review": { "title": "规格审核", "text": "我们根据当前产能核对等级、数量与目的地要求。" },
+      "quote": { "title": "正式报价", "text": "您将收到价格、MOQ、COA范围及FOB/CIF建议。" },
+      "ship": { "title": "出口执行", "text": "确认后，我们协调加工、文件与海运订舱。" }
+    },
+    "slaNote": "工作日 · GMT+6（达卡）",
+    "docsNote": "在留言中注明目标水分、粒度或等级可加快报价。",
+    "officeLabel": "OSI采购办公室",
+    "address": "House 12, Road 4, Dhaka 1207, Bangladesh",
+    "emailContact": "procurement@organicscales.com",
+    "sla": "响应SLA",
+    "slaValue": "24小时内",
+    "timezone": "时区",
+    "timezoneValue": "GMT+6 (BST)",
+    "trustSsl": "SSL安全",
+    "trustGdpr": "GDPR合规",
+    "trustNoSpam": "无垃圾邮件",
+    "errors": {
+      "companyName": "公司名称为必填项",
+      "contactPerson": "联系人为必填项",
+      "email": "请输入有效的电子邮件",
+      "country": "国家为必填项",
+      "quantityKg": "最小数量为100公斤",
+      "productInterest": "请至少选择一个产品类别"
+    }
+  },
+  "footer": {
+    "ctaTitle": "准备大宗采购了吗？",
+    "ctaSubtitle": "达卡采购团队提供机构报价 — 通常在24小时内回复。",
+    "ctaButton": "索取报价",
+    "mission": "面向全球机构采购的出口级鱼鳞。孟加拉原产。ISO合规。",
+    "quickLinks": "快速链接",
+    "language": "语言",
+    "contactLabel": "采购办公室",
+    "address": "House 12, Road 4, Dhaka 1207, Bangladesh",
+    "copyright": "© 2025 Organic Scales International. All rights reserved.",
+    "privacy": "隐私政策",
+    "terms": "服务条款"
+  }
+}

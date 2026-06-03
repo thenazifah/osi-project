@@ -1,0 +1,351 @@
+{
+  "metadata": {
+    "title": "OSI — 世界の魚鱗輸出業者 | バルクB2B供給",
+    "description": "Organic Scales Internationalは、14か国以上のバイヤーに医薬品・化粧品・食品グレードの魚鱗を供給しています。ティラピア、コイ、海水魚の鱗のバルク見積もりをご依頼ください。"
+  },
+  "nav": {
+    "wordmark": "OSI",
+    "tagline": "輸出グレード。世界規模。",
+    "about": "会社概要",
+    "catalog": "製品",
+    "process": "工程",
+    "compliance": "認証",
+    "rfq": "見積依頼",
+    "requestQuote": "見積依頼",
+    "menuOpen": "メニューを開く",
+    "menuClose": "メニューを閉じる",
+    "markets": "市場",
+    "faq": "FAQ",
+    "policy": "ポリシー",
+    "languages": {
+      "label": "言語",
+      "en": "English",
+      "ja": "Japanese",
+      "zh": "Chinese"
+    }
+  },
+  "trust": {
+    "badge": "機関向けサプライヤー",
+    "title": "調達チームがOSIを選ぶ理由",
+    "subtitle": "医薬品・化粧品・食品グレードの鱗を大量輸出するためのエンドツーエンド体制。",
+    "imageAlt": "海上を航行するコンテナ船 — 国際輸出貨物",
+    "items": {
+      "iso": { "title": "ISO準拠品質", "text": "全輸出ロットで第三者ラボ検証とバッチ認証。" },
+      "capacity": { "title": "年間500MT", "text": "定期プログラムとスポット大口注文に対応。" },
+      "markets": { "title": "14か国以上", "text": "アジア・欧州・中東・米州への活発な出荷。" },
+      "lab": { "title": "ラボ試験済み", "text": "病原体スクリーニング、水分、粒度分析。" },
+      "logistics": { "title": "輸出物流", "text": "FOBダッカまたはCIF、通関・植物検疫サポート。" },
+      "sla": { "title": "24時間以内見積", "text": "専任調達デスクがRFQと出荷を担当。" }
+    }
+  },
+  "hero": {
+    "sysLabel": "OSI.EXPORT.PLATFORM — ダッカ設立",
+    "platformBadge": "OSI.EXPORT.PLATFORM",
+    "headline1": "精密グレード",
+    "headline2": "魚鱗",
+    "headline3": "供給。",
+    "body": "14か国以上の機関バイヤーに、医薬品・化粧品・食品グレードの魚鱗素材を供給しています。",
+    "ctaPrimary": "バルク見積依頼 →",
+    "ctaSecondary": "カタログダウンロード ↓",
+    "statCountries": "14か国以上",
+    "statProducts": "6製品ライン",
+    "statIso": "ISO準拠",
+    "marqueeLabel": "輸出カタログ",
+    "marqueeItems": {
+      "tilapia": "ティラピア鱗",
+      "carp": "コイ鱗",
+      "marine": "海水魚鱗",
+      "moq": "MOQ対応",
+      "export": "輸出準備完了",
+      "origin": "バングラデシュ産",
+      "pharma": "医薬品グレード"
+    },
+    "trustLine": "医薬品・化粧品・食品加工の機関バイヤーに信頼されています。",
+    "imageAlt": "国際魚鱗輸出用のコンテナ貨物",
+    "imageCaptionLabel": "輸出回廊",
+    "imageCaption": "FOBチッタガン・ダッカ · CIF全世界",
+    "capacityBadge": "輸出準備完了"
+  },
+  "exportLogistics": {
+    "badge": "海上輸送・輸出",
+    "title": "ダッカからあなたの港へ — 物流を一括管理",
+    "subtitle": "OSIはコンテナ海上輸送、輸出申告、仕向地書類を調整し、コンプライアンス対応ロットを予定通りお届けします。",
+    "routeLabel": "主要レーン",
+    "routeValue": "チッタガン → APAC · EU · 米州",
+    "highlights": {
+      "fob": { "title": "FOB・CIFプログラム", "text": "複数コンテナ向けの集荷・混載サポート。" },
+      "docs": { "title": "輸出書類", "text": "COA、パッキングリスト、原産地証明、植物検疫一式。" },
+      "tracking": { "title": "出荷可視性", "text": "ブッキング、B/L、ETAを調達デスクと共有。" }
+    },
+    "images": {
+      "heroAlt": "国際輸出向けに積載されたコンテナ船",
+      "cargo": "海上を航行するコンテナ船",
+      "port": "バルク輸出用のコンテナターミナル",
+      "sea": "公海上の貨物船 — グローバル配送レーン"
+    },
+    "cards": {
+      "cargo": { "title": "海上輸送", "text": "バングラデシュ港から仕向地までFCL・LCL。" },
+      "port": { "title": "港湾作業", "text": "詰め込み・シール・通関をフォワーダーと連携。" },
+      "sea": { "title": "グローバルレーン", "text": "日本・中国・EU・米州・中東への定期プログラム。" }
+    }
+  },
+  "about": {
+    "label": "02 / 機関プロフィール",
+    "title": "グローバル調達チームの\nために構築。",
+    "p1": "Organic Scales Internationalは、バングラデシュを拠点とする魚鱗輸出業者で、淡水養殖地域に深い調達ネットワークを持ちます。粒子サイズ、水分含有量、ロットトレーサビリティに一貫性を求める医薬品メーカー、化粧品フォーミュレーター、食品加工業者向けに輸出グレードの原材料を供給しています。",
+    "p2": "持続可能な収穫パートナーシップと完全な保管チェーン文書化を優先しています。すべてのロットは収集地点から乾燥、検査、輸出包装まで追跡可能で、海洋コラーゲン原料およびバルク魚鱗の機関調達基準を満たします。",
+    "p3": "ダッカの調達オフィスから、14か国以上へのFOBおよびCIF出荷を、専用の輸出書類、第三者ラボ証明書、柔軟なMOQ構造で調整しています。",
+    "statYears": "輸出事業年数",
+    "statCountries": "供給国数",
+    "statCapacity": "年間輸出能力",
+    "statCategories": "認定鱗カテゴリ",
+    "imagePortAlt": "バルク出荷用の輸出港コンテナ作業",
+    "imageExportAlt": "海上輸出準備完了のコンテナ",
+    "capabilitiesTitle": "主要能力",
+    "capabilities": {
+      "sourcing": { "title": "深い調達ネットワーク", "text": "バングラデシュ淡水養殖地域の認定パートナー。" },
+      "processing": { "title": "輸出加工", "text": "選別・洗浄・乾燥・粉砕を仕様に合わせて実施。" },
+      "docs": { "title": "書類完備", "text": "COA、パッキングリスト、原産地証明、コンプライアンス一式。" }
+    }
+  },
+  "markets": {
+    "label": "02B / グローバル市場",
+    "title": "現在供給している\n輸出回廊。",
+    "subtitle": "世界の機関バイヤー向けに定期供給とスポット大口注文を調整。",
+    "incotermsLabel": "インコタームズ",
+    "incoterms": "FOBチッタゴン/ダッカまたはCIF。海上輸送、必要に応じて冷蔵、通関書類一式。",
+    "regions": {
+      "asiaPacific": { "name": "アジア太平洋", "count": "6市場", "description": "日本・韓国・中国・タイ・ベトナム・シンガポール向け。", "grades": "医薬 · 化粧品 · 食品" },
+      "europe": { "name": "欧州", "count": "4市場", "description": "EU・英国向け、完全なトレーサビリティ書類。", "grades": "医薬 · 化粧品" },
+      "middleEast": { "name": "中東", "count": "2市場", "description": "要望に応じハラール対応加工。", "grades": "食品 · 工業" },
+      "americas": { "name": "米州", "count": "2市場", "description": "米国・カナダの機関プログラム。", "grades": "医薬 · カスタム" }
+    }
+  },
+  "catalog": {
+    "label": "03 / 製品カタログ",
+    "subtitle": "6つの輸出ライン。MOQ、グレード分類、仕様書を提供。",
+    "specsHint": "技術データシートには水分率、粒度、微生物限界値を記載。",
+    "filterAll": "すべて",
+    "filterTilapia": "ティラピア",
+    "filterCarp": "コイ",
+    "filterMarine": "海水魚",
+    "filterCustom": "カスタム",
+    "moq": "MOQ: {kg}kg",
+    "viewSpecs": "仕様を見る →",
+    "categories": {
+      "tilapia": "ティラピア",
+      "carp": "コイ",
+      "marine": "海水魚",
+      "custom": "カスタム"
+    },
+    "tilapiaDriedPharma": {
+      "name": "ティラピア乾燥鱗 — 医薬品グレード",
+      "description": "コラーゲンペプチド抽出および医薬品用途向けの低水分乾燥ティラピア鱗。純度試験済み。"
+    },
+    "tilapiaWetCollagen": {
+      "name": "ティラピア湿潤鱗 — コラーゲン抽出グレード",
+      "description": "加水分解コラーゲン生産に最適化された新鮮加工湿潤鱗。化粧品・ニュートラシューティカルメーカー向け。"
+    },
+    "carpFoodGrade": {
+      "name": "コイ鱗 — 食品加工グレード",
+      "description": "ゼラチン、増粘剤、特殊食品用途向けの食品安全コイ鱗。HACCP準拠加工。"
+    },
+    "carpCosmeticGrade": {
+      "name": "コイ鱗 — 化粧品グレード",
+      "description": "プレミアムスキンケア・美容製剤向けの精製コイ鱗素材。一貫した粒子グレーディング。"
+    },
+    "marineIndustrial": {
+      "name": "海水魚混合鱗 — 工業グレード",
+      "description": "工業用コラーゲン、接着剤、複合材料用途向けの混合海水魚種鱗。大量対応。"
+    },
+    "customClientSpec": {
+      "name": "カスタム加工鱗 — クライアント仕様グレード",
+      "description": "技術仕様に応じた乾燥、粉砕、包装。専用プログラム向けMOQ交渉可能。"
+    }
+  },
+  "process": {
+    "label": "04 / トレーサビリティワークフロー",
+    "title": "養殖池から輸出コンテナまでのトレーサビリティ",
+    "subtitle": "国際出荷前にラボリリースを行う6段階の管理プロセス。",
+    "imageAlt": "海上を航行する貨物船 — 機関向け輸出配送",
+    "steps": {
+      "collection": {
+        "title": "収集",
+        "description": "認定養殖パートナーから調達"
+      },
+      "sorting": {
+        "title": "選別",
+        "description": "種別・サイズ分類"
+      },
+      "cleaning": {
+        "title": "洗浄",
+        "description": "除染・前処理洗浄"
+      },
+      "drying": {
+        "title": "乾燥",
+        "description": "制御された水分低減"
+      },
+      "inspection": {
+        "title": "品質検査",
+        "description": "ラボサンプリング・グレード認定"
+      },
+      "packaging": {
+        "title": "包装・輸出",
+        "description": "輸出対応ラベリング・書類"
+      }
+    },
+    "callouts": {
+      "iso": {
+        "label": "ISO品質保証",
+        "text": "全バッチ第三者検証"
+      },
+      "lab": {
+        "label": "ラボ試験済み",
+        "text": "病原体フリー、グレード認定"
+      },
+      "export": {
+        "label": "輸出書類",
+        "text": "完全なコンプライアンス書類付き"
+      }
+    }
+  },
+  "compliance": {
+    "label": "05 / 認証・コンプライアンス",
+    "title": "検証済み資格。\n輸出対応書類。",
+    "subtitle": "OSIはバングラデシュの貿易・品質・環境認証を維持し、機関向け魚鱗輸出プログラムに対応しています。",
+    "badge": "監査対応",
+    "download": "証明書PDFを見る",
+    "footnote": "バイヤーデューデリジェンス用の証明書はご要望に応じて提供。ダッカ拠点の輸出事業向けにすべて最新です。",
+    "certifications": {
+      "bsti": { "name": "BSTI認証", "issuer": "バングラデシュ規格・試験機関", "year": "2024", "status": "有効" },
+      "iso9001": { "name": "ISO 9001:2015", "issuer": "認定認証機関", "year": "2024", "status": "認証済" },
+      "tradeLicense": { "name": "貿易ライセンス", "issuer": "ダッカ市公社", "year": "2024", "status": "有効" },
+      "exportLicense": { "name": "輸出登録", "issuer": "バングラデシュ商務省", "year": "2024", "status": "有効" },
+      "irc": { "name": "IRC証明書", "issuer": "国税庁（NBR）", "year": "2024", "status": "有効" },
+      "environmental": { "name": "環境クリアランス", "issuer": "環境省", "year": "2023", "status": "準拠" }
+    }
+  },
+  "faq": {
+    "label": "05B / 調達FAQ",
+    "title": "バイヤーからの\nよくある質問。",
+    "subtitle": "バングラデシュ魚鱗サプライヤー評価時の回答。",
+    "supportLabel": "個別のご質問",
+    "supportText": "procurement@organicscales.com まで仕様書をお送りください。1営業日以内に返信します。",
+    "items": {
+      "moq": { "q": "最小注文量は？", "a": "標準MOQは500kg。カスタム加工は250kgから。2MT以上で割引。" },
+      "grades": { "q": "どのグレードを供給？", "a": "医薬・化粧品・食品・工業グレード、ティラピア・コイ・海水魚、カスタム加工。" },
+      "shipping": { "q": "配送条件は？", "a": "FOBバングラデシュまたはCIF。商業インボイス、COA、原産地証明を提供。" },
+      "samples": { "q": "サンプルは可能？", "a": "資格ある機関バイヤー向けに500g〜2kgのサンプルキットを提供。" },
+      "payment": { "q": "支払条件は？", "a": "通常30%前払い、70%BLコピー時。確立アカウントはLC対応。" },
+      "traceability": { "q": "トレーサビリティは？", "a": "各ロットに収集日・工程・検査・輸出書類を紐づけたバッチID。" }
+    }
+  },
+  "policy": {
+    "badge": "法務・コンプライアンス",
+    "label": "05C / 機関向けポリシー",
+    "title": "機関バイヤー向け\nポリシー。",
+    "subtitle": "プライバシー、利用規約、輸出品質基準について。",
+    "tabs": { "privacy": "プライバシー", "terms": "利用規約", "quality": "品質・輸出" },
+    "privacy": {
+      "intro": "OSIは調達問い合わせとバイヤーデータの機密性を尊重します。",
+      "updated": "最終更新：2025年5月。お問い合わせ：procurement@organicscales.com",
+      "sections": {
+        "s1": { "title": "収集する情報", "body": "RFQフォームの会社名・連絡先・製品関心・数量・メッセージ、技術ログ、メール通信を収集します。" },
+        "s2": { "title": "利用目的", "body": "見積対応、出荷調整、バイヤー記録、サービス改善、法的義務のために使用。個人データの販売は行いません。" },
+        "s3": { "title": "保管とセキュリティ", "body": "データはFirebase/Google Cloudに保存し、認可スタッフのみアクセス。本サイトはSSL/TLSで保護。" },
+        "s4": { "title": "お客様の権利", "body": "アクセス・訂正・削除はprocurement@organicscales.comまで。GDPR等に基づき30日以内に対応。" }
+      }
+    },
+    "terms": {
+      "intro": "本サイトの利用および調達問い合わせにより、以下の規約に同意したものとみなします。",
+      "updated": "最終更新：2025年5月。準拠法：バングラデシュ人民共和国。",
+      "sections": {
+        "s1": { "title": "サイト利用", "body": "コンテンツは機関向けB2B評価のみ。書面同意なく仕様の転載・誤表示は禁止。" },
+        "s2": { "title": "見積と契約", "body": "RFQは拘束力のある契約ではありません。価格・MOQ・納期はOSI発行のPIまたは販売契約で確定。" },
+        "s3": { "title": "製品情報", "body": "カタログは参考情報。最終COA・水分・粒度はバッチとバイヤー仕様で定義。" },
+        "s4": { "title": "責任制限", "body": "サイト利用による間接損害についてOSIは責任を負いません。輸出ロットは契約とインコタームズに従います。" }
+      }
+    },
+    "quality": {
+      "intro": "OSIの品質・輸出ポリシーは、機関調達の魚鱗原料要件に沿います。",
+      "updated": "最終更新：2025年5月。出荷ごとにバッチCOAを発行。",
+      "sections": {
+        "s1": { "title": "品質管理", "body": "選別・洗浄・乾燥・検査・必要に応じ第三者試験。不適合品は輸出しません。" },
+        "s2": { "title": "書類", "body": "商業インボイス、パッキングリスト、原産地証明、植物検疫、COAを標準提供。" },
+        "s3": { "title": "トレーサビリティ", "body": "バッチIDで収集・工程・検査・包装を紐付け。監査用サマリーを提供可能。" },
+        "s4": { "title": "クレーム", "body": "到着後14日以内にバッチIDと証拠を添えて書面報告。契約に基づき対応。" }
+      }
+    }
+  },
+  "rfq": {
+    "badge": "機関向けRFQ",
+    "label": "06 / 調達お問い合わせ",
+    "title": "バルク\n見積依頼。",
+    "subtitle": "医薬品・化粧品・食品グレードの魚鱗について仕様をお送りください。ダッカ調達デスクが1営業日以内にご返信します。",
+    "formTitle": "調達お問い合わせフォーム",
+    "formHint": "*は必須項目。最小注文量100kg。",
+    "sections": { "company": "会社・連絡先", "order": "注文詳細" },
+    "placeholders": { "companyName": "法人名" },
+    "countryPlaceholder": "仕向国を選択",
+    "moqHint": "標準MOQ 500kg/ライン · カスタム250kg〜",
+    "companyName": "会社名",
+    "contactPerson": "担当者名",
+    "email": "メール",
+    "country": "国",
+    "quantity": "数量（kg）",
+    "productInterest": "製品関心",
+    "products": {
+      "tilapia": "ティラピア鱗",
+      "carp": "コイ鱗",
+      "marine": "海水魚鱗",
+      "custom": "カスタム注文"
+    },
+    "message": "メッセージ",
+    "messagePlaceholder": "仕様、納期、インコタームスの希望を記入してください...",
+    "submit": "調達お問い合わせを送信",
+    "submitting": "送信中…",
+    "submitAnother": "別のお問い合わせを送信",
+    "successTitle": "お問い合わせを受付しました",
+    "referenceLabel": "参照番号",
+    "successBody": "ありがとうございます。調達担当が要件を確認し、24時間以内にMOQ・グレード・輸送条件を含む正式見積をお送りします。",
+    "stepsTitle": "今後の流れ",
+    "steps": {
+      "review": { "title": "仕様確認", "text": "グレード・数量・仕向地を現行能力と照合します。" },
+      "quote": { "title": "正式見積", "text": "価格・MOQ・COA範囲・FOB/CIFをご提示します。" },
+      "ship": { "title": "輸出実行", "text": "承認後、加工・書類・船積みを手配します。" }
+    },
+    "slaNote": "営業日 · GMT+6（ダッカ）",
+    "docsNote": "目標水分・粒度・グレードを記載いただくと見積が迅速になります。",
+    "officeLabel": "OSI調達オフィス",
+    "address": "House 12, Road 4, Dhaka 1207, Bangladesh",
+    "emailContact": "procurement@organicscales.com",
+    "sla": "応答SLA",
+    "slaValue": "24時間以内",
+    "timezone": "タイムゾーン",
+    "timezoneValue": "GMT+6 (BST)",
+    "trustSsl": "SSL保護",
+    "trustGdpr": "GDPR準拠",
+    "trustNoSpam": "スパムなし",
+    "errors": {
+      "companyName": "会社名は必須です",
+      "contactPerson": "担当者名は必須です",
+      "email": "有効なメールアドレスを入力してください",
+      "country": "国は必須です",
+      "quantityKg": "最小数量は100kgです",
+      "productInterest": "少なくとも1つの製品カテゴリを選択してください"
+    }
+  },
+  "footer": {
+    "ctaTitle": "バルク供給の準備はできていますか？",
+    "ctaSubtitle": "ダッカデスクから機関向け見積もり — 通常24時間以内。",
+    "ctaButton": "見積を依頼",
+    "mission": "グローバル機関調達向け輸出グレード魚鱗。バングラデシュ産。ISO準拠。",
+    "quickLinks": "クイックリンク",
+    "language": "言語",
+    "contactLabel": "調達オフィス",
+    "address": "House 12, Road 4, Dhaka 1207, Bangladesh",
+    "copyright": "© 2025 Organic Scales International. All rights reserved.",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約"
+  }
+}
