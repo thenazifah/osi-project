@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "OSI Admin — Content Dashboard",
+  title: "OSI Admin · Content Dashboard",
   robots: { index: false, follow: false },
 };
 

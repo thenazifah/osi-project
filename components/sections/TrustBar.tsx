@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ExportImage } from "@/components/visuals/ExportImage";
 import { EXPORT_IMAGES } from "@/data/export-images";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
+import type { SiteContent } from "@/lib/admin-types";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
@@ -25,8 +26,10 @@ const ITEMS = [
   { key: "sla" as const, icon: Timer },
 ];
 
-export default function TrustBar() {
+export default function TrustBar({ content }: { content?: SiteContent["trust"] }) {
   const t = useTranslations("trust");
+  const c = (key: keyof SiteContent["trust"]) =>
+    content?.[key]?.trim() ? content[key] : t(key);
   const { ref, isVisible } = useStaggerVisible();
 
   return (
@@ -35,9 +38,9 @@ export default function TrustBar() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <Badge variant="export">{t("badge")}</Badge>
-            <p className="mt-3 font-display text-xl text-ink lg:text-2xl">{t("title")}</p>
+            <p className="mt-3 font-display text-xl text-ink lg:text-2xl">{c("title")}</p>
             <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-ink-muted">
-              {t("subtitle")}
+              {c("subtitle")}
             </p>
             <ExportImage
               src={EXPORT_IMAGES.procurementShip}

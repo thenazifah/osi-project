@@ -23,8 +23,7 @@ export async function submitRFQ(data: RFQFormData): Promise<RFQResult> {
 
     return { success: true, id: docRef.id };
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Failed to submit inquiry";
-    return { success: false, error: message };
+    const { formatFirestoreError } = await import("@/lib/firestore-errors");
+    return { success: false, error: formatFirestoreError(error) };
   }
 }

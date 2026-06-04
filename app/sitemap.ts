@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { products } from "@/data/products";
 import { routing } from "@/i18n/routing";
 
 const SECTIONS = [
-  "about",
   "catalog",
+  "about",
   "process",
   "compliance",
   "faq",
@@ -36,6 +37,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.7,
+      });
+    }
+
+    for (const product of products) {
+      entries.push({
+        url: `${siteUrl}/${locale}/products/${product.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.8,
       });
     }
   }

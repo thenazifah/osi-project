@@ -341,6 +341,7 @@ export default function RFQ() {
 
                     <Button
                       type="submit"
+                      variant="cta"
                       disabled={isPending}
                       size="lg"
                       className="group h-12 w-full"

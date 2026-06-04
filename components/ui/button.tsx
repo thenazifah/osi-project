@@ -10,13 +10,15 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-accent-2 text-bg shadow-[0_2px_12px_rgba(27,138,138,0.35)] hover:bg-sea-light hover:shadow-[0_4px_16px_rgba(27,138,138,0.4)] active:scale-[0.98]",
+        cta:
+          "bg-cta text-bg shadow-[0_2px_12px_rgba(12,48,72,0.3)] hover:bg-cta-hover hover:shadow-[0_4px_16px_rgba(12,48,72,0.4)] active:scale-[0.98]",
         primary:
           "bg-accent text-bg shadow-[0_2px_12px_rgba(14,58,91,0.25)] hover:bg-ink hover:shadow-[0_4px_16px_rgba(11,31,42,0.3)] active:scale-[0.98]",
         outline:
           "border-2 border-border bg-surface text-accent hover:border-accent/40 hover:bg-tag-bg active:scale-[0.98]",
         ghost:
           "bg-transparent text-ink-muted hover:bg-tag-bg hover:text-accent",
-        nav: "bg-accent-2 text-bg shadow-[0_2px_12px_rgba(27,138,138,0.35)] hover:bg-sea-light hover:shadow-[0_4px_16px_rgba(27,138,138,0.45)] active:scale-[0.98]",
+        nav: "bg-white text-accent shadow-[0_2px_12px_rgba(11,31,42,0.12)] hover:bg-white/90 hover:shadow-[0_4px_16px_rgba(11,31,42,0.18)] active:scale-[0.98]",
         footer:
           "bg-bg text-accent shadow-lg hover:bg-white hover:shadow-xl active:scale-[0.98]",
         compliance:

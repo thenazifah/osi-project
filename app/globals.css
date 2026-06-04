@@ -7,8 +7,11 @@
   --ink: #0b1f2a;
   --ink-muted: #5a6f7d;
   --accent: #0e3a5b;
+  --cta: #0c3048;
+  --cta-hover: #0f3d5c;
   --accent-2: #1b8a8a;
   --sea: #2a6f97;
+  --nav: #2b6b91;
   --sea-light: #3db8b0;
   --export: #c4a35a;
   --tag-bg: #e8eff3;
@@ -25,8 +28,11 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-accent: var(--accent);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
   --color-accent-2: var(--accent-2);
   --color-sea: var(--sea);
+  --color-nav: var(--nav);
   --color-sea-light: var(--sea-light);
   --color-export: var(--export);
   --color-tag-bg: var(--tag-bg);
@@ -91,11 +97,6 @@ h6 {
   text-transform: uppercase;
   color: var(--sea);
   font-weight: 500;
-}
-
-.section-label::before {
-  content: "▸ ";
-  color: var(--accent-2);
 }
 
 .page-container {
@@ -387,6 +388,7 @@ h6 {
   }
 }
 
+.nav-header,
 .compliance-dark {
   background: linear-gradient(165deg, var(--ink) 0%, var(--accent) 100%);
   color: var(--bg);

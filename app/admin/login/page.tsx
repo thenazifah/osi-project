@@ -15,7 +15,7 @@ export default async function AdminLoginPage() {
         </p>
         <h1 className="mt-2 font-display text-2xl text-ink">Content Dashboard</h1>
         <p className="mt-2 font-sans text-sm text-ink-muted">
-          Sign in to manage RFQ inquiries, products, and site copy.
+          Sign in with an approved email and password, or Google, to manage RFQ inquiries, products, and site copy.
         </p>
         <LoginForm />
       </div>

@@ -11,10 +11,17 @@ import { CargoShipScene } from "@/components/visuals/CargoShipScene";
 import { EXPORT_IMAGES } from "@/data/export-images";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
+import type { SiteContent } from "@/lib/admin-types";
 import { cn } from "@/lib/utils";
 
-export default function Hero() {
+type HeroProps = {
+  content?: SiteContent["hero"];
+};
+
+export default function Hero({ content }: HeroProps) {
   const t = useTranslations("hero");
+  const h = (key: keyof SiteContent["hero"]) =>
+    content?.[key]?.trim() ? content[key] : t(key);
   const { ref, isVisible } = useSectionObserver();
   const { ref: statsRef, isVisible: statsVisible } = useStaggerVisible();
 
@@ -46,18 +53,20 @@ export default function Hero() {
             <Badge variant="outline">B2B Export</Badge>
           </div>
           <h1 className="font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[1.05] text-ink">
-            <span className="text-accent-2">{t("headline1")}</span>
+            <span className="text-accent-2">{h("headline1")}</span>
             <br />
-            {t("headline2")}
+            {h("headline2")}
             <br />
-            {t("headline3")}
+            {h("headline3")}
           </h1>
           <p className="mt-6 max-w-[520px] font-sans text-[17px] leading-relaxed text-ink-muted">
-            {t("body")}
+            {h("body")}
           </p>
-          <p className="mt-4 font-sans text-sm text-ink-muted/90">{t("trustLine")}</p>
+          <p className="mt-4 font-sans text-sm text-ink-muted/90">{h("trustLine")}</p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <Button onClick={() => scrollTo("rfq")}>{t("ctaPrimary")}</Button>
+            <Button variant="cta" onClick={() => scrollTo("rfq")}>
+              {t("ctaPrimary")}
+            </Button>
             <Button variant="outline" onClick={() => scrollTo("catalog")}>
               {t("ctaSecondary")}
             </Button>

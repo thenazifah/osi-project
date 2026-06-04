@@ -1,8 +1,27 @@
+import Link from "next/link";
+import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { ProductsManager } from "@/components/admin/ProductsManager";
+import { StatCard } from "@/components/admin/StatCard";
+import { Button } from "@/components/ui/button";
 import { listProducts } from "@/lib/admin-actions";
 import type { ProductRecord } from "@/lib/admin-types";
+import { isAdminConfigured } from "@/lib/firebase-admin";
 
 export default async function AdminProductsPage() {
+  const firebaseReady = isAdminConfigured();
+
+  if (!firebaseReady) {
+    return (
+      <div className="space-y-6">
+        <AdminPageHeader
+          eyebrow="Products"
+          title="Catalog content"
+          description="Connect Firestore to manage products shown on the public catalog and product detail pages."
+        />
+      </div>
+    );
+  }
+
   let products: ProductRecord[] = [];
   let error: string | null = null;
 
@@ -12,18 +31,27 @@ export default async function AdminProductsPage() {
     error = e instanceof Error ? e.message : "Failed to load products";
   }
 
+  const activeCount = products.filter((p) => p.active).length;
+
   return (
     <div className="space-y-6">
-      <div>
-        <p className="font-mono text-[10px] uppercase tracking-widest text-sea">
-          Products
-        </p>
-        <h1 className="mt-2 font-display text-3xl text-ink">Catalog content</h1>
-        <p className="mt-2 font-sans text-sm text-ink-muted">
-          Manage product records in Firestore. Use import to sync IDs from the static
-          catalog, then edit names and descriptions per locale.
-        </p>
-      </div>
+      <AdminPageHeader
+        eyebrow="Products"
+        title="Catalog content"
+        description="Manage Firestore product records. Saves revalidate /en, /ja, /zh and product detail routes."
+      >
+        <Button variant="outline" size="sm" asChild>
+          <Link href="/en#catalog">View catalog on site</Link>
+        </Button>
+      </AdminPageHeader>
+
+      {!error ? (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <StatCard label="Total products" value={products.length} />
+          <StatCard label="Active" value={activeCount} />
+          <StatCard label="Hidden" value={products.length - activeCount} />
+        </div>
+      ) : null}
 
       {error ? (
         <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 font-sans text-sm text-red-700">

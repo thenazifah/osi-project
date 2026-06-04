@@ -1,8 +1,25 @@
+import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { RfqTable } from "@/components/admin/RfqTable";
+import { StatCard } from "@/components/admin/StatCard";
 import { listRfqSubmissions } from "@/lib/admin-actions";
-import type { RfqSubmission } from "@/lib/admin-types";
+import type { RfqSubmission, RfqStatus } from "@/lib/admin-types";
+import { isAdminConfigured } from "@/lib/firebase-admin";
 
 export default async function AdminRfqPage() {
+  const firebaseReady = isAdminConfigured();
+
+  if (!firebaseReady) {
+    return (
+      <div className="space-y-6">
+        <AdminPageHeader
+          eyebrow="RFQ Inbox"
+          title="Quote requests"
+          description="Connect Firestore to load submissions from the public RFQ form."
+        />
+      </div>
+    );
+  }
+
   let submissions: RfqSubmission[] = [];
   let error: string | null = null;
 
@@ -12,17 +29,25 @@ export default async function AdminRfqPage() {
     error = e instanceof Error ? e.message : "Failed to load RFQ submissions";
   }
 
+  const byStatus = (status: RfqStatus) =>
+    submissions.filter((s) => s.status === status).length;
+
   return (
     <div className="space-y-6">
-      <div>
-        <p className="font-mono text-[10px] uppercase tracking-widest text-sea">
-          RFQ Inbox
-        </p>
-        <h1 className="mt-2 font-display text-3xl text-ink">Quote requests</h1>
-        <p className="mt-2 font-sans text-sm text-ink-muted">
-          Submissions from the public RFQ form. Update status as you review each lead.
-        </p>
-      </div>
+      <AdminPageHeader
+        eyebrow="RFQ Inbox"
+        title="Quote requests"
+        description="Submissions from the public RFQ form. Status updates sync to the overview charts and sidebar counts."
+      />
+
+      {!error ? (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <StatCard label="New" value={byStatus("new")} />
+          <StatCard label="Reviewing" value={byStatus("reviewing")} />
+          <StatCard label="Quoted" value={byStatus("quoted")} />
+          <StatCard label="Closed" value={byStatus("closed")} />
+        </div>
+      ) : null}
 
       {error ? (
         <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 font-sans text-sm text-red-700">

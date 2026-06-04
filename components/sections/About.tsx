@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useSectionObserver, useCountUp } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
+import type { SiteContent } from "@/lib/admin-types";
 import { cn } from "@/lib/utils";
 
 const STATS = [
@@ -58,8 +59,10 @@ function StatCard({
   );
 }
 
-export default function About() {
+export default function About({ content }: { content?: SiteContent["about"] }) {
   const t = useTranslations("about");
+  const c = (key: keyof SiteContent["about"]) =>
+    content?.[key]?.trim() ? content[key] : t(key);
   const { ref, isVisible } = useSectionObserver();
   const { ref: capRef, isVisible: capVisible } = useStaggerVisible();
 
@@ -77,12 +80,12 @@ export default function About() {
           <div className="lg:col-span-5">
             <p className="section-label">{t("label")}</p>
             <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-ink">
-              {t("title")}
+              {c("title")}
             </h2>
             <div className="mt-8 space-y-5 font-sans text-base leading-relaxed text-ink-muted">
-              <p>{t("p1")}</p>
-              <p>{t("p2")}</p>
-              <p>{t("p3")}</p>
+              <p>{c("p1")}</p>
+              <p>{c("p2")}</p>
+              <p>{c("p3")}</p>
             </div>
           </div>
 

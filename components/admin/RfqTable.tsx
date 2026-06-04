@@ -1,6 +1,7 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { updateRfqStatus } from "@/lib/admin-actions";
 import type { RfqSubmission, RfqStatus } from "@/lib/admin-types";
 import { Badge } from "@/components/ui/badge";
@@ -29,15 +30,19 @@ function statusVariant(status: RfqStatus) {
 }
 
 export function RfqTable({ submissions }: { submissions: RfqSubmission[] }) {
+  const router = useRouter();
+  const [rows, setRows] = useState(submissions);
   const [isPending, startTransition] = useTransition();
 
   const onStatusChange = (id: string, status: RfqStatus) => {
+    setRows((prev) => prev.map((r) => (r.id === id ? { ...r, status } : r)));
     startTransition(async () => {
       await updateRfqStatus(id, status);
+      router.refresh();
     });
   };
 
-  if (submissions.length === 0) {
+  if (rows.length === 0) {
     return (
       <p className="rounded-lg border border-border bg-surface px-4 py-8 text-center font-sans text-sm text-ink-muted">
         No RFQ submissions yet.
@@ -66,7 +71,7 @@ export function RfqTable({ submissions }: { submissions: RfqSubmission[] }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {submissions.map((row) => (
+            {rows.map((row) => (
               <tr key={row.id} className="align-top">
                 <td className="px-4 py-4">
                   <p className="font-medium text-ink">{row.companyName}</p>
@@ -115,7 +120,7 @@ export function RfqTable({ submissions }: { submissions: RfqSubmission[] }) {
                 <td className="px-4 py-4 font-sans text-xs text-ink-muted">
                   {row.createdAt
                     ? new Date(row.createdAt).toLocaleString()
-                    : "—"}
+                    : "N/A"}
                 </td>
               </tr>
             ))}

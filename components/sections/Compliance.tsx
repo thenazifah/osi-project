@@ -47,7 +47,7 @@ export default function Compliance() {
       <div className="page-container py-16 lg:py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="section-label mb-6 text-bg/50 before:text-accent-2">
+            <p className="section-label mb-6 text-bg/50">
               {t("label")}
             </p>
             <h2 className="whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-bg">

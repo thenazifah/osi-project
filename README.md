@@ -32,9 +32,11 @@ Admin dashboard: [http://localhost:3000/admin/login](http://localhost:3000/admin
 | `NEXT_PUBLIC_FIREBASE_*` | Firebase web app config |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL for SEO |
 | `NEXT_PUBLIC_DOC_*` | Optional Firebase Storage PDF URLs |
-| `ADMIN_PASSWORD` | Password for `/admin` dashboard login |
-| `ADMIN_SECRET` | Optional session signing secret (defaults to `ADMIN_PASSWORD`) |
-| `FIREBASE_SERVICE_ACCOUNT_KEY` | Firebase Admin service account JSON (single line) for dashboard reads/writes |
+| `ADMIN_SECRET` | Session signing secret for `/admin` (required) |
+| `ADMIN_ALLOWED_EMAILS` | Optional comma-separated Google emails allowed to sign in |
+| `FIREBASE_SERVICE_ACCOUNT_KEY` | Firebase Admin service account JSON (single line) for dashboard reads/writes and Google token verification |
+
+Enable **Google** and **Email/Password** in Firebase Console → Authentication → Sign-in method. Create Firebase users for each allowlisted email. Only those emails can access `/admin`.
 
 ## Admin dashboard
 

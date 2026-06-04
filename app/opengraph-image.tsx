@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Organic Scales International — Global Fish Scale Exporter";
+export const alt = "Organic Scales International · Global Fish Scale Exporter";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,7 +27,7 @@ export default function OgImage() {
             color: "#3DB8B0",
           }}
         >
-          OSI.EXPORT.PLATFORM — DHAKA, BD
+          OSI.EXPORT.PLATFORM · DHAKA, BD
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div

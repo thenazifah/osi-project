@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { saveSiteContent } from "@/lib/admin-actions";
+import { useRouter } from "next/navigation";
+import { saveSiteContent, seedSiteContentFromMessages } from "@/lib/admin-actions";
 import type { LocaleCode, SiteContent } from "@/lib/admin-types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,17 +25,21 @@ const LOCALES: { code: LocaleCode; label: string }[] = [
 
 export function ContentEditor({
   initialByLocale,
+  readOnly = false,
 }: {
   initialByLocale: Record<LocaleCode, SiteContent>;
+  readOnly?: boolean;
 }) {
+  const router = useRouter();
   const [locale, setLocale] = useState<LocaleCode>("en");
+  const [savedByLocale, setSavedByLocale] = useState(initialByLocale);
   const [content, setContent] = useState<SiteContent>(initialByLocale.en);
   const [message, setMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const switchLocale = (next: LocaleCode) => {
     setLocale(next);
-    setContent(initialByLocale[next]);
+    setContent(savedByLocale[next]);
     setMessage(null);
   };
 
@@ -60,16 +65,27 @@ export function ContentEditor({
   };
 
   const save = () => {
+    if (readOnly) return;
     setMessage(null);
     startTransition(async () => {
       await saveSiteContent(locale, content);
-      initialByLocale[locale] = content;
+      setSavedByLocale((prev) => ({ ...prev, [locale]: content }));
       setMessage(`Saved ${locale.toUpperCase()} content.`);
+      router.refresh();
+    });
+  };
+
+  const seedContent = () => {
+    if (readOnly) return;
+    startTransition(async () => {
+      const { count } = await seedSiteContentFromMessages();
+      setMessage(`Seeded ${count} locales from translation files.`);
+      router.refresh();
     });
   };
 
   return (
-    <div className="space-y-6">
+    <fieldset disabled={readOnly} className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
         <Label className="shrink-0">Locale</Label>
         <Select value={locale} onValueChange={(v) => switchLocale(v as LocaleCode)}>
@@ -84,10 +100,24 @@ export function ContentEditor({
             ))}
           </SelectContent>
         </Select>
-        <Button type="button" onClick={save} disabled={isPending}>
+        <Button type="button" onClick={save} disabled={isPending || readOnly}>
           {isPending ? "Saving…" : "Save changes"}
         </Button>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={seedContent}
+          disabled={isPending || readOnly}
+        >
+          Seed from messages
+        </Button>
       </div>
+
+      {readOnly ? (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 font-sans text-sm text-amber-900">
+          Preview only — connect Firestore to save changes to the live site.
+        </p>
+      ) : null}
 
       {message ? (
         <p className="rounded-lg border border-border bg-tag-bg px-4 py-3 font-sans text-sm text-ink">
@@ -188,12 +218,12 @@ export function ContentEditor({
         </CardContent>
       </Card>
 
-      <p className="font-sans text-xs text-ink-muted">
-        Saved copy is stored in Firestore collection{" "}
-        <code className="rounded bg-tag-bg px-1">site_content</code>. Wire the public
-        site to read these overrides in a follow-up if you want live CMS updates on the
-        homepage.
-      </p>
-    </div>
+      {!readOnly ? (
+        <p className="font-sans text-xs text-ink-muted">
+          Saved copy is stored in Firestore <code className="rounded bg-tag-bg px-1">site_content</code>{" "}
+          and applied on the public homepage for EN, JA, and ZH.
+        </p>
+      ) : null}
+    </fieldset>
   );
 }

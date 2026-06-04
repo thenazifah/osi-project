@@ -10,21 +10,35 @@ import Compliance from "@/components/sections/Compliance";
 import FAQ from "@/components/sections/FAQ";
 import Policy from "@/components/sections/Policy";
 import Footer from "@/components/sections/Footer";
+import { getCatalogProducts, getPublicSiteContent } from "@/lib/cms";
+import type { LocaleCode } from "@/lib/admin-types";
 
 const RFQ = dynamic(() => import("@/components/sections/RFQ"));
 
 export const revalidate = 3600;
 
-export default function HomePage() {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function HomePage({ params }: PageProps) {
+  const { locale } = await params;
+  const code = locale as LocaleCode;
+
+  const [catalogProducts, siteContent] = await Promise.all([
+    getCatalogProducts(code),
+    getPublicSiteContent(code),
+  ]);
+
   return (
     <>
       <Nav />
       <main>
-        <Hero />
-        <TrustBar />
+        <Hero content={siteContent.hero} />
+        <TrustBar content={siteContent.trust} />
         <ExportLogistics />
-        <About />
-        <Catalog />
+        <Catalog items={catalogProducts} />
+        <About content={siteContent.about} />
         <Process />
         <Compliance />
         <FAQ />

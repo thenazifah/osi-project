@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Menu } from "lucide-react";
 import { OsiLogo } from "@/components/brand/OsiLogo";
 import { Button } from "@/components/ui/button";
@@ -17,8 +19,8 @@ import { useActiveSection } from "@/lib/use-section-observer";
 import { cn } from "@/lib/utils";
 
 const NAV_SECTIONS = [
-  { id: "about", key: "about" },
   { id: "catalog", key: "catalog" },
+  { id: "about", key: "about" },
   { id: "process", key: "process" },
   { id: "compliance", key: "compliance" },
   { id: "faq", key: "faq" },
@@ -27,9 +29,18 @@ const NAV_SECTIONS = [
 
 export default function Nav() {
   const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const homePath = `/${locale}`;
+  const isHomePage =
+    pathname === homePath || pathname === `${homePath}/`;
+
   const [sheetOpen, setSheetOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const activeSection = useActiveSection(NAV_SECTIONS.map((s) => s.id));
+  const activeSection = useActiveSection(
+    isHomePage ? NAV_SECTIONS.map((s) => s.id) : []
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -38,22 +49,49 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (!isHomePage) return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const el = document.getElementById(hash);
+    if (!el) return;
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: "smooth" });
+    });
+  }, [isHomePage, pathname]);
+
+  const goToSection = (id: string) => {
     setSheetOpen(false);
+    if (isHomePage) {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", `${homePath}#${id}`);
+      return;
+    }
+    router.push(`${homePath}#${id}`);
   };
 
   const linkClass = (id: string, mobile?: boolean) => {
     const isActive = activeSection === id;
+    const base =
+      "relative rounded-full font-sans font-medium transition-[color,background-color,box-shadow] duration-200";
+    if (mobile) {
+      return cn(
+        base,
+        "w-full px-4 py-3 text-left text-base",
+        isActive
+          ? "bg-accent text-white shadow-sm"
+          : "text-ink-muted hover:bg-tag-bg hover:text-accent"
+      );
+    }
     return cn(
-      "relative rounded-full font-sans font-medium transition-[color,background-color,box-shadow] duration-200",
-      mobile ? "w-full px-4 py-3 text-left text-base" : "px-3.5 py-2 text-[13px]",
+      base,
+      "px-3.5 py-2 text-[13px]",
       isActive
-        ? "bg-accent text-bg shadow-sm hover:bg-ink hover:shadow-md"
+        ? "bg-white text-accent shadow-sm hover:bg-white/90"
         : cn(
-            "text-ink-muted",
-            "hover:bg-accent/[0.08] hover:text-accent",
-            "focus-visible:bg-accent/[0.08] focus-visible:text-accent focus-visible:outline-none"
+            "text-white/85",
+            "hover:bg-white/10 hover:text-white",
+            "focus-visible:bg-white/10 focus-visible:text-white focus-visible:outline-none"
           )
     );
   };
@@ -64,7 +102,7 @@ export default function Nav() {
         <button
           key={id}
           type="button"
-          onClick={() => scrollTo(id)}
+          onClick={() => goToSection(id)}
           className={linkClass(id, mobile)}
         >
           {t(key)}
@@ -76,28 +114,33 @@ export default function Nav() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-all duration-300",
+        "nav-header sticky top-0 z-50 border-b border-white/10 transition-all duration-300",
         scrolled
-          ? "border-border/80 bg-surface/95 shadow-[0_4px_24px_rgba(11,31,42,0.06)] backdrop-blur-md"
-          : "border-transparent bg-surface/80 backdrop-blur-sm"
+          ? "shadow-[0_4px_24px_rgba(11,31,42,0.2)] backdrop-blur-md"
+          : "backdrop-blur-sm"
       )}
     >
       <div className="page-container flex h-[76px] items-center justify-between gap-4">
-        <button
-          type="button"
-          onClick={() => scrollTo("hero")}
-          className="group -ml-1 flex min-w-0 shrink-0 items-center gap-3 rounded-xl px-2 py-1.5 text-left transition-colors duration-200 hover:bg-accent/[0.06]"
+        <Link
+          href={isHomePage ? `${homePath}#hero` : homePath}
+          onClick={(e) => {
+            if (!isHomePage) return;
+            e.preventDefault();
+            document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+            window.history.replaceState(null, "", `${homePath}#hero`);
+          }}
+          className="group -ml-1 flex min-w-0 shrink-0 items-center gap-3 rounded-xl px-2 py-1.5 text-left transition-colors duration-200 hover:bg-white/10"
         >
           <OsiLogo size={44} priority />
           <div className="hidden flex-col sm:flex">
-            <span className="font-display text-[17px] font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
+            <span className="font-display text-[17px] font-semibold tracking-tight text-white transition-colors duration-200 group-hover:text-white/90">
               {t("wordmark")}
             </span>
-            <span className="font-sans text-xs font-normal text-ink-muted transition-colors duration-200 group-hover:text-sea">
+            <span className="font-sans text-xs font-normal text-white/75 transition-colors duration-200 group-hover:text-white/90">
               {t("tagline")}
             </span>
           </div>
-        </button>
+        </Link>
 
         <nav
           className="hidden items-center gap-1 xl:flex"
@@ -107,11 +150,13 @@ export default function Nav() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <LanguageSelect />
+          <LanguageSelect
+            triggerClassName="border-white/25 bg-white/10 text-white hover:border-white/40 hover:bg-white/15 [&_svg]:text-white/80"
+          />
           <Button
             variant="nav"
             size="nav"
-            onClick={() => scrollTo("rfq")}
+            onClick={() => goToSection("rfq")}
             className="group"
           >
             {t("requestQuote")}
@@ -123,7 +168,7 @@ export default function Nav() {
           <SheetTrigger asChild>
             <button
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-bg text-accent transition-colors duration-200 hover:border-accent/30 hover:bg-tag-bg lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition-colors duration-200 hover:border-white/40 hover:bg-white/15 lg:hidden"
               aria-label={t("menuOpen")}
             >
               <Menu size={20} strokeWidth={1.75} />
@@ -151,9 +196,10 @@ export default function Nav() {
                 onLocaleChange={() => setSheetOpen(false)}
               />
               <Button
-                variant="nav"
+                variant="primary"
+                size="nav"
                 className="w-full"
-                onClick={() => scrollTo("rfq")}
+                onClick={() => goToSection("rfq")}
               >
                 {t("requestQuote")}
                 <ArrowRight className="h-4 w-4" />

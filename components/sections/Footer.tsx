@@ -10,8 +10,8 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { id: "about", key: "about" },
   { id: "catalog", key: "catalog" },
+  { id: "about", key: "about" },
   { id: "process", key: "process" },
   { id: "compliance", key: "compliance" },
   { id: "faq", key: "faq" },

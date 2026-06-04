@@ -1,11 +1,15 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { ProductCover } from "@/components/catalog/ProductCover";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { products, type ProductCategory } from "@/data/products";
+import type { CatalogProduct } from "@/lib/cms";
+import type { ProductCategory } from "@/data/products";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
@@ -20,18 +24,23 @@ const FILTERS: { key: FilterKey; labelKey: string }[] = [
   { key: "custom", labelKey: "filterCustom" },
 ];
 
-function getProductNameKey(nameKey: string): string {
-  const parts = nameKey.split(".");
-  return parts[0] ?? nameKey;
+function isExternalSpecsUrl(url?: string): url is string {
+  return Boolean(url && /^https?:\/\//i.test(url));
 }
 
-function ProductGrid({ filter }: { filter: FilterKey }) {
+function ProductGrid({
+  filter,
+  locale,
+  items,
+}: {
+  filter: FilterKey;
+  locale: string;
+  items: CatalogProduct[];
+}) {
   const t = useTranslations("catalog");
   const { ref, isVisible } = useStaggerVisible();
   const filtered =
-    filter === "all"
-      ? products
-      : products.filter((p) => p.category === filter);
+    filter === "all" ? items : items.filter((p) => p.category === filter);
 
   return (
     <div
@@ -42,34 +51,55 @@ function ProductGrid({ filter }: { filter: FilterKey }) {
       )}
     >
       {filtered.map((product) => {
-        const productKey = getProductNameKey(product.nameKey);
+        const externalSpecs = isExternalSpecsUrl(product.specsUrl);
+        const internalSpecsHref = `/${locale}/products/${product.slug}`;
+
         return (
           <Card
             key={product.id}
             className="stagger-item card-interactive overflow-hidden bg-bg"
           >
-            <ProductCover category={product.category} />
+            {product.images[0] ? (
+              <div className="relative aspect-video w-full overflow-hidden bg-tag-bg">
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <ProductCover category={product.category} />
+            )}
             <CardHeader className="pb-2">
               <Badge variant="secondary" className="w-fit">
                 {t(`categories.${product.category}`)}
               </Badge>
-              <CardTitle className="mt-2 text-base">
-                {t(`${productKey}.name`)}
-              </CardTitle>
+              <CardTitle className="mt-2 text-base">{product.name}</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <p className="line-clamp-2 font-sans text-sm leading-relaxed text-ink-muted">
-                {t(`${productKey}.description`)}
+                {product.description}
               </p>
             </CardContent>
-            <CardFooter className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-4">
+            <CardFooter className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
               <Badge variant="outline">{t("moq", { kg: product.moqKg })}</Badge>
-              <a
-                href={product.specsUrl}
-                className="font-mono text-[12px] text-sea transition-colors duration-200 hover:text-accent"
-              >
-                {t("viewSpecs")}
-              </a>
+              {externalSpecs ? (
+                <Button variant="primary" size="sm" className="shrink-0" asChild>
+                  <a
+                    href={product.specsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("viewDetails")}
+                  </a>
+                </Button>
+              ) : (
+                <Button variant="primary" size="sm" className="shrink-0" asChild>
+                  <Link href={internalSpecsHref}>{t("viewDetails")}</Link>
+                </Button>
+              )}
             </CardFooter>
           </Card>
         );
@@ -78,8 +108,9 @@ function ProductGrid({ filter }: { filter: FilterKey }) {
   );
 }
 
-export default function Catalog() {
+export default function Catalog({ items }: { items: CatalogProduct[] }) {
   const t = useTranslations("catalog");
+  const locale = useLocale();
   const { ref, isVisible } = useSectionObserver();
 
   return (
@@ -94,7 +125,7 @@ export default function Catalog() {
       <div className="page-container py-12 lg:py-20">
         <p className="section-label">{t("label")}</p>
         <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">
-          {t("filterAll")} · {products.length} lines
+          {t("filterAll")} · {items.length} lines
         </h2>
         <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-ink-muted">
           {t("subtitle")}
@@ -111,7 +142,7 @@ export default function Catalog() {
           </TabsList>
           {FILTERS.map(({ key }) => (
             <TabsContent key={key} value={key}>
-              <ProductGrid filter={key} />
+              <ProductGrid filter={key} locale={locale} items={items} />
             </TabsContent>
           ))}
         </Tabs>

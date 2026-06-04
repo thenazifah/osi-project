@@ -1,3 +1,5 @@
+import type { ProductSpecs } from "@/data/products";
+
 export type RfqStatus = "new" | "reviewing" | "quoted" | "closed";
 
 export type RfqSubmission = {
@@ -21,6 +23,8 @@ export type ProductRecord = {
   category: "tilapia" | "carp" | "marine" | "custom";
   moqKg: number;
   specsUrl: string;
+  images: string[];
+  specs: ProductSpecs;
   active: boolean;
   order: number;
   names: Record<LocaleCode, string>;
@@ -45,4 +49,10 @@ export type SiteContent = {
     title: string;
     subtitle: string;
   };
+};
+
+export type DashboardChartData = {
+  rfqByStatus: { status: string; count: number }[];
+  rfqByMonth: { month: string; count: number }[];
+  productsByCategory: { category: string; count: number }[];
 };
