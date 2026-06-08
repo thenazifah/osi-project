@@ -1,6 +1,12 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import {
+  getApp,
+  getApps,
+  initializeApp,
+  type FirebaseApp,
+  type FirebaseOptions,
+} from "firebase/app";
+import { getFirestore, type Firestore } from "firebase/firestore";
+import { getStorage, type FirebaseStorage } from "firebase/storage";
 
 /*
 Firebase web app (osi-project-da298) — same values as firebaseConfig in .env.local:
@@ -12,7 +18,7 @@ Firebase Console → Authentication → Sign-in method:
 Authorized domains: localhost, your production domain, and *.firebaseapp.com
 */
 
-const firebaseConfig = {
+const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -21,11 +27,48 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
+export function isFirebaseClientConfigured(): boolean {
+  return Boolean(
+    firebaseConfig.apiKey?.trim() &&
+      firebaseConfig.authDomain?.trim() &&
+      firebaseConfig.projectId?.trim() &&
+      firebaseConfig.appId?.trim()
+  );
+}
 
-export { app, db, storage };
+let app: FirebaseApp | null = null;
+
+export function getFirebaseApp(): FirebaseApp {
+  if (!isFirebaseClientConfigured()) {
+    throw new Error(
+      "Firebase client is not configured. Set NEXT_PUBLIC_FIREBASE_* environment variables and redeploy.",
+    );
+  }
+
+  if (!app) {
+    app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  }
+
+  return app;
+}
+
+let db: Firestore | null = null;
+
+export function getClientDb(): Firestore {
+  if (!db) {
+    db = getFirestore(getFirebaseApp());
+  }
+  return db;
+}
+
+let storage: FirebaseStorage | null = null;
+
+export function getClientStorage(): FirebaseStorage {
+  if (!storage) {
+    storage = getStorage(getFirebaseApp());
+  }
+  return storage;
+}
 
 /*
 Firestore security rules (Firebase Console → Firestore → Rules):

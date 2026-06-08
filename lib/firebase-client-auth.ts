@@ -6,38 +6,50 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  type Auth,
   type User,
 } from "firebase/auth";
-import { app } from "@/lib/firebase";
+import { getFirebaseApp, isFirebaseClientConfigured } from "@/lib/firebase";
 
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
+let auth: Auth | null = null;
 
-googleProvider.setCustomParameters({ prompt: "select_account" });
-
-export function getClientAuth() {
+function getAuthInstance(): Auth {
+  if (!auth) {
+    auth = getAuth(getFirebaseApp());
+  }
   return auth;
 }
 
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+
+export function isFirebaseAuthAvailable(): boolean {
+  return isFirebaseClientConfigured();
+}
+
+export function getClientAuth() {
+  return getAuthInstance();
+}
+
 export async function signInWithGoogle(): Promise<User> {
-  const result = await signInWithPopup(auth, googleProvider);
+  const result = await signInWithPopup(getAuthInstance(), googleProvider);
   return result.user;
 }
 
 export async function signInWithEmailPassword(
   email: string,
-  password: string
+  password: string,
 ): Promise<User> {
   const result = await signInWithEmailAndPassword(
-    auth,
+    getAuthInstance(),
     email.trim(),
-    password
+    password,
   );
   return result.user;
 }
 
 export async function signOutFirebase(): Promise<void> {
-  await signOut(auth);
+  await signOut(getAuthInstance());
 }
 
 /** @deprecated Use signOutFirebase */

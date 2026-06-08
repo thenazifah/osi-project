@@ -1,7 +1,7 @@
 "use server";
 
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "./firebase";
+import { getClientDb, isFirebaseClientConfigured } from "./firebase";
 import { RFQSchema, type RFQFormData, type RFQResult } from "./rfq-schema";
 
 export async function submitRFQ(data: RFQFormData): Promise<RFQResult> {
@@ -14,8 +14,16 @@ export async function submitRFQ(data: RFQFormData): Promise<RFQResult> {
     };
   }
 
+  if (!isFirebaseClientConfigured()) {
+    return {
+      success: false,
+      error:
+        "RFQ submissions are temporarily unavailable. Firebase is not configured on this deployment.",
+    };
+  }
+
   try {
-    const docRef = await addDoc(collection(db, "rfq_submissions"), {
+    const docRef = await addDoc(collection(getClientDb(), "rfq_submissions"), {
       ...parsed.data,
       createdAt: serverTimestamp(),
       status: "new",

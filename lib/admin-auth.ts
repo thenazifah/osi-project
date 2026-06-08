@@ -5,16 +5,14 @@ import { isAllowedAdminEmail } from "@/lib/admin-allowlist";
 const COOKIE_NAME = "osi_admin_session";
 const SESSION_MS = 7 * 24 * 60 * 60 * 1000;
 
-function getSecret(): string {
-  const secret = process.env.ADMIN_SECRET?.trim();
-  if (!secret) {
-    throw new Error("ADMIN_SECRET must be set in .env.local for admin sessions.");
-  }
-  return secret;
+function getSecret(): string | null {
+  return process.env.ADMIN_SECRET?.trim() || null;
 }
 
-function sign(payload: string): string {
-  return createHmac("sha256", getSecret()).update(payload).digest("base64url");
+function sign(payload: string): string | null {
+  const secret = getSecret();
+  if (!secret) return null;
+  return createHmac("sha256", secret).update(payload).digest("base64url");
 }
 
 function createToken(email: string): string {
@@ -22,9 +20,15 @@ function createToken(email: string): string {
     JSON.stringify({
       exp: Date.now() + SESSION_MS,
       email: email.trim().toLowerCase(),
-    })
+    }),
   ).toString("base64url");
-  return `${payload}.${sign(payload)}`;
+  const signature = sign(payload);
+  if (!signature) {
+    throw new Error(
+      "ADMIN_SECRET must be set in environment variables for admin sessions.",
+    );
+  }
+  return `${payload}.${signature}`;
 }
 
 function parseToken(token: string): { exp: number; email: string } | null {
@@ -32,6 +36,8 @@ function parseToken(token: string): { exp: number; email: string } | null {
   if (!payload || !signature) return null;
 
   const expected = sign(payload);
+  if (!expected) return null;
+
   try {
     const a = Buffer.from(signature);
     const b = Buffer.from(expected);

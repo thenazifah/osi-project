@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { loginAdminWithFirebase } from "@/lib/admin-actions";
 import {
+  isFirebaseAuthAvailable,
   signInWithEmailPassword,
   signInWithGoogle,
   signOutFirebase,
@@ -63,6 +64,7 @@ function GoogleIcon({ className }: { className?: string }) {
 }
 
 export function LoginForm() {
+  const firebaseReady = isFirebaseAuthAvailable();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -147,6 +149,28 @@ export function LoginForm() {
       </div>
 
       <div className="mt-8 space-y-6">
+        {!firebaseReady ? (
+          <div
+            className="flex items-start gap-3 rounded-xl border border-amber-200/80 bg-amber-50/90 px-4 py-3 backdrop-blur-sm"
+            role="alert"
+          >
+            <ShieldAlert
+              className="mt-0.5 h-4 w-4 shrink-0 text-amber-700"
+              strokeWidth={1.75}
+            />
+            <div className="space-y-1">
+              <p className="font-sans text-sm font-medium text-amber-900">
+                Firebase is not configured on this deployment
+              </p>
+              <p className="font-sans text-sm leading-snug text-amber-800/90">
+                Add all <code className="text-xs">NEXT_PUBLIC_FIREBASE_*</code>{" "}
+                variables in Vercel, then redeploy so the client bundle is
+                rebuilt with them.
+              </p>
+            </div>
+          </div>
+        ) : null}
+
         <form onSubmit={onEmailSubmit} className="space-y-5">
           <div className="admin-login-enter admin-login-enter-3 space-y-2">
             <Label htmlFor="email" className="font-sans text-sm text-ink">
@@ -167,7 +191,7 @@ export function LoginForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 className={inputClass}
                 required
-                disabled={isPending}
+                disabled={isPending || !firebaseReady}
               />
             </div>
           </div>
@@ -190,7 +214,7 @@ export function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 className={cn(inputClass, "pr-12")}
                 required
-                disabled={isPending}
+                disabled={isPending || !firebaseReady}
               />
               <button
                 type="button"
@@ -245,7 +269,7 @@ export function LoginForm() {
             variant="outline"
             size="lg"
             className="admin-login-btn h-12 w-full rounded-xl border-border/80 bg-surface/80 hover:border-accent/30 hover:bg-surface"
-            disabled={isPending}
+            disabled={isPending || !firebaseReady}
             onClick={onGoogleSignIn}
           >
             {isPending ? (
