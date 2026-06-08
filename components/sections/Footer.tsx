@@ -4,8 +4,11 @@ import { useTranslations } from "next-intl";
 import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { OsiLogo } from "@/components/brand/OsiLogo";
 import { SocialLinks, type SocialLinkItem } from "@/components/footer/SocialLinks";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useSectionObserver } from "@/lib/use-section-observer";
+import { cn } from "@/lib/utils";
 
 const LINKS = [
   { id: "catalog", key: "catalog" },
@@ -23,6 +26,7 @@ type FooterProps = {
 export default function Footer({ socialLinks = [] }: FooterProps) {
   const t = useTranslations("footer");
   const tNav = useTranslations("nav");
+  const { ref, isVisible } = useSectionObserver();
 
   const scrollTo = (id: string, hash?: string) => {
     if (hash) {
@@ -32,20 +36,31 @@ export default function Footer({ socialLinks = [] }: FooterProps) {
   };
 
   return (
-    <footer className="mt-auto">
-      <div className="bg-gradient-to-br from-accent via-accent to-ink text-bg">
+    <footer ref={ref} className="mt-auto">
+      <div
+        className={cn(
+          "section-animate bg-gradient-to-br from-accent via-accent to-ink text-bg",
+          isVisible && "is-visible"
+        )}
+      >
         <div className="page-container flex flex-col items-start justify-between gap-8 py-14 md:flex-row md:items-center">
-          <div className="max-w-lg">
-            <p className="font-sans text-xs font-medium uppercase tracking-widest text-bg/60">
-              OSI Export
-            </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold leading-tight md:text-3xl">
-              {t("ctaTitle")}
-            </h2>
-            <p className="mt-3 font-sans text-sm leading-relaxed text-bg/75">
-              {t("ctaSubtitle")}
-            </p>
-          </div>
+          <SectionIntro visible={isVisible} className="max-w-lg">
+            <SectionIntroItem>
+              <p className="font-sans text-xs font-medium uppercase tracking-widest text-bg/60">
+                OSI Export
+              </p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <h2 className="mt-2 font-display text-2xl font-semibold leading-tight md:text-3xl">
+                {t("ctaTitle")}
+              </h2>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <p className="mt-3 font-sans text-sm leading-relaxed text-bg/75">
+                {t("ctaSubtitle")}
+              </p>
+            </SectionIntroItem>
+          </SectionIntro>
           <Button
             variant="footer"
             size="lg"

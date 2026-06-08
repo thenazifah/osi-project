@@ -6,6 +6,8 @@ import { ShieldCheck, Microscope, Globe } from "lucide-react";
 import { ExportImage } from "@/components/visuals/ExportImage";
 import { EXPORT_IMAGES } from "@/data/export-images";
 import { Card, CardContent } from "@/components/ui/card";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
+import { Reveal } from "@/components/motion/Reveal";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
@@ -56,27 +58,34 @@ export default function Process({ processBannerImage }: { processBannerImage?: s
         "section-animate section-divider",
         isVisible && "is-visible"
       )}
-      style={{ animationDelay: "160ms" }}
     >
       <div className="page-container py-16 lg:py-24">
         <div className="mb-12 grid grid-cols-1 items-end gap-8 lg:grid-cols-2">
-          <div>
-            <p className="section-label text-ink-muted">{t("label")}</p>
-            <h2 className="mt-4 font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-tight text-ink">
-              {t("title")}
-            </h2>
-            <p className="mt-4 max-w-xl font-sans text-base text-ink-muted">
-              {t("subtitle")}
-            </p>
-          </div>
-          <ExportImage
-            src={processBannerImage?.trim() || EXPORT_IMAGES.shipSea}
-            alt={t("imageAlt")}
-            overlay="dark"
-            objectPosition="center 50%"
-            className="aspect-[21/9] w-full rounded-xl lg:aspect-[2/1]"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
+          <SectionIntro visible={isVisible}>
+            <SectionIntroItem>
+              <p className="section-label text-ink-muted">{t("label")}</p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <h2 className="mt-4 font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-tight text-ink">
+                {t("title")}
+              </h2>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <p className="mt-4 max-w-xl font-sans text-base text-ink-muted">
+                {t("subtitle")}
+              </p>
+            </SectionIntroItem>
+          </SectionIntro>
+          <Reveal visible={isVisible} direction="scale">
+            <ExportImage
+              src={processBannerImage?.trim() || EXPORT_IMAGES.shipSea}
+              alt={t("imageAlt")}
+              overlay="dark"
+              objectPosition="center 50%"
+              className="aspect-[21/9] w-full rounded-xl lg:aspect-[2/1]"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </Reveal>
         </div>
 
         <div ref={timelineRef} className="relative">

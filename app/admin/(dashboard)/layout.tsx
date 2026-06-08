@@ -26,17 +26,17 @@ export default async function AdminDashboardLayout({
     : { rfqNew: 0, rfqTotal: 0, productCount: 0, contentLocales: 0 };
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row">
+    <div className="admin-dashboard flex min-h-screen flex-col lg:flex-row">
       <AdminSidebar
         email={email}
         firebaseReady={adminStatus.ready}
         navCounts={navCounts}
       />
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="admin-dashboard-main flex min-w-0 flex-1 flex-col">
         {!adminStatus.ready ? (
           <AdminSetupBanner message={adminStatus.message} />
         ) : null}
-        <main className="flex-1 p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-5 sm:p-6 lg:p-8 xl:p-10">{children}</main>
       </div>
     </div>
   );

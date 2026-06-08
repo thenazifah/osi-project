@@ -8,7 +8,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
+import { Reveal } from "@/components/motion/Reveal";
 import { useSectionObserver } from "@/lib/use-section-observer";
+import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
 
 const FAQ_KEYS = ["moq", "grades", "shipping", "samples", "payment", "traceability"] as const;
@@ -16,6 +19,7 @@ const FAQ_KEYS = ["moq", "grades", "shipping", "samples", "payment", "traceabili
 export default function FAQ() {
   const t = useTranslations("faq");
   const { ref, isVisible } = useSectionObserver();
+  const { ref: faqRef, isVisible: faqVisible } = useStaggerVisible();
 
   return (
     <section
@@ -27,40 +31,53 @@ export default function FAQ() {
       )}
     >
       <div className="page-container grid grid-cols-1 gap-12 py-16 lg:grid-cols-12 lg:py-24">
-        <div className="lg:col-span-4">
-          <p className="section-label">{t("label")}</p>
-          <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,2.5rem)] leading-tight text-ink">
-            {t("title")}
-          </h2>
-          <p className="mt-4 font-sans text-sm leading-relaxed text-ink-muted">
-            {t("subtitle")}
-          </p>
-          <Card className="mt-8 card-interactive">
-            <CardContent className="p-5">
-              <p className="font-mono text-[11px] uppercase tracking-wider text-sea">
-                {t("supportLabel")}
-              </p>
-              <p className="mt-2 font-sans text-sm text-ink-muted">
-                {t("supportText")}
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <SectionIntro visible={isVisible} className="lg:col-span-4">
+          <SectionIntroItem>
+            <p className="section-label">{t("label")}</p>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,2.5rem)] leading-tight text-ink">
+              {t("title")}
+            </h2>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <p className="mt-4 font-sans text-sm leading-relaxed text-ink-muted">
+              {t("subtitle")}
+            </p>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <Card className="mt-8 card-interactive">
+              <CardContent className="p-5">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-sea">
+                  {t("supportLabel")}
+                </p>
+                <p className="mt-2 font-sans text-sm text-ink-muted">
+                  {t("supportText")}
+                </p>
+              </CardContent>
+            </Card>
+          </SectionIntroItem>
+        </SectionIntro>
 
-        <div className="lg:col-span-8">
+        <Reveal visible={isVisible} direction="left" className="lg:col-span-8">
+          <div ref={faqRef}>
           <Accordion
             type="single"
             collapsible
-            className="w-full overflow-hidden rounded-lg border border-border bg-bg px-4"
+            className={cn(
+              "w-full overflow-hidden rounded-lg border border-border bg-bg px-4",
+              faqVisible && "stagger-visible"
+            )}
           >
             {FAQ_KEYS.map((key) => (
-              <AccordionItem key={key} value={key}>
+              <AccordionItem key={key} value={key} className="stagger-item">
                 <AccordionTrigger>{t(`items.${key}.q`)}</AccordionTrigger>
                 <AccordionContent>{t(`items.${key}.a`)}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

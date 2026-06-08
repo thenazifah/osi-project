@@ -9,6 +9,7 @@ import zh from "@/messages/zh.json";
 import { isAllowedAdminEmail } from "@/lib/admin-allowlist";
 import {
   clearAdminSession,
+  getAdminSessionEmail,
   isAdminAuthenticated,
   setAdminSession,
 } from "@/lib/admin-auth";
@@ -26,6 +27,7 @@ import type {
   SiteContent,
   SiteSettings,
 } from "@/lib/admin-types";
+import { listAuditLogs, writeAuditLog } from "@/lib/audit-log";
 import {
   activeSocialLinks,
   defaultSiteSettings,
@@ -87,6 +89,12 @@ export async function loginAdminWithFirebase(
     }
 
     await setAdminSession(user.email);
+    await writeAuditLog({
+      action: "auth.login",
+      category: "auth",
+      summary: "Signed in to admin dashboard",
+      actor: user.email,
+    });
     return { success: true };
   } catch {
     return { success: false, error: "Sign-in failed. Try again." };
@@ -94,6 +102,13 @@ export async function loginAdminWithFirebase(
 }
 
 export async function logoutAdmin(): Promise<void> {
+  const email = await getAdminSessionEmail();
+  await writeAuditLog({
+    action: "auth.logout",
+    category: "auth",
+    summary: "Signed out of admin dashboard",
+    actor: email,
+  });
   await clearAdminSession();
   revalidateAdminAndSite();
 }
@@ -272,10 +287,23 @@ export async function updateRfqStatus(
   await requireAdmin();
   return withFirestore(async () => {
   const db = getAdminDb();
+  const doc = await db.collection("rfq_submissions").doc(id).get();
+  const company = doc.exists ? String(doc.data()?.companyName ?? id) : id;
+
   await db.collection("rfq_submissions").doc(id).update({
     status,
     updatedAt: FieldValue.serverTimestamp(),
   });
+
+  await writeAuditLog({
+    action: "rfq.status_update",
+    category: "rfq",
+    summary: `RFQ status set to "${status}" for ${company}`,
+    targetId: id,
+    targetLabel: company,
+    metadata: { status },
+  });
+
   revalidateAdminAndSite();
   return { success: true };
   });
@@ -358,6 +386,15 @@ export async function upsertProduct(
       : "";
 
     await db.collection("products").doc(product.id).set(payload, { merge: true });
+
+    await writeAuditLog({
+      action: "product.update",
+      category: "product",
+      summary: `Updated product "${product.names.en || product.slug}"`,
+      targetId: product.id,
+      targetLabel: product.slug,
+    });
+
     revalidatePublicSite(
       product.slug,
       previousSlug && previousSlug !== product.slug ? previousSlug : undefined
@@ -369,6 +406,15 @@ export async function upsertProduct(
     ...payload,
     createdAt: FieldValue.serverTimestamp(),
   });
+
+  await writeAuditLog({
+    action: "product.create",
+    category: "product",
+    summary: `Created product "${product.names.en || product.slug}"`,
+    targetId: ref.id,
+    targetLabel: product.slug,
+  });
+
   revalidatePublicSite(product.slug);
   return { success: true, id: ref.id };
   });
@@ -384,6 +430,15 @@ export async function deleteProduct(id: string): Promise<{ success: boolean }> {
     : "";
 
   await db.collection("products").doc(id).delete();
+
+  await writeAuditLog({
+    action: "product.delete",
+    category: "product",
+    summary: `Deleted product "${previousSlug || id}"`,
+    targetId: id,
+    targetLabel: previousSlug || undefined,
+  });
+
   revalidatePublicSite(undefined, previousSlug || undefined);
   return { success: true };
   });
@@ -433,6 +488,14 @@ export async function seedProductsFromStatic(): Promise<{ count: number }> {
   });
 
   await batch.commit();
+
+  await writeAuditLog({
+    action: "product.seed",
+    category: "product",
+    summary: `Imported ${staticProducts.length} products from static catalog`,
+    metadata: { count: staticProducts.length },
+  });
+
   revalidatePublicSite(staticProducts.map((p) => p.slug));
   return { count: staticProducts.length };
   });
@@ -474,6 +537,13 @@ export async function seedSiteContentFromMessages(): Promise<{ count: number }> 
         { merge: true }
       );
   }
+
+  await writeAuditLog({
+    action: "content.seed",
+    category: "content",
+    summary: `Seeded site copy for ${locales.length} locales`,
+    metadata: { count: locales.length },
+  });
 
   revalidatePublicSite();
   return { count: locales.length };
@@ -558,6 +628,12 @@ export async function saveSiteSettings(
         },
         { merge: true }
       );
+    await writeAuditLog({
+      action: "site.save",
+      category: "site",
+      summary: "Saved site settings (social links, images, Meta Pixel)",
+    });
+
     revalidatePublicSite();
     return { success: true };
   });
@@ -574,6 +650,12 @@ export async function seedSiteSettingsFromDefaults(): Promise<{ success: boolean
         ...defaultSiteSettings(),
         updatedAt: FieldValue.serverTimestamp(),
       });
+    await writeAuditLog({
+      action: "site.seed",
+      category: "site",
+      summary: "Reset site settings to defaults",
+    });
+
     revalidatePublicSite();
     return { success: true };
   });
@@ -605,6 +687,20 @@ export async function syncPublicSite(): Promise<{ success: boolean; pages: numbe
     const products = await listProducts();
     const slugs = products.filter((p) => p.active && p.slug).map((p) => p.slug);
     revalidatePublicSite(slugs);
-    return { success: true, pages: 3 + slugs.length * 3 };
+
+    const pages = 3 + slugs.length * 3;
+    await writeAuditLog({
+      action: "sync.revalidate",
+      category: "sync",
+      summary: `Revalidated public storefront (${pages} page groups)`,
+      metadata: { pages },
+    });
+
+    return { success: true, pages };
   });
+}
+
+export async function listAuditLogsForAdmin(limit = 200) {
+  await requireAdmin();
+  return withFirestore(() => listAuditLogs(limit));
 }

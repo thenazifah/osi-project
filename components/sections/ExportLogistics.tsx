@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExportImage } from "@/components/visuals/ExportImage";
 import { EXPORT_IMAGES } from "@/data/export-images";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
+import { Reveal } from "@/components/motion/Reveal";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
@@ -31,33 +33,41 @@ export default function ExportLogistics({ exportHeroImage }: { exportHeroImage?:
     >
       <div className="page-container py-16 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <Badge variant="export">{t("badge")}</Badge>
-            <h2 className="mt-4 font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-tight text-ink">
-              {t("title")}
-            </h2>
-            <p className="mt-5 font-sans text-base leading-relaxed text-ink-muted">
-              {t("subtitle")}
-            </p>
-            <ul className="mt-8 space-y-4">
-              {(["fob", "docs", "tracking"] as const).map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent-2" />
-                  <div>
-                    <p className="font-display text-sm text-ink">
-                      {t(`highlights.${item}.title`)}
-                    </p>
-                    <p className="mt-0.5 font-sans text-sm text-ink-muted">
-                      {t(`highlights.${item}.text`)}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <SectionIntro visible={isVisible} className="lg:col-span-5">
+            <SectionIntroItem>
+              <Badge variant="export">{t("badge")}</Badge>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <h2 className="mt-4 font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-tight text-ink">
+                {t("title")}
+              </h2>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <p className="mt-5 font-sans text-base leading-relaxed text-ink-muted">
+                {t("subtitle")}
+              </p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <ul className="mt-8 space-y-4">
+                {(["fob", "docs", "tracking"] as const).map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent-2" />
+                    <div>
+                      <p className="font-display text-sm text-ink">
+                        {t(`highlights.${item}.title`)}
+                      </p>
+                      <p className="mt-0.5 font-sans text-sm text-ink-muted">
+                        {t(`highlights.${item}.text`)}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </SectionIntroItem>
+          </SectionIntro>
 
-          <div className="relative lg:col-span-7">
-            <Card className="overflow-hidden border-border bg-surface p-2 shadow-[0_20px_50px_rgba(11,31,42,0.08)]">
+          <Reveal visible={isVisible} direction="right" className="relative lg:col-span-7">
+            <Card className="overflow-hidden border-border bg-surface p-2 shadow-[0_20px_50px_rgba(11,31,42,0.08)] transition-shadow duration-500 hover:shadow-[0_24px_56px_rgba(11,31,42,0.12)]">
               <ExportImage
                 src={exportHeroImage?.trim() || EXPORT_IMAGES.containers}
                 alt={t("images.heroAlt")}
@@ -76,7 +86,7 @@ export default function ExportLogistics({ exportHeroImage }: { exportHeroImage?:
                 {t("routeValue")}
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
 
         <div

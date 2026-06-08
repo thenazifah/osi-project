@@ -13,6 +13,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExportImage } from "@/components/visuals/ExportImage";
 import { EXPORT_IMAGES } from "@/data/export-images";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
+import { Reveal } from "@/components/motion/Reveal";
+import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import type { SiteContent } from "@/lib/admin-types";
 import { cn } from "@/lib/utils";
@@ -36,33 +39,50 @@ export default function TrustBar({
   const t = useTranslations("trust");
   const c = (key: keyof SiteContent["trust"]) =>
     content?.[key]?.trim() ? content[key] : t(key);
-  const { ref, isVisible } = useStaggerVisible();
+  const { ref, isVisible } = useSectionObserver();
+  const { ref: gridRef, isVisible: gridVisible } = useStaggerVisible();
 
   return (
-    <section className="border-b border-border bg-surface py-12 lg:py-14">
+    <section
+      ref={ref}
+      className={cn(
+        "section-animate border-b border-border bg-surface py-12 lg:py-14",
+        isVisible && "is-visible"
+      )}
+    >
       <div className="page-container">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-4">
-            <Badge variant="export">{t("badge")}</Badge>
-            <p className="mt-3 font-display text-xl text-ink lg:text-2xl">{c("title")}</p>
-            <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-ink-muted">
-              {c("subtitle")}
-            </p>
-            <ExportImage
-              src={trustBarImage?.trim() || EXPORT_IMAGES.procurementShip}
-              alt={t("imageAlt")}
-              overlay="sea"
-              objectPosition="center 55%"
-              className="mt-6 aspect-[16/10] w-full rounded-xl lg:mt-8"
-              sizes="(max-width: 1024px) 100vw, 360px"
-            />
-          </div>
+          <SectionIntro visible={isVisible} className="lg:col-span-4">
+            <SectionIntroItem>
+              <Badge variant="export">{t("badge")}</Badge>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <p className="mt-3 font-display text-xl text-ink lg:text-2xl">{c("title")}</p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-ink-muted">
+                {c("subtitle")}
+              </p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <Reveal visible={isVisible} direction="scale" className="mt-6 lg:mt-8">
+                <ExportImage
+                  src={trustBarImage?.trim() || EXPORT_IMAGES.procurementShip}
+                  alt={t("imageAlt")}
+                  overlay="sea"
+                  objectPosition="center 55%"
+                  className="aspect-[16/10] w-full rounded-xl"
+                  sizes="(max-width: 1024px) 100vw, 360px"
+                />
+              </Reveal>
+            </SectionIntroItem>
+          </SectionIntro>
 
           <div
-            ref={ref}
+            ref={gridRef}
             className={cn(
               "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-2",
-              isVisible && "stagger-visible"
+              gridVisible && "stagger-visible"
             )}
           >
           {ITEMS.map(({ key, icon: Icon }) => (

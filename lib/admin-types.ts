@@ -62,3 +62,24 @@ export type DashboardChartData = {
   rfqByMonth: { month: string; count: number }[];
   productsByCategory: { category: string; count: number }[];
 };
+
+export type AuditCategory =
+  | "auth"
+  | "rfq"
+  | "product"
+  | "content"
+  | "site"
+  | "sync"
+  | "upload";
+
+export type AuditLogEntry = {
+  id: string;
+  action: string;
+  category: AuditCategory;
+  summary: string;
+  actor: string;
+  targetId?: string;
+  targetLabel?: string;
+  metadata?: Record<string, string | number | boolean>;
+  createdAt: string | null;
+};

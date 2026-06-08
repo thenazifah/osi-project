@@ -6,6 +6,7 @@ import { FileText, Scale, Shield } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { cn } from "@/lib/utils";
 
@@ -69,16 +70,24 @@ export default function Policy() {
       )}
     >
       <div className="page-container py-16 lg:py-24">
-        <div className="max-w-3xl">
-          <Badge variant="outline">{t("badge")}</Badge>
-          <p className="section-label mt-6">{t("label")}</p>
-          <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,2.75rem)] leading-tight text-ink">
-            {t("title")}
-          </h2>
-          <p className="mt-4 font-sans text-base leading-relaxed text-ink-muted">
-            {t("subtitle")}
-          </p>
-        </div>
+        <SectionIntro visible={isVisible} className="max-w-3xl">
+          <SectionIntroItem>
+            <Badge variant="outline">{t("badge")}</Badge>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <p className="section-label mt-6">{t("label")}</p>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,2.75rem)] leading-tight text-ink">
+              {t("title")}
+            </h2>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <p className="mt-4 font-sans text-base leading-relaxed text-ink-muted">
+              {t("subtitle")}
+            </p>
+          </SectionIntroItem>
+        </SectionIntro>
 
         <Tabs
           value={activeTab}

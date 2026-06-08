@@ -8,6 +8,7 @@ import {
 } from "@/components/certifications/CertificationMark";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
@@ -42,21 +43,26 @@ export default function Compliance() {
         "section-animate compliance-dark",
         isVisible && "is-visible"
       )}
-      style={{ animationDelay: "200ms" }}
     >
       <div className="page-container py-16 lg:py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="section-label mb-6 text-bg/50">
-              {t("label")}
-            </p>
-            <h2 className="whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-bg">
-              {t("title")}
-            </h2>
-            <p className="mt-6 font-sans text-base leading-relaxed text-bg/65">
-              {t("subtitle")}
-            </p>
-          </div>
+          <SectionIntro visible={isVisible} className="max-w-2xl">
+            <SectionIntroItem>
+              <p className="section-label mb-6 text-bg/50">
+                {t("label")}
+              </p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <h2 className="whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-bg">
+                {t("title")}
+              </h2>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <p className="mt-6 font-sans text-base leading-relaxed text-bg/65">
+                {t("subtitle")}
+              </p>
+            </SectionIntroItem>
+          </SectionIntro>
           <Badge
             variant="outline"
             className="border-bg/30 bg-white/10 px-4 py-2 text-xs text-bg"

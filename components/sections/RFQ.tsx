@@ -34,6 +34,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
+import { Reveal } from "@/components/motion/Reveal";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { cn } from "@/lib/utils";
 
@@ -141,19 +143,28 @@ export default function RFQ() {
         "section-animate rfq-section border-t border-border",
         isVisible && "is-visible"
       )}
-      style={{ animationDelay: "240ms" }}
     >
       <div className="page-container py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <Badge variant="export">{t("badge")}</Badge>
-            <p className="section-label mt-6">{t("label")}</p>
-            <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-ink">
-              {t("title")}
-            </h2>
-            <p className="mt-4 max-w-xl font-sans text-base leading-relaxed text-ink-muted">
-              {t("subtitle")}
-            </p>
+            <SectionIntro visible={isVisible}>
+              <SectionIntroItem>
+                <Badge variant="export">{t("badge")}</Badge>
+              </SectionIntroItem>
+              <SectionIntroItem>
+                <p className="section-label mt-6">{t("label")}</p>
+              </SectionIntroItem>
+              <SectionIntroItem>
+                <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-ink">
+                  {t("title")}
+                </h2>
+              </SectionIntroItem>
+              <SectionIntroItem>
+                <p className="mt-4 max-w-xl font-sans text-base leading-relaxed text-ink-muted">
+                  {t("subtitle")}
+                </p>
+              </SectionIntroItem>
+            </SectionIntro>
 
             {confirmId ? (
               <Card className="mt-10 overflow-hidden border-accent-2/30 bg-surface shadow-[0_12px_40px_rgba(27,138,138,0.12)]">
@@ -362,7 +373,7 @@ export default function RFQ() {
             )}
           </div>
 
-          <div className="space-y-4 lg:col-span-5">
+          <Reveal visible={isVisible} direction="left" className="space-y-4 lg:col-span-5">
             <Card className="overflow-hidden border-border bg-surface">
               <div className="bg-gradient-to-br from-accent to-ink px-6 py-5 text-bg">
                 <div className="flex items-center gap-2">
@@ -456,7 +467,7 @@ export default function RFQ() {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

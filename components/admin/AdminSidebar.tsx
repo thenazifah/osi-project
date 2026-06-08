@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
+  ClipboardList,
   ExternalLink,
   FileText,
   LayoutDashboard,
@@ -11,6 +12,7 @@ import {
   PenLine,
   Share2,
 } from "lucide-react";
+import { OsiLogo } from "@/components/brand/OsiLogo";
 import { logoutAdmin } from "@/lib/admin-actions";
 import { signOutFirebase } from "@/lib/firebase-client-auth";
 import { Button } from "@/components/ui/button";
@@ -22,6 +24,7 @@ const LINKS = [
   { href: "/admin/products", label: "Products", icon: Package, countKey: "productCount" as const },
   { href: "/admin/content", label: "Site Content", icon: PenLine, countKey: "contentLocales" as const },
   { href: "/admin/site", label: "Site Settings", icon: Share2, countKey: null },
+  { href: "/admin/audit", label: "Audit Log", icon: ClipboardList, countKey: null },
 ] as const;
 
 type NavCounts = {
@@ -36,6 +39,11 @@ type AdminSidebarProps = {
   firebaseReady: boolean;
   navCounts: NavCounts;
 };
+
+function userInitial(email: string | null): string {
+  if (!email) return "?";
+  return (email.charAt(0) || "?").toUpperCase();
+}
 
 export function AdminSidebar({ email, firebaseReady, navCounts }: AdminSidebarProps) {
   const pathname = usePathname();
@@ -53,27 +61,44 @@ export function AdminSidebar({ email, firebaseReady, navCounts }: AdminSidebarPr
   };
 
   return (
-    <aside className="flex w-full flex-col border-b border-border bg-surface lg:min-h-screen lg:w-64 lg:border-b-0 lg:border-r">
-      <div className="border-b border-border px-5 py-5">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-sea">
-          OSI Admin
-        </p>
-        <p className="mt-1 font-display text-lg text-ink">Content Dashboard</p>
+    <aside className="admin-sidebar flex w-full flex-col lg:sticky lg:top-0 lg:min-h-screen lg:w-[17.5rem] lg:shrink-0">
+      <div className="border-b border-white/10 px-5 py-5">
+        <div className="flex items-center gap-3">
+          <OsiLogo size={36} />
+          <div className="min-w-0">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-sea-light/80">
+              OSI Admin
+            </p>
+            <p className="truncate font-display text-base text-bg">Dashboard</p>
+          </div>
+        </div>
+
         {email ? (
-          <p className="mt-2 truncate font-sans text-xs text-ink-muted" title={email}>
-            {email}
-          </p>
+          <div className="mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-2/25 font-display text-sm text-sea-light">
+              {userInitial(email)}
+            </span>
+            <div className="min-w-0">
+              <p className="truncate font-sans text-xs text-bg/90" title={email}>
+                {email}
+              </p>
+              <span
+                className={cn(
+                  "mt-1 inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider",
+                  firebaseReady ? "text-emerald-300/90" : "text-amber-300/90"
+                )}
+              >
+                <span
+                  className={cn(
+                    "h-1.5 w-1.5 rounded-full",
+                    firebaseReady ? "bg-emerald-400" : "bg-amber-400"
+                  )}
+                />
+                {firebaseReady ? "Connected" : "Setup required"}
+              </span>
+            </div>
+          </div>
         ) : null}
-        <span
-          className={cn(
-            "mt-2 inline-block rounded-full px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider",
-            firebaseReady
-              ? "bg-emerald-100 text-emerald-800"
-              : "bg-amber-100 text-amber-800"
-          )}
-        >
-          {firebaseReady ? "Firestore connected" : "Setup required"}
-        </span>
       </div>
 
       <nav className="flex flex-1 flex-row gap-1 overflow-x-auto p-3 lg:flex-col lg:overflow-visible">
@@ -95,24 +120,26 @@ export function AdminSidebar({ email, firebaseReady, navCounts }: AdminSidebarPr
               key={href}
               href={href}
               className={cn(
-                "flex shrink-0 items-center justify-between gap-2 rounded-lg px-3 py-2.5 font-sans text-sm font-medium transition-colors",
+                "admin-nav-link flex shrink-0 items-center justify-between gap-2 rounded-xl px-3 py-2.5 font-sans text-sm font-medium transition-all duration-200",
                 active
-                  ? "bg-accent text-bg"
-                  : "text-ink-muted hover:bg-tag-bg hover:text-accent"
+                  ? "admin-nav-link-active bg-white/12 text-bg shadow-[inset_3px_0_0_0_var(--accent-2)]"
+                  : "text-bg/65 hover:bg-white/6 hover:text-bg"
               )}
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2.5">
                 <Icon className="h-4 w-4" strokeWidth={1.75} />
                 {label}
               </span>
               {countKey && count > 0 ? (
                 <span
                   className={cn(
-                    "min-w-[1.25rem] rounded-full px-1.5 py-0.5 text-center font-mono text-[10px] tabular-nums",
-                    active ? "bg-bg/20 text-bg" : "bg-tag-bg text-accent"
+                    "min-w-[1.35rem] rounded-full px-1.5 py-0.5 text-center font-mono text-[10px] tabular-nums",
+                    active
+                      ? "bg-accent-2/30 text-bg"
+                      : "bg-white/10 text-sea-light"
                   )}
                 >
-                  {countKey === "rfqNew" ? count : count}
+                  {count}
                 </span>
               ) : null}
             </Link>
@@ -120,8 +147,13 @@ export function AdminSidebar({ email, firebaseReady, navCounts }: AdminSidebarPr
         })}
       </nav>
 
-      <div className="space-y-1 border-t border-border p-3">
-        <Button variant="ghost" size="sm" className="w-full justify-start" asChild>
+      <div className="space-y-1 border-t border-white/10 p-3">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="w-full justify-start text-bg/70 hover:bg-white/8 hover:text-bg"
+          asChild
+        >
           <a href="/en" target="_blank" rel="noopener noreferrer">
             <ExternalLink className="h-4 w-4" />
             View public site
@@ -130,7 +162,7 @@ export function AdminSidebar({ email, firebaseReady, navCounts }: AdminSidebarPr
         <Button
           type="button"
           variant="ghost"
-          className="w-full justify-start"
+          className="w-full justify-start text-bg/70 hover:bg-white/8 hover:text-bg"
           onClick={onLogout}
         >
           <LogOut className="h-4 w-4" />

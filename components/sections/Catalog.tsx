@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { CatalogProduct } from "@/lib/cms";
 import type { ProductCategory } from "@/data/products";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
@@ -123,16 +124,26 @@ export default function Catalog({ items }: { items: CatalogProduct[] }) {
       )}
     >
       <div className="page-container py-12 lg:py-20">
-        <p className="section-label">{t("label")}</p>
-        <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">
-          {t("filterAll")} · {items.length} lines
-        </h2>
-        <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-ink-muted">
-          {t("subtitle")}
-        </p>
-        <p className="mt-2 font-mono text-[11px] text-sea">{t("specsHint")}</p>
+        <SectionIntro visible={isVisible} className="mb-8">
+          <SectionIntroItem>
+            <p className="section-label">{t("label")}</p>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">
+              {t("filterAll")} · {items.length} lines
+            </h2>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-ink-muted">
+              {t("subtitle")}
+            </p>
+          </SectionIntroItem>
+          <SectionIntroItem>
+            <p className="mt-2 font-mono text-[11px] text-sea">{t("specsHint")}</p>
+          </SectionIntroItem>
+        </SectionIntro>
 
-        <Tabs defaultValue="all" className="mt-10">
+        <Tabs defaultValue="all" className="mt-2">
           <TabsList className="w-full justify-start overflow-x-auto">
             {FILTERS.map(({ key, labelKey }) => (
               <TabsTrigger key={key} value={key}>

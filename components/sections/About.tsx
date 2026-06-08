@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { FileCheck, Factory, Network } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { SectionIntro, SectionIntroItem } from "@/components/motion/SectionIntro";
 import { useSectionObserver, useCountUp } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import type { SiteContent } from "@/lib/admin-types";
@@ -77,17 +78,23 @@ export default function About({ content }: { content?: SiteContent["about"] }) {
     >
       <div className="page-container py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-5">
-            <p className="section-label">{t("label")}</p>
-            <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-ink">
-              {c("title")}
-            </h2>
-            <div className="mt-8 space-y-5 font-sans text-base leading-relaxed text-ink-muted">
-              <p>{c("p1")}</p>
-              <p>{c("p2")}</p>
-              <p>{c("p3")}</p>
-            </div>
-          </div>
+          <SectionIntro visible={isVisible} className="lg:col-span-5">
+            <SectionIntroItem>
+              <p className="section-label">{t("label")}</p>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <h2 className="mt-4 whitespace-pre-line font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-ink">
+                {c("title")}
+              </h2>
+            </SectionIntroItem>
+            <SectionIntroItem>
+              <div className="mt-8 space-y-5 font-sans text-base leading-relaxed text-ink-muted">
+                <p>{c("p1")}</p>
+                <p>{c("p2")}</p>
+                <p>{c("p3")}</p>
+              </div>
+            </SectionIntroItem>
+          </SectionIntro>
 
           <div className="grid grid-cols-2 auto-rows-min items-start gap-x-3 gap-y-2 sm:gap-y-2.5 lg:col-span-7">
             {STATS.map((stat) => (

@@ -82,9 +82,7 @@ function resolveSocialHref(link: SocialLinkEntry): string {
 
   if (link.platform === "whatsapp") {
     return (
-      buildWhatsAppUrl(url || handle) ??
-      url ||
-      handle
+      buildWhatsAppUrl(url || handle) ?? (url || handle)
     );
   }
 
@@ -135,7 +133,7 @@ export function SocialLinks({
           title={handle || label}
           className={cn(
             "group/social transition-transform duration-200 hover:-translate-y-0.5",
-            showLabels && "flex min-w-[4.5rem] flex-col items-center gap-2"
+            showLabels && "flex min-w-[4rem] flex-col items-center gap-1.5"
           )}
         >
           <span
@@ -149,7 +147,7 @@ export function SocialLinks({
             {SOCIAL_PLATFORM_ICONS[platform]}
           </span>
           {showLabels ? (
-            <span className="max-w-[5.5rem] text-center font-sans text-[11px] font-semibold leading-tight text-ink-muted transition-colors group-hover/social:text-accent">
+            <span className="max-w-[4.5rem] text-center font-sans text-[10px] font-semibold leading-tight text-ink-muted transition-colors group-hover/social:text-accent">
               {label}
             </span>
           ) : null}
