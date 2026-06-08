@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCover } from "@/components/catalog/ProductCover";
+import { CldMediaImage } from "@/components/visuals/CldMediaImage";
 import type { ProductCategory } from "@/data/products";
 import { cn } from "@/lib/utils";
 
@@ -40,7 +40,7 @@ export function ProductImageGallery({
   return (
     <div className={cn("overflow-hidden", className)}>
       <div className="relative aspect-[4/3] w-full bg-tag-bg">
-        <Image
+        <CldMediaImage
           src={current.src}
           alt={current.alt}
           fill
@@ -89,7 +89,7 @@ export function ProductImageGallery({
                   : "border-border opacity-80 hover:border-accent/40 hover:opacity-100"
               )}
             >
-              <Image
+              <CldMediaImage
                 src={image.src}
                 alt=""
                 fill

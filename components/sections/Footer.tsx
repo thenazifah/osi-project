@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { OsiLogo } from "@/components/brand/OsiLogo";
+import { SocialLinks } from "@/components/footer/SocialLinks";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -74,6 +75,12 @@ export default function Footer() {
             <p className="mt-5 max-w-sm font-sans text-sm leading-relaxed text-ink-muted">
               {t("mission")}
             </p>
+            <div className="mt-6">
+              <p className="font-sans text-xs font-semibold uppercase tracking-wider text-accent">
+                {t("socialLabel")}
+              </p>
+              <SocialLinks className="mt-3" />
+            </div>
             <div className="mt-6 flex flex-wrap gap-2">
               {LOCALES.map((loc) => (
                 <Link

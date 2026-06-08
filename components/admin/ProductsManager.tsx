@@ -222,7 +222,7 @@ export function ProductsManager({
                     })
                   }
                   rows={3}
-                  placeholder="/images/products/scales-hand.png"
+                  placeholder="/images/products/scales-hand.png or Cloudinary ID: main-sample"
                 />
               </div>
             </div>

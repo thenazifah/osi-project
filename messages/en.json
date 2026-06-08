@@ -20,9 +20,9 @@
     "description": "Organic Scales International supplies pharmaceutical, cosmetic, and food-grade fish scales to buyers in 14+ countries. Request bulk quotes for tilapia, carp, and marine scale exports."
   },
   "nav": {
-    "wordmark": "OSI",
-    "tagline": "Export Grade. Global Scale.",
-    "about": "About",
+    "wordmark": "Organic Scales International",
+    "tagline": "",
+    "about": "Institutional Profile",
     "catalog": "Catalog",
     "process": "Process",
     "compliance": "Certifications",
@@ -75,9 +75,9 @@
   "hero": {
     "sysLabel": "OSI.EXPORT.PLATFORM · EST. DHAKA, BD",
     "platformBadge": "OSI.EXPORT.PLATFORM",
-    "headline1": "Precision-Grade",
-    "headline2": "Fish Scale",
-    "headline3": "Supply.",
+    "headline1": "Organic Scales",
+    "headline2": "International",
+    "headline3": "",
     "body": "Supplying pharmaceutical, cosmetic, and food-grade fish scale materials to institutional buyers across 14+ countries.",
     "ctaPrimary": "Request Bulk Quote",
     "ctaSecondary": "Download Catalog",
@@ -307,9 +307,9 @@
     "download": "View certificate PDF",
     "footnote": "Certificates available for buyer due diligence upon request. All documents are current and verified for export operations from Dhaka, Bangladesh.",
     "certifications": {
-      "bsti": {
-        "name": "BSTI Certification",
-        "issuer": "Bangladesh Standards and Testing Institution",
+      "phyto": {
+        "name": "Phytosanitary Certificate (Phyto)",
+        "issuer": "Department of Agricultural Extension, Bangladesh",
         "year": "2024",
         "status": "Active"
       },
@@ -533,6 +533,7 @@
     "ctaButton": "Request a Quote",
     "mission": "Export-grade fish scales for global institutional procurement. Bangladesh origin. ISO compliant.",
     "quickLinks": "Quick Links",
+    "socialLabel": "Follow OSI",
     "language": "Language",
     "contactLabel": "Procurement Office",
     "address": "House 12, Road 4, Dhaka 1207, Bangladesh",

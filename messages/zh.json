@@ -20,9 +20,9 @@
     "description": "Organic Scales International向14个以上国家的买家供应医药级、化妆品级和食品级鱼鳞。索取罗非鱼、鲤鱼和海水鱼鳞的大宗报价。"
   },
   "nav": {
-    "wordmark": "OSI",
-    "tagline": "出口级品质。全球规模。",
-    "about": "关于",
+    "wordmark": "Organic Scales International",
+    "tagline": "",
+    "about": "机构简介",
     "catalog": "产品",
     "process": "流程",
     "compliance": "认证",
@@ -242,7 +242,7 @@
     "download": "查看证书PDF",
     "footnote": "应买方尽职调查要求可提供证书副本。所有文件均为达卡出口业务的最新有效版本。",
     "certifications": {
-      "bsti": { "name": "BSTI认证", "issuer": "孟加拉标准与测试机构", "year": "2024", "status": "有效" },
+      "phyto": { "name": "植物检疫证书（Phyto）", "issuer": "孟加拉农业推广部", "year": "2024", "status": "有效" },
       "iso9001": { "name": "ISO 9001:2015", "issuer": "认可认证机构", "year": "2024", "status": "已认证" },
       "tradeLicense": { "name": "贸易许可证", "issuer": "达卡市政府", "year": "2024", "status": "有效" },
       "exportLicense": { "name": "出口注册", "issuer": "孟加拉商务部", "year": "2024", "status": "有效" },
@@ -366,6 +366,7 @@
     "ctaButton": "索取报价",
     "mission": "面向全球机构采购的出口级鱼鳞。孟加拉原产。ISO合规。",
     "quickLinks": "快速链接",
+    "socialLabel": "关注我们",
     "language": "语言",
     "contactLabel": "采购办公室",
     "address": "House 12, Road 4, Dhaka 1207, Bangladesh",

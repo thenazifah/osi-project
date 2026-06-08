@@ -35,10 +35,10 @@ export default async function HomePage({ params }: PageProps) {
       <Nav />
       <main>
         <Hero content={siteContent.hero} />
-        <TrustBar content={siteContent.trust} />
-        <ExportLogistics />
         <Catalog items={catalogProducts} />
         <About content={siteContent.about} />
+        <TrustBar content={siteContent.trust} />
+        <ExportLogistics />
         <Process />
         <Compliance />
         <FAQ />

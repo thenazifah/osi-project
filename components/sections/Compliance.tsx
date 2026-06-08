@@ -13,7 +13,7 @@ import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import { cn } from "@/lib/utils";
 
 const CERT_KEYS: CertId[] = [
-  "bsti",
+  "phyto",
   "iso9001",
   "tradeLicense",
   "exportLicense",

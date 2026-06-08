@@ -20,9 +20,9 @@
     "description": "Organic Scales Internationalは、14か国以上のバイヤーに医薬品・化粧品・食品グレードの魚鱗を供給しています。ティラピア、コイ、海水魚の鱗のバルク見積もりをご依頼ください。"
   },
   "nav": {
-    "wordmark": "OSI",
-    "tagline": "輸出グレード。世界規模。",
-    "about": "会社概要",
+    "wordmark": "Organic Scales International",
+    "tagline": "",
+    "about": "機関プロフィール",
     "catalog": "製品",
     "process": "工程",
     "compliance": "認証",
@@ -57,9 +57,9 @@
   "hero": {
     "sysLabel": "OSI.EXPORT.PLATFORM · ダッカ設立",
     "platformBadge": "OSI.EXPORT.PLATFORM",
-    "headline1": "精密グレード",
-    "headline2": "魚鱗",
-    "headline3": "供給。",
+    "headline1": "Organic Scales",
+    "headline2": "International",
+    "headline3": "",
     "body": "14か国以上の機関バイヤーに、医薬品・化粧品・食品グレードの魚鱗素材を供給しています。",
     "ctaPrimary": "バルク見積依頼",
     "ctaSecondary": "カタログダウンロード",
@@ -242,7 +242,7 @@
     "download": "証明書PDFを見る",
     "footnote": "バイヤーデューデリジェンス用の証明書はご要望に応じて提供。ダッカ拠点の輸出事業向けにすべて最新です。",
     "certifications": {
-      "bsti": { "name": "BSTI認証", "issuer": "バングラデシュ規格・試験機関", "year": "2024", "status": "有効" },
+      "phyto": { "name": "植物検疫証明書（Phyto）", "issuer": "バングラデシュ農業拡張局", "year": "2024", "status": "有効" },
       "iso9001": { "name": "ISO 9001:2015", "issuer": "認定認証機関", "year": "2024", "status": "認証済" },
       "tradeLicense": { "name": "貿易ライセンス", "issuer": "ダッカ市公社", "year": "2024", "status": "有効" },
       "exportLicense": { "name": "輸出登録", "issuer": "バングラデシュ商務省", "year": "2024", "status": "有効" },
@@ -366,6 +366,7 @@
     "ctaButton": "見積を依頼",
     "mission": "グローバル機関調達向け輸出グレード魚鱗。バングラデシュ産。ISO準拠。",
     "quickLinks": "クイックリンク",
+    "socialLabel": "SNS",
     "language": "言語",
     "contactLabel": "調達オフィス",
     "address": "House 12, Road 4, Dhaka 1207, Bangladesh",

@@ -72,28 +72,17 @@ export default function Nav() {
 
   const linkClass = (id: string, mobile?: boolean) => {
     const isActive = activeSection === id;
-    const base =
-      "relative rounded-full font-sans font-medium transition-[color,background-color,box-shadow] duration-200";
+    const base = "nav-link relative rounded-full font-sans font-medium transition-[color,background-color,box-shadow] duration-200";
     if (mobile) {
       return cn(
         base,
         "w-full px-4 py-3 text-left text-base",
         isActive
-          ? "bg-accent text-white shadow-sm"
+          ? "nav-link-active"
           : "text-ink-muted hover:bg-tag-bg hover:text-accent"
       );
     }
-    return cn(
-      base,
-      "px-3.5 py-2 text-[13px]",
-      isActive
-        ? "bg-white text-accent shadow-sm hover:bg-white/90"
-        : cn(
-            "text-white/85",
-            "hover:bg-white/10 hover:text-white",
-            "focus-visible:bg-white/10 focus-visible:text-white focus-visible:outline-none"
-          )
-    );
+    return cn(base, "px-3.5 py-2 text-[13px]", isActive && "nav-link-active");
   };
 
   const NavLinks = ({ mobile }: { mobile?: boolean }) => (
@@ -120,7 +109,7 @@ export default function Nav() {
           : "backdrop-blur-sm"
       )}
     >
-      <div className="page-container flex h-[76px] items-center justify-between gap-4">
+      <div className="page-container flex h-[76px] items-center justify-between gap-3">
         <Link
           href={isHomePage ? `${homePath}#hero` : homePath}
           onClick={(e) => {
@@ -129,30 +118,20 @@ export default function Nav() {
             document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
             window.history.replaceState(null, "", `${homePath}#hero`);
           }}
-          className="group -ml-1 flex min-w-0 shrink-0 items-center gap-3 rounded-xl px-2 py-1.5 text-left transition-colors duration-200 hover:bg-white/10"
+          className="group -ml-1 flex min-w-0 shrink-0 items-center gap-3 rounded-xl px-2 py-1.5 text-left transition-colors duration-200 hover:bg-sea-light/20 active:bg-export/25"
         >
           <OsiLogo size={44} priority />
-          <div className="hidden flex-col sm:flex">
-            <span className="font-display text-[17px] font-semibold tracking-tight text-white transition-colors duration-200 group-hover:text-white/90">
-              {t("wordmark")}
-            </span>
-            <span className="font-sans text-xs font-normal text-white/75 transition-colors duration-200 group-hover:text-white/90">
-              {t("tagline")}
-            </span>
-          </div>
+          <span className="hidden font-display text-[15px] font-semibold leading-tight tracking-tight text-white transition-colors duration-200 group-hover:text-white/95 lg:block xl:text-[17px]">
+            {t("wordmark")}
+          </span>
         </Link>
 
-        <nav
-          className="hidden items-center gap-1 xl:flex"
-          aria-label="Main"
-        >
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Main">
           <NavLinks />
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <LanguageSelect
-            triggerClassName="border-white/25 bg-white/10 text-white hover:border-white/40 hover:bg-white/15 [&_svg]:text-white/80"
-          />
+          <LanguageSelect triggerClassName="border-white/25 bg-white/10 text-white hover:border-sea-light/50 hover:bg-sea-light/20 active:bg-export/25 [&_svg]:text-white/80" />
           <Button
             variant="nav"
             size="nav"
@@ -164,49 +143,48 @@ export default function Nav() {
           </Button>
         </div>
 
-        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetTrigger asChild>
-            <button
-              type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition-colors duration-200 hover:border-white/40 hover:bg-white/15 lg:hidden"
-              aria-label={t("menuOpen")}
-            >
-              <Menu size={20} strokeWidth={1.75} />
-            </button>
-          </SheetTrigger>
-          <SheetContent className="flex flex-col">
-            <SheetHeader className="border-b border-border pb-4">
-              <div className="flex items-center gap-3">
-                <OsiLogo size={36} />
-                <SheetTitle className="font-display text-lg">
-                  {t("wordmark")}
-                </SheetTitle>
-              </div>
-              <p className="font-sans text-sm text-ink-muted">{t("tagline")}</p>
-            </SheetHeader>
-            <nav
-              className="mt-6 flex flex-1 flex-col gap-2 overflow-y-auto"
-              aria-label="Mobile"
-            >
-              <NavLinks mobile />
-            </nav>
-            <div className="mt-auto space-y-4 border-t border-border pt-6">
-              <LanguageSelect
-                triggerClassName="w-full min-w-0"
-                onLocaleChange={() => setSheetOpen(false)}
-              />
-              <Button
-                variant="primary"
-                size="nav"
-                className="w-full"
-                onClick={() => goToSection("rfq")}
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSelect
+            compact
+            triggerClassName="h-11 min-w-0 border-white/25 bg-white/10 px-2.5 text-white hover:border-sea-light/50 hover:bg-sea-light/20 active:bg-export/25 [&_svg]:text-white/80"
+          />
+          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition-colors duration-200 hover:border-sea-light/50 hover:bg-sea-light/20 active:bg-export/25"
+                aria-label={t("menuOpen")}
               >
-                {t("requestQuote")}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </SheetContent>
-        </Sheet>
+                <Menu size={20} strokeWidth={1.75} />
+              </button>
+            </SheetTrigger>
+            <SheetContent className="flex flex-col">
+              <SheetHeader className="border-b border-border pb-4">
+                <div className="flex items-center gap-3">
+                  <OsiLogo size={36} />
+                  <SheetTitle className="font-display text-lg">OSI</SheetTitle>
+                </div>
+              </SheetHeader>
+              <nav
+                className="mt-6 flex flex-1 flex-col gap-2 overflow-y-auto"
+                aria-label="Mobile"
+              >
+                <NavLinks mobile />
+              </nav>
+              <div className="mt-auto border-t border-border pt-6">
+                <Button
+                  variant="primary"
+                  size="nav"
+                  className="w-full"
+                  onClick={() => goToSection("rfq")}
+                >
+                  {t("requestQuote")}
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

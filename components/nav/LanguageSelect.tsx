@@ -17,12 +17,14 @@ type LanguageSelectProps = {
   className?: string;
   triggerClassName?: string;
   onLocaleChange?: () => void;
+  compact?: boolean;
 };
 
 export function LanguageSelect({
   className,
   triggerClassName,
   onLocaleChange,
+  compact = false,
 }: LanguageSelectProps) {
   const t = useTranslations("nav.languages");
   const locale = useLocale();
@@ -43,10 +45,12 @@ export function LanguageSelect({
   return (
     <Select value={locale} onValueChange={onValueChange}>
       <SelectTrigger
-        className={cn("min-w-[9.5rem] uppercase", triggerClassName)}
+        className={cn(compact ? "w-[4.5rem] uppercase" : "min-w-[9.5rem] uppercase", triggerClassName)}
         aria-label={t("label")}
       >
-        <SelectValue placeholder={t("label")}>{t(locale as "en" | "ja" | "zh")}</SelectValue>
+        <SelectValue placeholder={t("label")}>
+          {compact ? locale.toUpperCase() : t(locale as "en" | "ja" | "zh")}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent className={className}>
         {LOCALES.map((loc) => (

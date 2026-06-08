@@ -7,7 +7,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export type CertId =
-  | "bsti"
+  | "phyto"
   | "iso9001"
   | "tradeLicense"
   | "exportLicense"
@@ -21,25 +21,20 @@ type CertificationMarkProps = {
 };
 
 function isLogoCertId(id: CertId): id is CertificationLogoId {
-  return id === "bsti" || id === "iso9001";
+  return id === "iso9001";
 }
 
 export function CertificationMark({ id, className, alt }: CertificationMarkProps) {
   if (isLogoCertId(id)) {
     const src = CERTIFICATION_LOGOS[id];
-    const isBsti = id === "bsti";
     return (
       <div className={cn("relative flex items-center justify-center", className)}>
         <Image
           src={src}
           alt={alt ?? `${id} certification logo`}
-          width={isBsti ? 140 : 160}
-          height={isBsti ? 140 : 160}
-          className={cn(
-            "w-auto object-contain",
-            isBsti ? "h-24" : "h-24 mix-blend-multiply"
-          )}
-          priority={isBsti}
+          width={160}
+          height={160}
+          className="h-24 w-auto object-contain mix-blend-multiply"
         />
       </div>
     );
@@ -53,6 +48,42 @@ export function CertificationMark({ id, className, alt }: CertificationMarkProps
 }
 
 const SVG_MARKS: Record<Exclude<CertId, CertificationLogoId>, ReactNode> = {
+  phyto: (
+    <svg viewBox="0 0 120 48" className="h-12 w-auto" fill="none">
+      <circle cx="24" cy="24" r="22" fill="#0d7a3a" />
+      <path
+        d="M24 12c-4 6-8 10-8 14a8 8 0 1016 0c0-4-4-8-8-14z"
+        fill="#fff"
+        fillOpacity="0.92"
+      />
+      <path
+        d="M24 30V18M20 22l4-4 4 4"
+        stroke="#0d7a3a"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <text
+        x="54"
+        y="20"
+        fill="#0d7a3a"
+        fontSize="9"
+        fontWeight="700"
+        fontFamily="system-ui, sans-serif"
+      >
+        PHYTO
+      </text>
+      <text
+        x="54"
+        y="32"
+        fill="#64748b"
+        fontSize="7"
+        fontFamily="system-ui, sans-serif"
+      >
+        Phytosanitary Certificate
+      </text>
+    </svg>
+  ),
   tradeLicense: (
     <svg viewBox="0 0 120 48" className="h-12 w-auto" fill="none">
       <rect x="2" y="6" width="44" height="36" rx="4" fill="#0e3a5b" />

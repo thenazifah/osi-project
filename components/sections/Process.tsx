@@ -113,11 +113,11 @@ export default function Process() {
             {STEP_KEYS.map((key, index) => (
               <div
                 key={key}
-                className="relative flex flex-col items-start lg:items-center"
+                className="relative flex flex-col items-center text-center lg:items-center"
               >
                 {index > 0 && (
                   <div
-                    className="absolute -top-6 left-4 h-6 w-px bg-border lg:hidden"
+                    className="absolute -top-6 left-1/2 h-6 w-px -translate-x-1/2 bg-border lg:hidden"
                     aria-hidden
                   />
                 )}
@@ -127,7 +127,7 @@ export default function Process() {
                 <h3 className="mt-4 font-display text-sm text-ink">
                   {t(`steps.${key}.title`)}
                 </h3>
-                <p className="mt-1 max-w-[140px] font-sans text-[13px] text-ink-muted lg:text-center">
+                <p className="mt-1 max-w-[200px] font-sans text-[13px] text-ink-muted sm:max-w-[140px] lg:text-center">
                   {t(`steps.${key}.description`)}
                 </p>
               </div>

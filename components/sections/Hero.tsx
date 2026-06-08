@@ -52,12 +52,20 @@ export default function Hero({ content }: HeroProps) {
             <Badge variant="export">{t("platformBadge")}</Badge>
             <Badge variant="outline">B2B Export</Badge>
           </div>
-          <h1 className="font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[1.05] text-ink">
+          <h1 className="font-display text-[clamp(2rem,6vw,4.25rem)] leading-[1.08] text-ink">
             <span className="text-accent-2">{h("headline1")}</span>
-            <br />
-            {h("headline2")}
-            <br />
-            {h("headline3")}
+            {h("headline2") ? (
+              <>
+                <br />
+                <span>{h("headline2")}</span>
+              </>
+            ) : null}
+            {h("headline3") ? (
+              <>
+                <br />
+                <span>{h("headline3")}</span>
+              </>
+            ) : null}
           </h1>
           <p className="mt-6 max-w-[520px] font-sans text-[17px] leading-relaxed text-ink-muted">
             {h("body")}
@@ -95,8 +103,12 @@ export default function Hero({ content }: HeroProps) {
         </div>
 
         <div className="relative flex items-center justify-center py-12 lg:col-span-5 lg:py-24 lg:pl-8">
+          <div
+            className="hero-image-radiant absolute inset-y-[8%] -left-6 hidden w-28 lg:block xl:w-36"
+            aria-hidden
+          />
           <div className="relative w-full max-w-md">
-            <Card className="overflow-hidden border-border bg-surface p-2 shadow-[0_24px_60px_rgba(11,31,42,0.12)]">
+            <Card className="relative overflow-hidden border-border bg-surface p-2 shadow-[0_24px_60px_rgba(11,31,42,0.12)] ring-1 ring-accent-2/15">
               <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
                 <ExportImage
                   src={EXPORT_IMAGES.containers}
