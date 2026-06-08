@@ -16,7 +16,7 @@ const CARDS = [
   { key: "sea" as const, icon: Anchor },
 ] as const;
 
-export default function ExportLogistics() {
+export default function ExportLogistics({ exportHeroImage }: { exportHeroImage?: string }) {
   const t = useTranslations("exportLogistics");
   const { ref, isVisible } = useSectionObserver();
   const { ref: gridRef, isVisible: gridVisible } = useStaggerVisible();
@@ -59,7 +59,7 @@ export default function ExportLogistics() {
           <div className="relative lg:col-span-7">
             <Card className="overflow-hidden border-border bg-surface p-2 shadow-[0_20px_50px_rgba(11,31,42,0.08)]">
               <ExportImage
-                src={EXPORT_IMAGES.containers}
+                src={exportHeroImage?.trim() || EXPORT_IMAGES.containers}
                 alt={t("images.heroAlt")}
                 overlay="sea"
                 objectPosition="center 40%"

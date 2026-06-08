@@ -15,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { LanguageSelect } from "@/components/nav/LanguageSelect";
+import { SocialLinks, type SocialLinkItem } from "@/components/footer/SocialLinks";
 import { useActiveSection } from "@/lib/use-section-observer";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +28,14 @@ const NAV_SECTIONS = [
   { id: "rfq", key: "rfq" },
 ] as const;
 
-export default function Nav() {
+const NAV_SOCIAL_CLASS =
+  "border-white/25 bg-white/10 text-white hover:border-sea-light/50 hover:bg-sea-light/20 hover:text-white";
+
+type NavProps = {
+  socialLinks?: SocialLinkItem[];
+};
+
+export default function Nav({ socialLinks = [] }: NavProps) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
@@ -171,7 +179,8 @@ export default function Nav() {
               >
                 <NavLinks mobile />
               </nav>
-              <div className="mt-auto border-t border-border pt-6">
+              <div className="mt-auto space-y-6 border-t border-border pt-6">
+                <SocialLinks links={socialLinks} className="justify-center" />
                 <Button
                   variant="primary"
                   size="nav"

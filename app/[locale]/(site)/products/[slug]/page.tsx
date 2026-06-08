@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Nav from "@/components/sections/Nav";
 import Footer from "@/components/sections/Footer";
 import { ProductSpecsView } from "@/components/catalog/ProductSpecsView";
-import { getCatalogProductBySlug, getCatalogProducts } from "@/lib/cms";
-import { products } from "@/data/products";
+import {
+  getCatalogProductBySlug,
+  getCatalogProductSlugs,
+  getCatalogProducts,
+  getPublicSiteSettings,
+} from "@/lib/cms";
+import { getPublicSocialLinkItems } from "@/lib/social-links";
 import { routing } from "@/i18n/routing";
 import type { LocaleCode } from "@/lib/admin-types";
 
@@ -12,9 +16,10 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const slugs = await getCatalogProductSlugs();
   return routing.locales.flatMap((locale) =>
-    products.map((product) => ({ locale, slug: product.slug }))
+    slugs.map((slug) => ({ locale, slug }))
   );
 }
 
@@ -45,7 +50,11 @@ export default async function ProductSpecsPage({ params }: PageProps) {
     notFound();
   }
 
-  const allProducts = await getCatalogProducts(code);
+  const [allProducts, siteSettings] = await Promise.all([
+    getCatalogProducts(code),
+    getPublicSiteSettings(),
+  ]);
+  const socialLinks = getPublicSocialLinkItems(siteSettings);
   const related = allProducts
     .filter((p) => p.slug !== slug)
     .filter((p) => p.category === product.category)
@@ -54,11 +63,10 @@ export default async function ProductSpecsPage({ params }: PageProps) {
 
   return (
     <>
-      <Nav />
       <main>
         <ProductSpecsView product={product} locale={locale} related={related} />
       </main>
-      <Footer />
+      <Footer socialLinks={socialLinks} />
     </>
   );
 }

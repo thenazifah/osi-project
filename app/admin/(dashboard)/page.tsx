@@ -25,7 +25,7 @@ export default async function AdminOverviewPage() {
           title="OSI Admin Dashboard"
           description="You are signed in. Connect Firestore using the setup steps above to load RFQs, products, and site content."
         />
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
             { href: "/admin/rfq", title: "RFQ Inbox", text: "Quote requests from the public form." },
             { href: "/admin/products", title: "Products", text: "Catalog CRUD synced to the live site." },
@@ -51,7 +51,14 @@ export default async function AdminOverviewPage() {
     );
   }
 
-  let stats = { rfqTotal: 0, rfqNew: 0, productCount: 0, contentLocales: 0 };
+  let stats = {
+    rfqTotal: 0,
+    rfqNew: 0,
+    productCount: 0,
+    contentLocales: 0,
+    socialLinks: 0,
+    siteImages: 0,
+  };
   let charts = {
     rfqByStatus: [] as { status: string; count: number }[],
     rfqByMonth: [] as { month: string; count: number }[],
@@ -75,7 +82,7 @@ export default async function AdminOverviewPage() {
       <AdminPageHeader
         eyebrow="Overview"
         title="OSI Admin Dashboard"
-        description="Live sync with the public site (EN / JA / ZH). Changes to products and content revalidate storefront pages automatically."
+        description="Live sync with the landing page, product pages, social links, and site images (EN / JA / ZH). Saves revalidate the public storefront automatically."
       />
 
       {error ? (
@@ -84,7 +91,7 @@ export default async function AdminOverviewPage() {
         </p>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         <StatCard
           label="RFQ submissions"
           value={stats.rfqTotal}
@@ -107,6 +114,18 @@ export default async function AdminOverviewPage() {
           hint="EN · JA · ZH"
           href="/admin/content"
         />
+        <StatCard
+          label="Social links"
+          value={stats.socialLinks}
+          hint="Header · hero · footer"
+          href="/admin/site"
+        />
+        <StatCard
+          label="Site images"
+          value={stats.siteImages}
+          hint="Hero · trust · export · process"
+          href="/admin/site"
+        />
       </div>
 
       {!error ? (
@@ -119,7 +138,7 @@ export default async function AdminOverviewPage() {
         </>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[
           {
             href: "/admin/rfq",
@@ -135,6 +154,11 @@ export default async function AdminOverviewPage() {
             href: "/admin/content",
             title: "Site Content",
             text: "Edit hero, about, and trust copy per locale.",
+          },
+          {
+            href: "/admin/site",
+            title: "Site Settings",
+            text: "Social links, Meta Pixel, and homepage images synced to the storefront.",
           },
         ].map((item) => (
           <Card key={item.href} className="card-interactive border-border bg-surface">

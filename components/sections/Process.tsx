@@ -25,7 +25,7 @@ const CALLOUTS = [
   { key: "export" as const, icon: Globe },
 ];
 
-export default function Process() {
+export default function Process({ processBannerImage }: { processBannerImage?: string }) {
   const t = useTranslations("process");
   const { ref, isVisible } = useSectionObserver();
   const { ref: calloutRef, isVisible: calloutVisible } = useStaggerVisible();
@@ -70,7 +70,7 @@ export default function Process() {
             </p>
           </div>
           <ExportImage
-            src={EXPORT_IMAGES.shipSea}
+            src={processBannerImage?.trim() || EXPORT_IMAGES.shipSea}
             alt={t("imageAlt")}
             overlay="dark"
             objectPosition="center 50%"

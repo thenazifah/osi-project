@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { products } from "@/data/products";
+import { getCatalogProductSlugs } from "@/lib/cms";
 import { routing } from "@/i18n/routing";
 
 const SECTIONS = [
@@ -12,9 +12,10 @@ const SECTIONS = [
   "rfq",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://organicscales.com";
+  const productSlugs = await getCatalogProductSlugs();
 
   const entries: MetadataRoute.Sitemap = [];
 
@@ -40,9 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
 
-    for (const product of products) {
+    for (const slug of productSlugs) {
       entries.push({
-        url: `${siteUrl}/${locale}/products/${product.slug}`,
+        url: `${siteUrl}/${locale}/products/${slug}`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.8,

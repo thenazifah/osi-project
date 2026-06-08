@@ -98,7 +98,9 @@
     "imageAlt": "Cargo containers prepared for international fish scale export",
     "imageCaptionLabel": "Export corridor",
     "imageCaption": "FOB Chittagong & Dhaka · CIF worldwide",
-    "capacityBadge": "Export ready"
+    "capacityBadge": "Export ready",
+    "socialHint": "Connect with our procurement team on your preferred platform.",
+    "socialBadge": "Direct contact"
   },
   "exportLogistics": {
     "badge": "Sea Freight & Export",
@@ -526,6 +528,16 @@
       "quantityKg": "Minimum quantity is 100 kg",
       "productInterest": "Select at least one product category"
     }
+  },
+  "messagingFab": {
+    "openLabel": "Open messaging options",
+    "closeLabel": "Close messaging menu",
+    "whatsappLabel": "Chat with OSI on WhatsApp",
+    "title": "Message OSI",
+    "subtitle": "Procurement desk · typically within 24 hours",
+    "email": "Email procurement",
+    "rfq": "Request a quote",
+    "rfqHint": "Open RFQ form on this site"
   },
   "footer": {
     "ctaTitle": "Ready to secure bulk supply?",

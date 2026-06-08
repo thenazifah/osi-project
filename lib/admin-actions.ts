@@ -13,6 +13,7 @@ import {
   setAdminSession,
 } from "@/lib/admin-auth";
 import { revalidateAdminAndSite } from "@/lib/admin-revalidate";
+import { uploadFileToCloudinary } from "@/lib/cloudinary-upload-server";
 import { formatFirestoreError } from "@/lib/firestore-errors";
 import { getAdminDb, isAdminConfigured } from "@/lib/firebase-admin";
 import { verifyFirebaseIdToken } from "@/lib/verify-firebase-id-token";
@@ -23,7 +24,14 @@ import type {
   RfqStatus,
   RfqSubmission,
   SiteContent,
+  SiteSettings,
 } from "@/lib/admin-types";
+import {
+  activeSocialLinks,
+  defaultSiteSettings,
+  mergeSiteSettings,
+  SITE_SETTINGS_DOC,
+} from "@/lib/site-settings";
 
 async function requireAdmin() {
   if (!(await isAdminAuthenticated())) {
@@ -114,26 +122,34 @@ export async function getDashboardStats(): Promise<{
   rfqNew: number;
   productCount: number;
   contentLocales: number;
+  socialLinks: number;
+  siteImages: number;
 }> {
   await requireAdmin();
   return withFirestore(async () => {
   const db = getAdminDb();
 
-  const [rfqSnap, productsSnap, contentSnap] = await Promise.all([
+  const [rfqSnap, productsSnap, contentSnap, siteSettings] = await Promise.all([
     db.collection("rfq_submissions").get(),
     db.collection("products").get(),
     db.collection("site_content").get(),
+    getSiteSettings(),
   ]);
 
   const rfqNew = rfqSnap.docs.filter(
     (doc) => (doc.data().status as string | undefined) === "new"
   ).length;
 
+  const socialLinks = activeSocialLinks(siteSettings).length;
+  const siteImages = Object.values(siteSettings.images).filter((v) => v.trim()).length;
+
   return {
     rfqTotal: rfqSnap.size,
     rfqNew,
     productCount: productsSnap.size,
     contentLocales: contentSnap.size,
+    socialLinks,
+    siteImages,
   };
   });
 }
@@ -293,8 +309,11 @@ function parseProductDoc(
   };
 }
 
-function revalidatePublicSite(productSlug?: string) {
-  revalidateAdminAndSite(productSlug);
+function revalidatePublicSite(
+  productSlugs?: string | string[],
+  previousSlugs?: string | string[]
+) {
+  revalidateAdminAndSite(productSlugs, previousSlugs);
 }
 
 export async function listProducts(): Promise<ProductRecord[]> {
@@ -333,8 +352,16 @@ export async function upsertProduct(
   };
 
   if (product.id) {
+    const existing = await db.collection("products").doc(product.id).get();
+    const previousSlug = existing.exists
+      ? String(existing.data()?.slug ?? "").trim()
+      : "";
+
     await db.collection("products").doc(product.id).set(payload, { merge: true });
-    revalidatePublicSite(product.slug);
+    revalidatePublicSite(
+      product.slug,
+      previousSlug && previousSlug !== product.slug ? previousSlug : undefined
+    );
     return { success: true, id: product.id };
   }
 
@@ -351,8 +378,13 @@ export async function deleteProduct(id: string): Promise<{ success: boolean }> {
   await requireAdmin();
   return withFirestore(async () => {
   const db = getAdminDb();
+  const existing = await db.collection("products").doc(id).get();
+  const previousSlug = existing.exists
+    ? String(existing.data()?.slug ?? "").trim()
+    : "";
+
   await db.collection("products").doc(id).delete();
-  revalidatePublicSite();
+  revalidatePublicSite(undefined, previousSlug || undefined);
   return { success: true };
   });
 }
@@ -401,7 +433,7 @@ export async function seedProductsFromStatic(): Promise<{ count: number }> {
   });
 
   await batch.commit();
-  revalidatePublicSite();
+  revalidatePublicSite(staticProducts.map((p) => p.slug));
   return { count: staticProducts.length };
   });
 }
@@ -497,5 +529,82 @@ export async function saveSiteContent(
     );
   revalidatePublicSite();
   return { success: true };
+  });
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  await requireAdmin();
+  return withFirestore(async () => {
+    const db = getAdminDb();
+    const doc = await db.collection("site_settings").doc(SITE_SETTINGS_DOC).get();
+    if (!doc.exists) return defaultSiteSettings();
+    return mergeSiteSettings(doc.data() as Partial<SiteSettings>);
+  });
+}
+
+export async function saveSiteSettings(
+  settings: SiteSettings
+): Promise<{ success: boolean }> {
+  await requireAdmin();
+  return withFirestore(async () => {
+    const db = getAdminDb();
+    await db
+      .collection("site_settings")
+      .doc(SITE_SETTINGS_DOC)
+      .set(
+        {
+          ...mergeSiteSettings(settings),
+          updatedAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+    revalidatePublicSite();
+    return { success: true };
+  });
+}
+
+export async function seedSiteSettingsFromDefaults(): Promise<{ success: boolean }> {
+  await requireAdmin();
+  return withFirestore(async () => {
+    const db = getAdminDb();
+    await db
+      .collection("site_settings")
+      .doc(SITE_SETTINGS_DOC)
+      .set({
+        ...defaultSiteSettings(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+    revalidatePublicSite();
+    return { success: true };
+  });
+}
+
+export async function uploadAdminImageToCloudinary(
+  formData: FormData
+): Promise<{ publicId?: string; secureUrl?: string; error?: string }> {
+  await requireAdmin();
+
+  const file = formData.get("file");
+  const folder = String(formData.get("folder") ?? "osi/uploads").trim();
+
+  if (!(file instanceof File)) {
+    return { error: "No image file received." };
+  }
+
+  const result = await uploadFileToCloudinary(file, folder);
+  if (!result.ok) {
+    return { error: result.error };
+  }
+
+  return { publicId: result.publicId, secureUrl: result.secureUrl };
+}
+
+export async function syncPublicSite(): Promise<{ success: boolean; pages: number }> {
+  await requireAdmin();
+  return withFirestore(async () => {
+    const products = await listProducts();
+    const slugs = products.filter((p) => p.active && p.slug).map((p) => p.slug);
+    revalidatePublicSite(slugs);
+    return { success: true, pages: 3 + slugs.length * 3 };
   });
 }

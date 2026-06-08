@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { LocaleFlag } from "@/components/nav/LocaleFlag";
 import {
   Select,
   SelectContent,
@@ -42,20 +43,30 @@ export function LanguageSelect({
     router.push(localeHref(value));
   };
 
+  const flagSize = compact ? "md" : "lg";
+
   return (
     <Select value={locale} onValueChange={onValueChange}>
       <SelectTrigger
-        className={cn(compact ? "w-[4.5rem] uppercase" : "min-w-[9.5rem] uppercase", triggerClassName)}
-        aria-label={t("label")}
+        className={cn(
+          "min-w-[4.75rem] gap-1.5 px-2.5 normal-case [&>span]:line-clamp-none [&>span]:overflow-visible",
+          compact ? "h-11" : "h-10",
+          triggerClassName
+        )}
+        aria-label={`${t("label")}: ${t(locale as "en" | "ja" | "zh")}`}
       >
-        <SelectValue placeholder={t("label")}>
-          {compact ? locale.toUpperCase() : t(locale as "en" | "ja" | "zh")}
-        </SelectValue>
+        <LocaleFlag locale={locale} size={flagSize} />
+        <SelectValue className="sr-only">{t(locale as "en" | "ja" | "zh")}</SelectValue>
       </SelectTrigger>
-      <SelectContent className={className}>
+      <SelectContent className={cn("min-w-[5.5rem]", className)}>
         {LOCALES.map((loc) => (
-          <SelectItem key={loc} value={loc}>
-            {t(loc)}
+          <SelectItem
+            key={loc}
+            value={loc}
+            className="justify-center py-3 pl-3 pr-8 uppercase tracking-normal"
+            aria-label={t(loc)}
+          >
+            <LocaleFlag locale={loc} size="lg" label={t(loc)} />
           </SelectItem>
         ))}
       </SelectContent>

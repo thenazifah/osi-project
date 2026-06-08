@@ -80,7 +80,9 @@
     "imageAlt": "国際魚鱗輸出用のコンテナ貨物",
     "imageCaptionLabel": "輸出回廊",
     "imageCaption": "FOBチッタガン・ダッカ · CIF全世界",
-    "capacityBadge": "輸出準備完了"
+    "capacityBadge": "輸出準備完了",
+    "socialHint": "ご希望のプラットフォームで調達チームに直接お問い合わせください。",
+    "socialBadge": "直接連絡"
   },
   "exportLogistics": {
     "badge": "海上輸送・輸出",
@@ -359,6 +361,16 @@
       "quantityKg": "最小数量は100kgです",
       "productInterest": "少なくとも1つの製品カテゴリを選択してください"
     }
+  },
+  "messagingFab": {
+    "openLabel": "メッセージオプションを開く",
+    "closeLabel": "メッセージメニューを閉じる",
+    "whatsappLabel": "WhatsAppでOSIに連絡",
+    "title": "OSIに連絡",
+    "subtitle": "調達デスク · 通常24時間以内に返信",
+    "email": "メールで連絡",
+    "rfq": "見積を依頼",
+    "rfqHint": "このサイトのRFQフォームを開く"
   },
   "footer": {
     "ctaTitle": "バルク供給の準備はできていますか？",

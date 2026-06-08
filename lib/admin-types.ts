@@ -51,6 +51,12 @@ export type SiteContent = {
   };
 };
 
+export type {
+  SiteSettings,
+  SocialLinkEntry,
+  SocialPlatform,
+} from "@/lib/site-settings";
+
 export type DashboardChartData = {
   rfqByStatus: { status: string; count: number }[];
   rfqByMonth: { month: string; count: number }[];

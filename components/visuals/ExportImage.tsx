@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CldMediaImage } from "@/components/visuals/CldMediaImage";
 import { cn } from "@/lib/utils";
 
 type ExportImageProps = {
@@ -10,6 +10,8 @@ type ExportImageProps = {
   overlay?: "sea" | "dark" | "light" | "none";
   objectPosition?: string;
   sizes?: string;
+  /** Disable hover zoom on the image frame */
+  staticFrame?: boolean;
 };
 
 const overlayStyles = {
@@ -28,15 +30,17 @@ export function ExportImage({
   overlay = "sea",
   objectPosition = "center",
   sizes = "(max-width: 1024px) 100vw, 50vw",
+  staticFrame = false,
 }: ExportImageProps) {
   return (
     <div
       className={cn(
         "export-image-frame relative overflow-hidden bg-tag-bg",
+        staticFrame && "export-image-frame-static",
         className
       )}
     >
-      <Image
+      <CldMediaImage
         src={src}
         alt={alt}
         fill

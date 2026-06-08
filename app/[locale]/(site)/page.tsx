@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
 import TrustBar from "@/components/sections/TrustBar";
 import ExportLogistics from "@/components/sections/ExportLogistics";
@@ -10,7 +9,8 @@ import Compliance from "@/components/sections/Compliance";
 import FAQ from "@/components/sections/FAQ";
 import Policy from "@/components/sections/Policy";
 import Footer from "@/components/sections/Footer";
-import { getCatalogProducts, getPublicSiteContent } from "@/lib/cms";
+import { getCatalogProducts, getPublicSiteContent, getPublicSiteSettings } from "@/lib/cms";
+import { getPublicSocialLinkItems } from "@/lib/social-links";
 import type { LocaleCode } from "@/lib/admin-types";
 
 const RFQ = dynamic(() => import("@/components/sections/RFQ"));
@@ -25,27 +25,36 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   const code = locale as LocaleCode;
 
-  const [catalogProducts, siteContent] = await Promise.all([
+  const [catalogProducts, siteContent, siteSettings] = await Promise.all([
     getCatalogProducts(code),
     getPublicSiteContent(code),
+    getPublicSiteSettings(),
   ]);
+
+  const socialLinks = getPublicSocialLinkItems(siteSettings);
 
   return (
     <>
-      <Nav />
       <main>
-        <Hero content={siteContent.hero} />
+        <Hero
+          content={siteContent.hero}
+          heroImage={siteSettings.images.hero}
+          socialLinks={socialLinks}
+        />
         <Catalog items={catalogProducts} />
         <About content={siteContent.about} />
-        <TrustBar content={siteContent.trust} />
-        <ExportLogistics />
-        <Process />
+        <TrustBar
+          content={siteContent.trust}
+          trustBarImage={siteSettings.images.trustBar}
+        />
+        <ExportLogistics exportHeroImage={siteSettings.images.exportHero} />
+        <Process processBannerImage={siteSettings.images.processBanner} />
         <Compliance />
         <FAQ />
         <Policy />
         <RFQ />
       </main>
-      <Footer />
+      <Footer socialLinks={socialLinks} />
     </>
   );
 }

@@ -16,6 +16,7 @@ import {
   MessageSquare,
   Shield,
 } from "lucide-react";
+import { trackMetaEvent } from "@/lib/meta-pixel";
 import { submitRFQ } from "@/lib/rfq-actions";
 import { RFQSchema, type RFQFormData } from "@/lib/rfq-schema";
 import { Badge } from "@/components/ui/badge";
@@ -114,6 +115,10 @@ export default function RFQ() {
     startTransition(async () => {
       const result = await submitRFQ(data);
       if (result.success) {
+        trackMetaEvent("Lead", {
+          content_name: "RFQ",
+          content_category: data.productInterest.join(", "),
+        });
         setConfirmId(result.id.slice(0, 6).toUpperCase());
         reset();
       } else {

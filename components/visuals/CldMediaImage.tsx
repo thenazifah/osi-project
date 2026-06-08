@@ -12,6 +12,7 @@ type CldMediaImageProps = {
   fill?: boolean;
   sizes?: string;
   className?: string;
+  style?: React.CSSProperties;
   priority?: boolean;
 };
 
@@ -23,6 +24,7 @@ export function CldMediaImage({
   fill,
   sizes,
   className,
+  style,
   priority,
 }: CldMediaImageProps) {
   if (isCloudinarySource(src)) {
@@ -34,6 +36,7 @@ export function CldMediaImage({
           fill
           sizes={sizes}
           className={className}
+          style={style}
           priority={priority}
         />
       );
@@ -46,6 +49,7 @@ export function CldMediaImage({
         height={height}
         alt={alt}
         className={className}
+        style={style}
         priority={priority}
       />
     );
@@ -60,6 +64,7 @@ export function CldMediaImage({
       height={fill ? undefined : height}
       sizes={sizes}
       className={className}
+      style={style}
       priority={priority}
     />
   );

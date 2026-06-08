@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { CldMediaImage } from "@/components/visuals/CldMediaImage";
 import { useLocale, useTranslations } from "next-intl";
 import { ProductCover } from "@/components/catalog/ProductCover";
 import { Badge } from "@/components/ui/badge";
@@ -61,7 +61,7 @@ function ProductGrid({
           >
             {product.images[0] ? (
               <div className="relative aspect-video w-full overflow-hidden bg-tag-bg">
-                <Image
+                <CldMediaImage
                   src={product.images[0]}
                   alt={product.name}
                   fill

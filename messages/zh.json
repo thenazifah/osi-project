@@ -80,7 +80,9 @@
     "imageAlt": "准备国际鱼鳞出口的集装箱货物",
     "imageCaptionLabel": "出口通道",
     "imageCaption": "FOB吉大港/达卡 · CIF全球到港",
-    "capacityBadge": "出口就绪"
+    "capacityBadge": "出口就绪",
+    "socialHint": "通过您常用的平台直接联系我们的采购团队。",
+    "socialBadge": "直接联系"
   },
   "exportLogistics": {
     "badge": "海运与出口",
@@ -359,6 +361,16 @@
       "quantityKg": "最小数量为100公斤",
       "productInterest": "请至少选择一个产品类别"
     }
+  },
+  "messagingFab": {
+    "openLabel": "打开消息选项",
+    "closeLabel": "关闭消息菜单",
+    "whatsappLabel": "通过 WhatsApp 联系 OSI",
+    "title": "联系 OSI",
+    "subtitle": "采购团队 · 通常在24小时内回复",
+    "email": "邮件联系采购",
+    "rfq": "索取报价",
+    "rfqHint": "打开本站询价表单"
   },
   "footer": {
     "ctaTitle": "准备大宗采购了吗？",

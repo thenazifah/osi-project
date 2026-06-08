@@ -12,3 +12,11 @@ export function isCloudinarySource(src: string): boolean {
 export function cloudinaryConfigured(): boolean {
   return Boolean(process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME?.trim());
 }
+
+export function cloudinaryUploadReady(): boolean {
+  return cloudinaryConfigured();
+}
+
+export function siteImageFolder(key: string): string {
+  return `osi/site/${key}`;
+}

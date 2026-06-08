@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import HeroMarquee from "@/components/sections/HeroMarquee";
 import { ExportImage } from "@/components/visuals/ExportImage";
-import { CargoShipScene } from "@/components/visuals/CargoShipScene";
-import { EXPORT_IMAGES } from "@/data/export-images";
+import { SocialLinks, type SocialLinkItem } from "@/components/footer/SocialLinks";
+import { resolveExportImageSrc } from "@/data/export-images";
 import { useSectionObserver } from "@/lib/use-section-observer";
 import { useStaggerVisible } from "@/lib/use-stagger-visible";
 import type { SiteContent } from "@/lib/admin-types";
@@ -16,10 +16,13 @@ import { cn } from "@/lib/utils";
 
 type HeroProps = {
   content?: SiteContent["hero"];
+  heroImage?: string;
+  socialLinks?: SocialLinkItem[];
 };
 
-export default function Hero({ content }: HeroProps) {
+export default function Hero({ content, heroImage, socialLinks = [] }: HeroProps) {
   const t = useTranslations("hero");
+  const tFooter = useTranslations("footer");
   const h = (key: keyof SiteContent["hero"]) =>
     content?.[key]?.trim() ? content[key] : t(key);
   const { ref, isVisible } = useSectionObserver();
@@ -34,6 +37,8 @@ export default function Hero({ content }: HeroProps) {
     { icon: Anchor, text: t("statProducts") },
     { icon: Shield, text: t("statIso") },
   ];
+
+  const heroSrc = resolveExportImageSrc(heroImage, "heroPort");
 
   return (
     <section
@@ -80,6 +85,31 @@ export default function Hero({ content }: HeroProps) {
             </Button>
           </div>
 
+          {socialLinks.length > 0 ? (
+            <div className="mt-8 rounded-2xl border border-accent-2/30 bg-gradient-to-br from-accent/[0.07] via-surface to-accent-2/[0.1] p-5 shadow-[0_8px_30px_rgba(14,58,91,0.08)] ring-1 ring-accent/10 sm:p-6">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p className="font-display text-base font-semibold text-ink sm:text-lg">
+                    {tFooter("socialLabel")}
+                  </p>
+                  <p className="mt-1 max-w-md font-sans text-sm text-ink-muted">
+                    {t("socialHint")}
+                  </p>
+                </div>
+                <span className="hidden rounded-full border border-accent-2/25 bg-surface/80 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-accent sm:inline">
+                  {t("socialBadge")}
+                </span>
+              </div>
+              <SocialLinks
+                className="mt-5"
+                links={socialLinks}
+                size="lg"
+                showLabels
+                iconClassName="border-accent/15 bg-surface text-accent shadow-md hover:border-accent-2 hover:bg-accent hover:text-white"
+              />
+            </div>
+          ) : null}
+
           <div
             ref={statsRef}
             className={cn(
@@ -103,25 +133,19 @@ export default function Hero({ content }: HeroProps) {
         </div>
 
         <div className="relative flex items-center justify-center py-12 lg:col-span-5 lg:py-24 lg:pl-8">
-          <div
-            className="hero-image-radiant absolute inset-y-[8%] -left-6 hidden w-28 lg:block xl:w-36"
-            aria-hidden
-          />
           <div className="relative w-full max-w-md">
             <Card className="relative overflow-hidden border-border bg-surface p-2 shadow-[0_24px_60px_rgba(11,31,42,0.12)] ring-1 ring-accent-2/15">
               <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
                 <ExportImage
-                  src={EXPORT_IMAGES.containers}
+                  src={heroSrc}
                   alt={t("imageAlt")}
-                  overlay="sea"
-                  objectPosition="center 35%"
+                  overlay="none"
+                  objectPosition="center center"
                   priority
-                  className="absolute inset-0"
+                  staticFrame
+                  className="absolute inset-0 h-full w-full"
                   sizes="(max-width: 1024px) 100vw, 420px"
                 />
-                <div className="absolute inset-0 hidden sm:block">
-                  <CargoShipScene className="absolute bottom-0 right-0 h-[45%] w-[55%] opacity-90 drop-shadow-lg" />
-                </div>
               </div>
             </Card>
 

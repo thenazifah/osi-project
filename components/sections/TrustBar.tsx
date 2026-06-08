@@ -26,7 +26,13 @@ const ITEMS = [
   { key: "sla" as const, icon: Timer },
 ];
 
-export default function TrustBar({ content }: { content?: SiteContent["trust"] }) {
+export default function TrustBar({
+  content,
+  trustBarImage,
+}: {
+  content?: SiteContent["trust"];
+  trustBarImage?: string;
+}) {
   const t = useTranslations("trust");
   const c = (key: keyof SiteContent["trust"]) =>
     content?.[key]?.trim() ? content[key] : t(key);
@@ -43,7 +49,7 @@ export default function TrustBar({ content }: { content?: SiteContent["trust"] }
               {c("subtitle")}
             </p>
             <ExportImage
-              src={EXPORT_IMAGES.procurementShip}
+              src={trustBarImage?.trim() || EXPORT_IMAGES.procurementShip}
               alt={t("imageAlt")}
               overlay="sea"
               objectPosition="center 55%"

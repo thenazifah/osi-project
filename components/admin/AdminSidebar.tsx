@@ -9,6 +9,7 @@ import {
   LogOut,
   Package,
   PenLine,
+  Share2,
 } from "lucide-react";
 import { logoutAdmin } from "@/lib/admin-actions";
 import { signOutFirebase } from "@/lib/firebase-client-auth";
@@ -20,6 +21,7 @@ const LINKS = [
   { href: "/admin/rfq", label: "RFQ Inbox", icon: FileText, countKey: "rfqNew" as const },
   { href: "/admin/products", label: "Products", icon: Package, countKey: "productCount" as const },
   { href: "/admin/content", label: "Site Content", icon: PenLine, countKey: "contentLocales" as const },
+  { href: "/admin/site", label: "Site Settings", icon: Share2, countKey: null },
 ] as const;
 
 type NavCounts = {

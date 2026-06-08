@@ -7,6 +7,11 @@ import {
 } from "@/data/products";
 import { getAdminDb, isAdminConfigured } from "@/lib/firebase-admin";
 import type { LocaleCode, ProductRecord, SiteContent } from "@/lib/admin-types";
+import {
+  defaultSiteSettings,
+  mergeSiteSettings,
+  type SiteSettings,
+} from "@/lib/site-settings";
 import en from "@/messages/en.json";
 import ja from "@/messages/ja.json";
 import zh from "@/messages/zh.json";
@@ -92,11 +97,12 @@ export async function getCatalogProducts(
   try {
     const db = getAdminDb();
     const snap = await db.collection("products").orderBy("order", "asc").get();
+    if (snap.empty) return mapStatic(locale);
+
     const active = snap.docs
       .map((doc) => parseRecord(doc.id, doc.data()))
       .filter((p) => p.active && p.slug);
 
-    if (active.length === 0) return mapStatic(locale);
     return active.map((p) => mapRecord(p, locale));
   } catch {
     return mapStatic(locale);
@@ -171,6 +177,41 @@ export async function getPublicSiteContent(locale: LocaleCode): Promise<SiteCont
     return mergeContent(defaults, doc.data() as Partial<SiteContent>);
   } catch {
     return defaults;
+  }
+}
+
+export async function getCatalogProductSlugs(): Promise<string[]> {
+  if (!isAdminConfigured()) {
+    return staticProducts.map((p) => p.slug);
+  }
+
+  try {
+    const db = getAdminDb();
+    const snap = await db.collection("products").get();
+    if (snap.empty) {
+      return staticProducts.map((p) => p.slug);
+    }
+
+    const slugs = snap.docs
+      .map((doc) => String(doc.data().slug ?? "").trim())
+      .filter(Boolean);
+
+    return slugs.length > 0 ? slugs : staticProducts.map((p) => p.slug);
+  } catch {
+    return staticProducts.map((p) => p.slug);
+  }
+}
+
+export async function getPublicSiteSettings(): Promise<SiteSettings> {
+  if (!isAdminConfigured()) return defaultSiteSettings();
+
+  try {
+    const db = getAdminDb();
+    const doc = await db.collection("site_settings").doc("global").get();
+    if (!doc.exists) return defaultSiteSettings();
+    return mergeSiteSettings(doc.data() as Partial<SiteSettings>);
+  } catch {
+    return defaultSiteSettings();
   }
 }
 

@@ -1,14 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { OsiLogo } from "@/components/brand/OsiLogo";
-import { SocialLinks } from "@/components/footer/SocialLinks";
+import { SocialLinks, type SocialLinkItem } from "@/components/footer/SocialLinks";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 
 const LINKS = [
   { id: "catalog", key: "catalog" },
@@ -19,20 +16,13 @@ const LINKS = [
   { id: "rfq", key: "rfq" },
 ] as const;
 
-const LOCALES = ["en", "ja", "zh"] as const;
+type FooterProps = {
+  socialLinks?: SocialLinkItem[];
+};
 
-export default function Footer() {
+export default function Footer({ socialLinks = [] }: FooterProps) {
   const t = useTranslations("footer");
   const tNav = useTranslations("nav");
-  const tLang = useTranslations("nav.languages");
-  const locale = useLocale();
-  const pathname = usePathname();
-
-  const localeHref = (loc: string) => {
-    const segments = pathname.split("/").filter(Boolean);
-    const rest = segments.slice(1).join("/");
-    return `/${loc}${rest ? `/${rest}` : ""}`;
-  };
 
   const scrollTo = (id: string, hash?: string) => {
     if (hash) {
@@ -79,23 +69,7 @@ export default function Footer() {
               <p className="font-sans text-xs font-semibold uppercase tracking-wider text-accent">
                 {t("socialLabel")}
               </p>
-              <SocialLinks className="mt-3" />
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {LOCALES.map((loc) => (
-                <Link
-                  key={loc}
-                  href={localeHref(loc)}
-                    className={cn(
-                    "rounded-full px-3.5 py-1.5 font-sans text-xs font-medium uppercase tracking-wide transition-all duration-200",
-                    locale === loc
-                      ? "bg-accent text-bg"
-                      : "bg-tag-bg text-ink-muted hover:text-accent"
-                  )}
-                >
-                  {tLang(loc)}
-                </Link>
-              ))}
+              <SocialLinks className="mt-3" links={socialLinks} />
             </div>
           </div>
 
@@ -145,7 +119,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border bg-bg">
-          <div className="page-container flex flex-col gap-4 py-6 md:flex-row md:items-center md:justify-between">
+          <div className="page-container flex flex-col gap-5 py-6 md:flex-row md:items-center md:justify-between">
             <p className="font-sans text-xs text-ink-muted">{t("copyright")}</p>
             <div className="flex gap-6">
               <button
