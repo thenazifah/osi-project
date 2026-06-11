@@ -3,7 +3,6 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import {
   ArrowLeft,
-  ArrowRight,
   Droplets,
   FileCheck,
   Microscope,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import { ProductImageGallery } from "@/components/catalog/ProductImageGallery";
 import { ProductCover } from "@/components/catalog/ProductCover";
+import { SocialLinks, type SocialLinkItem } from "@/components/footer/SocialLinks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,6 +24,7 @@ type ProductSpecsViewProps = {
   product: CatalogProduct;
   locale: string;
   related: CatalogProduct[];
+  socialLinks?: SocialLinkItem[];
 };
 
 const SPEC_ICONS = [Droplets, Ruler, Microscope, Package] as const;
@@ -32,9 +33,12 @@ export async function ProductSpecsView({
   product,
   locale,
   related,
+  socialLinks = [],
 }: ProductSpecsViewProps) {
   const t = await getTranslations("catalog");
   const tPage = await getTranslations("productPage");
+  const tFooter = await getTranslations("footer");
+  const tHero = await getTranslations("hero");
 
   const galleryImages = product.images.map((src, index) => ({
     src,
@@ -155,13 +159,23 @@ export async function ProductSpecsView({
               </p>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button variant="primary" asChild>
-                <Link href={`/${locale}#rfq`}>
-                  {t("specsSheet.requestCta")}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
+            <div className="mt-10 space-y-4">
+              {socialLinks.length > 0 ? (
+                <div className="rounded-xl border border-border bg-tag-bg/60 p-4 sm:p-5">
+                  <p className="font-display text-sm font-semibold text-ink sm:text-base">
+                    {tFooter("socialLabel")}
+                  </p>
+                  <p className="mt-1 font-sans text-xs text-ink-muted sm:text-sm">
+                    {tHero("socialHint")}
+                  </p>
+                  <SocialLinks
+                    className="mt-3 gap-2.5 sm:gap-3"
+                    links={socialLinks}
+                    size="md"
+                    showLabels
+                  />
+                </div>
+              ) : null}
               <Button variant="outline" asChild>
                 <Link href={`/${locale}#catalog`}>{tPage("browseCatalog")}</Link>
               </Button>

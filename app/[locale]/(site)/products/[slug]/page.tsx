@@ -64,7 +64,12 @@ export default async function ProductSpecsPage({ params }: PageProps) {
   return (
     <>
       <main>
-        <ProductSpecsView product={product} locale={locale} related={related} />
+        <ProductSpecsView
+          product={product}
+          locale={locale}
+          related={related}
+          socialLinks={socialLinks}
+        />
       </main>
       <Footer socialLinks={socialLinks} />
     </>
