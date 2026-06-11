@@ -1,8 +1,6 @@
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
-import { CloudinarySetupCard } from "@/components/admin/CloudinarySetupCard";
 import { SiteSettingsEditor } from "@/components/admin/SiteSettingsEditor";
 import { getSiteSettings } from "@/lib/admin-actions";
-import { getCloudinaryEnvStatus } from "@/lib/cloudinary-env";
 import { defaultSiteSettings } from "@/lib/site-settings";
 import { isAdminConfigured } from "@/lib/firebase-admin";
 
@@ -35,10 +33,8 @@ export default async function AdminSitePage() {
       <AdminPageHeader
         eyebrow="Site"
         title="Site settings"
-        description="Meta Pixel, social links, and site images (Cloudinary upload) sync to the landing page and product sections."
+        description="Meta Pixel, social links, and site images sync to the landing page and product sections."
       />
-
-      <CloudinarySetupCard status={getCloudinaryEnvStatus()} />
 
       {error ? (
         <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 font-sans text-sm text-red-700">

@@ -41,6 +41,8 @@ export function MetaPixel({ pixelId }: MetaPixelProps) {
         `}
       </Script>
       <noscript>
+        {/* Meta Pixel requires a plain img in noscript; next/image is not valid here. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           height="1"
           width="1"

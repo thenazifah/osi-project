@@ -1,3 +1,4 @@
+import { OSI_SOCIAL_BUNDLED } from "@/data/social-defaults";
 import type { SiteSettings } from "@/lib/site-settings";
 import { activeSocialLinks } from "@/lib/site-settings";
 
@@ -39,19 +40,44 @@ export function buildWhatsAppUrl(
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
+function whatsappCandidates(settings: SiteSettings): string[] {
+  const envNumber =
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() ||
+    process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP?.trim();
+  const storedWa = settings.socialLinks.find((link) => link.platform === "whatsapp");
+  const activeWa = activeSocialLinks(settings).find(
+    (link) => link.platform === "whatsapp"
+  );
+  const waLink = storedWa ?? activeWa;
+  const bundled = OSI_SOCIAL_BUNDLED.whatsapp;
+
+  return [
+    waLink?.url.trim(),
+    waLink?.handle.trim(),
+    envNumber,
+    bundled?.handle.trim(),
+    bundled?.url.trim(),
+  ].filter((value): value is string => Boolean(value?.trim()));
+}
+
 export function resolveWhatsAppUrl(
   settings: SiteSettings,
   locale: string
 ): string | null {
-  const envNumber =
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() ||
-    process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP?.trim();
-
-  const links = activeSocialLinks(settings);
-  const waLink = links.find((link) => link.platform === "whatsapp");
-  const source = waLink?.url.trim() || waLink?.handle.trim() || envNumber || "";
-  if (!source) return null;
-
   const message = DEFAULT_MESSAGES[locale] ?? DEFAULT_MESSAGES.en;
-  return buildWhatsAppUrl(source, message);
+
+  for (const candidate of whatsappCandidates(settings)) {
+    const url = buildWhatsAppUrl(candidate, message);
+    if (url) return url;
+  }
+
+  return null;
+}
+
+/** WhatsApp link for messaging menu — works even when admin handle is not a phone number. */
+export function resolveMessagingWhatsAppUrl(
+  settings: SiteSettings,
+  locale: string
+): string | null {
+  return resolveWhatsAppUrl(settings, locale);
 }

@@ -399,6 +399,36 @@ h6 {
   }
 }
 
+@keyframes osi-loading-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(0.97);
+  }
+}
+
+@keyframes osi-loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(260%);
+  }
+}
+
+.osi-loading-logo {
+  animation: osi-loading-pulse 1.8s ease-in-out infinite;
+}
+
+.osi-loading-bar {
+  width: 38%;
+  animation: osi-loading-bar 1.15s ease-in-out infinite;
+}
+
 .marquee-band {
   background: linear-gradient(
     100deg,

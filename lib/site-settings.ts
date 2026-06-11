@@ -5,6 +5,7 @@ import {
   mergeMetaPixelSettings,
   type MetaPixelSettings,
 } from "@/lib/meta-pixel";
+import { isResolvableSocialLink } from "@/lib/social-profile-url";
 
 export const SOCIAL_PLATFORM_OPTIONS = [
   "whatsapp",
@@ -108,7 +109,7 @@ export function createSocialLink(
   };
 }
 
-function normalizeEntry(raw: unknown): SocialLinkEntry | null {
+export function normalizeSocialLinkEntry(raw: unknown): SocialLinkEntry | null {
   if (!raw || typeof raw !== "object") return null;
   const row = raw as Partial<SocialLinkEntry>;
   const platform = SOCIAL_PLATFORM_OPTIONS.includes(
@@ -151,7 +152,7 @@ function legacySocialToLinks(
 function parseSocialLinks(stored: unknown): SocialLinkEntry[] | null {
   if (Array.isArray(stored)) {
     const links = stored
-      .map(normalizeEntry)
+      .map(normalizeSocialLinkEntry)
       .filter((row): row is SocialLinkEntry => row !== null);
     return links;
   }
@@ -179,10 +180,10 @@ export function mergeSiteSettings(
     parseSocialLinks(stored.socialLinks) ??
     (stored.social ? legacySocialToLinks(stored.social as Record<string, Partial<{ handle?: string; url?: string }>>) : null);
 
-  const socialLinks = hydrateSocialLinks(
+  const socialLinks = withDefaultWhatsappLink(
     parsed && parsed.length > 0
       ? parsed
-          .map((l) => normalizeEntry(l))
+          .map((l) => normalizeSocialLinkEntry(l))
           .filter((row): row is SocialLinkEntry => row !== null)
       : defaults.socialLinks
   );
@@ -209,8 +210,18 @@ export function mergeSiteSettings(
 }
 
 export function defaultSiteSettings(): SiteSettings {
+  const socialLinks = defaultSocialLinks().map((link) => {
+    const bundled = OSI_SOCIAL_BUNDLED[link.platform];
+    if (!bundled) return link;
+    return {
+      ...link,
+      url: link.url.trim() || bundled.url,
+      handle: link.handle.trim() || bundled.handle,
+    };
+  });
+
   return {
-    socialLinks: defaultSocialLinks(),
+    socialLinks,
     images: {
       hero: EXPORT_IMAGES.heroPort,
       trustBar: EXPORT_IMAGES.heroPort,
@@ -221,21 +232,12 @@ export function defaultSiteSettings(): SiteSettings {
   };
 }
 
-function hasWhatsAppTarget(value: string): boolean {
-  const trimmed = value.trim();
-  if (!trimmed) return false;
-  if (/^https?:\/\//i.test(trimmed)) return true;
-  return trimmed.replace(/\D/g, "").length >= 8;
-}
-
-function hasResolvableSocialUrl(link: SocialLinkEntry): boolean {
-  if (link.platform === "whatsapp") {
-    return (
-      hasWhatsAppTarget(link.url) || hasWhatsAppTarget(link.handle)
-    );
-  }
-  const url = link.url.trim();
-  return url.length > 0 && url !== "#";
+function withDefaultWhatsappLink(links: SocialLinkEntry[]): SocialLinkEntry[] {
+  if (links.some((link) => link.platform === "whatsapp")) return links;
+  const whatsapp = defaultSiteSettings().socialLinks.find(
+    (link) => link.platform === "whatsapp"
+  );
+  return whatsapp ? [whatsapp, ...links] : links;
 }
 
 function hydrateSocialLinks(links: SocialLinkEntry[]): SocialLinkEntry[] {
@@ -243,42 +245,44 @@ function hydrateSocialLinks(links: SocialLinkEntry[]): SocialLinkEntry[] {
     defaultSocialLinks().map((link) => [link.platform, link])
   );
 
-  return links.map((link) => {
-    if (hasResolvableSocialUrl(link)) return link;
+  return withDefaultWhatsappLink(links).map((link) => {
+    if (isResolvableSocialLink(link)) return link;
 
     const env = envByPlatform.get(link.platform);
-    if (env && hasResolvableSocialUrl(env)) {
-      return {
-        ...link,
-        url: env.url.trim() || link.url,
-        handle: link.handle.trim() || env.handle,
-      };
-    }
-
     const bundled = OSI_SOCIAL_BUNDLED[link.platform];
-    if (bundled?.url.trim()) {
-      return {
-        ...link,
-        url: bundled.url.trim(),
-        handle: link.handle.trim() || bundled.handle,
-      };
-    }
 
-    if (link.platform === "whatsapp" && link.handle.trim()) {
-      return link;
-    }
+    const merged = {
+      ...link,
+      url:
+        link.url.trim() ||
+        env?.url.trim() ||
+        bundled?.url.trim() ||
+        "",
+      handle:
+        link.handle.trim() ||
+        env?.handle.trim() ||
+        bundled?.handle.trim() ||
+        "",
+    };
 
-    return link;
+    return isResolvableSocialLink(merged) ? merged : link;
   });
 }
 
 export function activeSocialLinks(settings: SiteSettings): SocialLinkEntry[] {
-  const hydrated = hydrateSocialLinks(settings.socialLinks);
-  const active = hydrated.filter((link) => hasResolvableSocialUrl(link));
+  return hydrateSocialLinks(settings.socialLinks).filter(isResolvableSocialLink);
+}
 
-  if (active.length > 0) return active;
-
-  return defaultSocialLinks().filter((link) => hasResolvableSocialUrl(link));
+export function normalizeSiteSettingsForSave(
+  settings: SiteSettings
+): SiteSettings {
+  return {
+    socialLinks: settings.socialLinks
+      .map((link) => normalizeSocialLinkEntry(link))
+      .filter((row): row is SocialLinkEntry => row !== null),
+    images: settings.images,
+    metaPixel: mergeMetaPixelSettings(settings.metaPixel),
+  };
 }
 
 export function imageOrDefault(

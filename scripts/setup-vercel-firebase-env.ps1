@@ -1,14 +1,14 @@
 # Push Firebase + admin env vars to the linked Vercel project.
 # Prereqs:
 #   1. vercel login (account that owns the OSI project)
-#   2. vercel link   (select project "osi" under nazifah-anwars-projects)
+#   2. vercel link   (select project "osi" under your Vercel team)
 #   3. firebase-service-account.json in repo root
 #
 # Usage: .\scripts\setup-vercel-firebase-env.ps1
 # Optional: .\scripts\setup-vercel-firebase-env.ps1 -SiteUrl "https://your-domain.vercel.app"
 
 param(
-  [string]$SiteUrl = "https://osi-oe7997akv-nazifah-anwars-projects.vercel.app"
+  [string]$SiteUrl = "https://osi-nine.vercel.app"
 )
 
 $ErrorActionPreference = "Stop"
@@ -22,7 +22,7 @@ if (-not (Test-Path ".vercel\project.json")) {
 
 $saPath = Join-Path $root "firebase-service-account.json"
 if (-not (Test-Path $saPath)) {
-  Write-Host "Missing firebase-service-account.json — download from Firebase Console → Project settings → Service accounts." -ForegroundColor Red
+  Write-Host "Missing firebase-service-account.json - download from Firebase Console > Project settings > Service accounts." -ForegroundColor Red
   exit 1
 }
 
@@ -62,6 +62,6 @@ foreach ($entry in $vars.GetEnumerator()) {
 
 Write-Host ""
 Write-Host "Done. Redeploy: vercel --prod" -ForegroundColor Green
-Write-Host "Firebase Console → Authentication → Settings → Authorized domains → add:" -ForegroundColor Cyan
-Write-Host "  - your-project.vercel.app"
-Write-Host "  - *.vercel.app (or each preview hostname)"
+Write-Host "Firebase Console > Authentication > Settings > Authorized domains - add:" -ForegroundColor Cyan
+Write-Host '  - your-project.vercel.app'
+Write-Host '  - each preview hostname as needed'

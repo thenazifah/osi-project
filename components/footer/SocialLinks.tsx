@@ -2,7 +2,10 @@ import type { ReactNode } from "react";
 import { Link2 } from "lucide-react";
 import type { SocialLinkEntry, SocialPlatform } from "@/lib/site-settings";
 import { PLATFORM_LABELS } from "@/lib/site-settings";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import {
+  isResolvableSocialLink,
+  resolveSocialProfileUrl,
+} from "@/lib/social-profile-url";
 import { cn } from "@/lib/utils";
 
 export type SocialLinkItem = {
@@ -76,30 +79,14 @@ export const SOCIAL_PLATFORM_ICONS: Record<SocialPlatform, ReactNode> = {
   custom: <Link2 className="h-5 w-5" strokeWidth={1.75} aria-hidden />,
 };
 
-function resolveSocialHref(link: SocialLinkEntry): string {
-  const url = link.url.trim();
-  const handle = link.handle.trim();
-
-  if (link.platform === "whatsapp") {
-    return (
-      buildWhatsAppUrl(url || handle) ?? (url || handle)
-    );
-  }
-
-  return url;
-}
-
 export function buildSocialLinkItems(links: SocialLinkEntry[]): SocialLinkItem[] {
   return links
-    .filter((link) => {
-      const href = resolveSocialHref(link);
-      return href.length > 0 && href !== "#";
-    })
+    .filter((link) => isResolvableSocialLink(link))
     .map((link) => ({
       id: link.id,
       platform: link.platform,
       label: link.label.trim() || PLATFORM_LABELS[link.platform],
-      href: resolveSocialHref(link),
+      href: resolveSocialProfileUrl(link),
       handle: link.handle.trim() || undefined,
     }));
 }

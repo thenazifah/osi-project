@@ -3,7 +3,10 @@ import { buildSocialLinkItems } from "@/components/footer/SocialLinks";
 import { getPublicSiteSettings } from "@/lib/cms";
 import { buildMessagingChannels } from "@/lib/messaging-channels";
 import { activeSocialLinks } from "@/lib/site-settings";
-import { resolveWhatsAppUrl } from "@/lib/whatsapp";
+import {
+  normalizeWhatsAppPhone,
+  resolveMessagingWhatsAppUrl,
+} from "@/lib/whatsapp";
 
 type SiteMessagingFabProps = {
   locale: string;
@@ -11,15 +14,24 @@ type SiteMessagingFabProps = {
 
 export default async function SiteMessagingFab({ locale }: SiteMessagingFabProps) {
   const siteSettings = await getPublicSiteSettings();
-  const socialLinks = buildSocialLinkItems(activeSocialLinks(siteSettings));
-  const channels = buildMessagingChannels(socialLinks);
-  const whatsappUrl = resolveWhatsAppUrl(siteSettings, locale);
+  const links = activeSocialLinks(siteSettings);
+  const socialLinks = buildSocialLinkItems(links);
+  const whatsappUrl = resolveMessagingWhatsAppUrl(siteSettings, locale);
+  const waLink =
+    siteSettings.socialLinks.find((link) => link.platform === "whatsapp") ??
+    links.find((link) => link.platform === "whatsapp");
+  const waSource = waLink?.handle.trim() || waLink?.url.trim() || "";
+  const whatsappHandle =
+    waSource && !/^https?:\/\//i.test(waSource)
+      ? normalizeWhatsAppPhone(waSource)
+        ? `+${normalizeWhatsAppPhone(waSource)}`
+        : waSource
+      : waSource || undefined;
 
-  return (
-    <FloatingMessageButton
-      locale={locale}
-      whatsappUrl={whatsappUrl}
-      channels={channels}
-    />
-  );
+  const channels = buildMessagingChannels(socialLinks, {
+    whatsappUrl,
+    whatsappHandle,
+  });
+
+  return <FloatingMessageButton locale={locale} channels={channels} />;
 }

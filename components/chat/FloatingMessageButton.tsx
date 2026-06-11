@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 
 type FloatingMessageButtonProps = {
   locale: string;
-  whatsappUrl: string | null;
   channels: MessagingChannel[];
 };
 
@@ -37,7 +36,6 @@ function ChannelIcon({
 
 export default function FloatingMessageButton({
   locale,
-  whatsappUrl,
   channels,
 }: FloatingMessageButtonProps) {
   const t = useTranslations("messagingFab");
@@ -75,32 +73,9 @@ export default function FloatingMessageButton({
     window.location.href = `/${locale}#rfq`;
   };
 
-  if (whatsappUrl) {
-    return (
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => trackMetaEvent("Contact", { content_name: "WhatsApp" })}
-        aria-label={t("whatsappLabel")}
-        title={t("whatsappLabel")}
-        className={cn(
-          "fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-transform duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E] sm:bottom-6 sm:right-6",
-          "bg-[#25D366] shadow-[#25D366]/30"
-        )}
-      >
-        <span
-          className="absolute inset-0 rounded-full bg-[#25D366]/50 animate-ping"
-          aria-hidden
-        />
-        <span className="relative flex h-7 w-7 items-center justify-center text-white">
-          {SOCIAL_PLATFORM_ICONS.whatsapp}
-        </span>
-      </a>
-    );
-  }
-
-  const externalChannels = channels.filter((c) => c.kind === "external");
+  const externalChannels = channels.filter(
+    (c) => c.kind === "external" && c.href?.trim()
+  );
   const emailChannel = channels.find((c) => c.kind === "email");
   const hasRfq = channels.some((c) => c.kind === "rfq");
 
@@ -130,10 +105,21 @@ export default function FloatingMessageButton({
                   href={channel.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    if (channel.platform === "whatsapp") {
+                      trackMetaEvent("Contact", { content_name: "WhatsApp" });
+                    }
+                    setOpen(false);
+                  }}
                   className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-ink transition-colors hover:bg-tag-bg"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-bg text-accent">
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 items-center justify-center rounded-full border border-border bg-bg text-accent",
+                      channel.platform === "whatsapp" &&
+                        "border-[#25D366]/30 bg-[#25D366]/10 text-[#128C7E]"
+                    )}
+                  >
                     <ChannelIcon platform={channel.platform} />
                   </span>
                   <span className="min-w-0 flex-1">

@@ -15,6 +15,8 @@ import {
 } from "@/lib/admin-auth";
 import { revalidateAdminAndSite } from "@/lib/admin-revalidate";
 import { uploadFileToCloudinary } from "@/lib/cloudinary-upload-server";
+import { listSiteImageLibrary } from "@/lib/site-image-library";
+import { uploadSiteImage } from "@/lib/site-image-upload";
 import { formatFirestoreError } from "@/lib/firestore-errors";
 import { getAdminDb, isAdminConfigured } from "@/lib/firebase-admin";
 import { verifyFirebaseIdToken } from "@/lib/verify-firebase-id-token";
@@ -32,6 +34,7 @@ import {
   activeSocialLinks,
   defaultSiteSettings,
   mergeSiteSettings,
+  normalizeSiteSettingsForSave,
   SITE_SETTINGS_DOC,
 } from "@/lib/site-settings";
 
@@ -623,7 +626,7 @@ export async function saveSiteSettings(
       .doc(SITE_SETTINGS_DOC)
       .set(
         {
-          ...mergeSiteSettings(settings),
+          ...normalizeSiteSettingsForSave(settings),
           updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
@@ -679,6 +682,32 @@ export async function uploadAdminImageToCloudinary(
   }
 
   return { publicId: result.publicId, secureUrl: result.secureUrl };
+}
+
+export async function uploadAdminSiteImage(
+  formData: FormData
+): Promise<{ url?: string; error?: string }> {
+  await requireAdmin();
+
+  const file = formData.get("file");
+  const imageKey = String(formData.get("imageKey") ?? "image").trim();
+
+  if (!(file instanceof File)) {
+    return { error: "No image file received." };
+  }
+
+  try {
+    return await uploadSiteImage(file, imageKey);
+  } catch (e) {
+    return {
+      error: e instanceof Error ? e.message : "Image upload failed.",
+    };
+  }
+}
+
+export async function listAvailableSiteImages() {
+  await requireAdmin();
+  return listSiteImageLibrary();
 }
 
 export async function syncPublicSite(): Promise<{ success: boolean; pages: number }> {

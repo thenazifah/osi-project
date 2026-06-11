@@ -16,7 +16,7 @@ import {
   type SocialPlatform,
 } from "@/lib/site-settings";
 import { normalizePixelId } from "@/lib/meta-pixel";
-import { CloudinaryImageField } from "@/components/admin/CloudinaryImageField";
+import { SiteImageField } from "@/components/admin/SiteImageField";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,7 +38,7 @@ const IMAGE_FIELDS: {
   {
     key: "hero",
     label: "Hero image",
-    hint: "Homepage hero — upload or paste a Cloudinary public ID",
+    hint: "Homepage hero background",
   },
   {
     key: "trustBar",
@@ -98,10 +98,18 @@ export function SiteSettingsEditor({
   };
 
   const addSocialLink = () => {
-    setSettings((prev) => ({
-      ...prev,
-      socialLinks: [...prev.socialLinks, createSocialLink("instagram")],
-    }));
+    setSettings((prev) => {
+      const hasWhatsapp = prev.socialLinks.some(
+        (link) => link.platform === "whatsapp"
+      );
+      return {
+        ...prev,
+        socialLinks: [
+          ...prev.socialLinks,
+          createSocialLink(hasWhatsapp ? "instagram" : "whatsapp"),
+        ],
+      };
+    });
   };
 
   const removeSocialLink = (id: string) => {
@@ -241,7 +249,10 @@ export function SiteSettingsEditor({
               Social links
             </CardTitle>
             <p className="mt-1 font-sans text-xs text-ink-muted">
-              Add or remove links. Only rows with a profile URL appear in the footer.
+              Add or remove links. Rows with a profile URL or handle appear on the
+              live site. For WhatsApp, use a phone number with country code (e.g.{" "}
+              <code className="rounded bg-tag-bg px-1">8801712345678</code>), not
+              @username.
             </p>
           </div>
           <Button type="button" variant="outline" size="sm" onClick={addSocialLink}>
@@ -318,7 +329,11 @@ export function SiteSettingsEditor({
                     onChange={(e) =>
                       updateSocialLink(link.id, { handle: e.target.value })
                     }
-                    placeholder="@organicscales"
+                    placeholder={
+                      link.platform === "whatsapp"
+                        ? "8801712345678"
+                        : "@organicscales"
+                    }
                   />
                 </div>
 
@@ -330,7 +345,11 @@ export function SiteSettingsEditor({
                     onChange={(e) =>
                       updateSocialLink(link.id, { url: e.target.value })
                     }
-                    placeholder="https://"
+                    placeholder={
+                      link.platform === "whatsapp"
+                        ? "https://wa.me/8801712345678"
+                        : "https://"
+                    }
                   />
                 </div>
               </div>
@@ -346,14 +365,14 @@ export function SiteSettingsEditor({
             Site images
           </CardTitle>
           <p className="font-sans text-xs text-ink-muted">
-            Click <strong>Upload to Cloudinary</strong> on each slot — files go directly to
-            your Cloudinary account. Then click <strong>Save site settings</strong> to publish
-            on the live website.
+            Upload a new image or choose from existing files in{" "}
+            <code className="rounded bg-tag-bg px-1">public/images</code>, then click{" "}
+            <strong>Save site settings</strong> to publish on the live website.
           </p>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           {IMAGE_FIELDS.map(({ key, label, hint }) => (
-            <CloudinaryImageField
+            <SiteImageField
               key={key}
               id={`img-${key}`}
               imageKey={key}
