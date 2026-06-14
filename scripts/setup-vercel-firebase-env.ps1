@@ -29,7 +29,8 @@ if (-not (Test-Path $saPath)) {
 function Read-DotEnvValue([string]$key) {
   $line = Get-Content ".env.local" -ErrorAction SilentlyContinue | Where-Object { $_ -match "^\s*$([regex]::Escape($key))=" } | Select-Object -First 1
   if (-not $line) { return $null }
-  return ($line -split "=", 2)[1].Trim()
+  $value = ($line -split "=", 2)[1].Trim().Trim('"').Trim("'")
+  return $value
 }
 
 $serviceAccountJson = (Get-Content $saPath -Raw | ConvertFrom-Json | ConvertTo-Json -Compress -Depth 10)
@@ -45,6 +46,8 @@ $vars = [ordered]@{
   ADMIN_SECRET                            = Read-DotEnvValue "ADMIN_SECRET"
   ADMIN_ALLOWED_EMAILS                    = Read-DotEnvValue "ADMIN_ALLOWED_EMAILS"
   FIREBASE_SERVICE_ACCOUNT_KEY            = $serviceAccountJson
+  BLOB_STORE_ID                           = Read-DotEnvValue "BLOB_STORE_ID"
+  BLOB_READ_WRITE_TOKEN                   = Read-DotEnvValue "BLOB_READ_WRITE_TOKEN"
 }
 
 $targets = @("production", "preview", "development")
