@@ -365,8 +365,7 @@ export function SiteSettingsEditor({
             Site images
           </CardTitle>
           <p className="font-sans text-xs text-ink-muted">
-            Upload a new image or choose from existing files in{" "}
-            <code className="rounded bg-tag-bg px-1">public/images</code>, then click{" "}
+            Upload a new image or choose from existing files, then click{" "}
             <strong>Save site settings</strong> to publish on the live website.
           </p>
         </CardHeader>
