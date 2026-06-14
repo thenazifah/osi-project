@@ -39,12 +39,21 @@ import {
 } from "@/lib/site-settings";
 
 async function requireAdmin() {
+  const authError = await ensureAdmin();
+  if (authError) {
+    throw new Error(authError);
+  }
+}
+
+/** Returns an error message instead of throwing (safe for client-called server actions). */
+async function ensureAdmin(): Promise<string | null> {
   if (!(await isAdminAuthenticated())) {
-    throw new Error("Unauthorized");
+    return "Unauthorized. Sign in again.";
   }
   if (!isAdminConfigured()) {
-    throw new Error("Firebase Admin is not configured.");
+    return "Firebase Admin is not configured.";
   }
+  return null;
 }
 
 async function withFirestore<T>(fn: () => Promise<T>): Promise<T> {
@@ -617,51 +626,72 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
 export async function saveSiteSettings(
   settings: SiteSettings
-): Promise<{ success: boolean }> {
-  await requireAdmin();
-  return withFirestore(async () => {
-    const db = getAdminDb();
-    await db
-      .collection("site_settings")
-      .doc(SITE_SETTINGS_DOC)
-      .set(
-        {
-          ...normalizeSiteSettingsForSave(settings),
-          updatedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
-    await writeAuditLog({
-      action: "site.save",
-      category: "site",
-      summary: "Saved site settings (social links, images, Meta Pixel)",
-    });
+): Promise<{ success: boolean; error?: string }> {
+  const authError = await ensureAdmin();
+  if (authError) return { success: false, error: authError };
 
-    revalidatePublicSite();
-    return { success: true };
-  });
+  try {
+    return await withFirestore(async () => {
+      const db = getAdminDb();
+      await db
+        .collection("site_settings")
+        .doc(SITE_SETTINGS_DOC)
+        .set(
+          {
+            ...normalizeSiteSettingsForSave(settings),
+            updatedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        );
+      await writeAuditLog({
+        action: "site.save",
+        category: "site",
+        summary: "Saved site settings (social links, images, Meta Pixel)",
+      });
+
+      revalidatePublicSite();
+      return { success: true };
+    });
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to save site settings.",
+    };
+  }
 }
 
-export async function seedSiteSettingsFromDefaults(): Promise<{ success: boolean }> {
-  await requireAdmin();
-  return withFirestore(async () => {
-    const db = getAdminDb();
-    await db
-      .collection("site_settings")
-      .doc(SITE_SETTINGS_DOC)
-      .set({
-        ...defaultSiteSettings(),
-        updatedAt: FieldValue.serverTimestamp(),
-      });
-    await writeAuditLog({
-      action: "site.seed",
-      category: "site",
-      summary: "Reset site settings to defaults",
-    });
+export async function seedSiteSettingsFromDefaults(): Promise<{
+  success: boolean;
+  error?: string;
+}> {
+  const authError = await ensureAdmin();
+  if (authError) return { success: false, error: authError };
 
-    revalidatePublicSite();
-    return { success: true };
-  });
+  try {
+    return await withFirestore(async () => {
+      const db = getAdminDb();
+      await db
+        .collection("site_settings")
+        .doc(SITE_SETTINGS_DOC)
+        .set({
+          ...defaultSiteSettings(),
+          updatedAt: FieldValue.serverTimestamp(),
+        });
+      await writeAuditLog({
+        action: "site.seed",
+        category: "site",
+        summary: "Reset site settings to defaults",
+      });
+
+      revalidatePublicSite();
+      return { success: true };
+    });
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to reset site settings.",
+    };
+  }
 }
 
 export async function uploadAdminImageToCloudinary(
@@ -687,7 +717,8 @@ export async function uploadAdminImageToCloudinary(
 export async function uploadAdminSiteImage(
   formData: FormData
 ): Promise<{ url?: string; error?: string }> {
-  await requireAdmin();
+  const authError = await ensureAdmin();
+  if (authError) return { error: authError };
 
   const file = formData.get("file");
   const imageKey = String(formData.get("imageKey") ?? "image").trim();
@@ -706,8 +737,14 @@ export async function uploadAdminSiteImage(
 }
 
 export async function listAvailableSiteImages() {
-  await requireAdmin();
-  return listSiteImageLibrary();
+  const authError = await ensureAdmin();
+  if (authError) return [];
+
+  try {
+    return await listSiteImageLibrary();
+  } catch {
+    return [];
+  }
 }
 
 export async function syncPublicSite(): Promise<{ success: boolean; pages: number }> {

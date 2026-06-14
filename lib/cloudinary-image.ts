@@ -1,3 +1,8 @@
+/** True for same-origin blob proxy URLs served by /api/site-images. */
+export function isApiProxyImage(src: string): boolean {
+  return src.trim().startsWith("/api/");
+}
+
 /** True when src should be delivered via Cloudinary (public ID or Cloudinary URL). */
 export function isCloudinarySource(src: string): boolean {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME?.trim();

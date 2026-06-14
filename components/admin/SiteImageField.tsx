@@ -9,6 +9,7 @@ import {
 } from "@/lib/admin-actions";
 import type { SiteImageOption } from "@/lib/site-image-library";
 import { CldMediaImage } from "@/components/visuals/CldMediaImage";
+import { isApiProxyImage } from "@/lib/cloudinary-image";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -214,6 +215,7 @@ export function SiteImageField({
                     fill
                     sizes="120px"
                     className="object-cover"
+                    unoptimized={isApiProxyImage(image.url)}
                   />
                 </button>
               ))}

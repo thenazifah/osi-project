@@ -24,6 +24,8 @@ export default async function AdminSitePage() {
 
   try {
     settings = await getSiteSettings();
+    // Ensure only JSON-serializable props reach the client editor.
+    settings = JSON.parse(JSON.stringify(settings)) as typeof settings;
   } catch (e) {
     error = e instanceof Error ? e.message : "Failed to load site settings";
   }

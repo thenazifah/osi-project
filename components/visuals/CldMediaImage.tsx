@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";
-import { isCloudinarySource } from "@/lib/cloudinary-image";
+import { isApiProxyImage, isCloudinarySource } from "@/lib/cloudinary-image";
 
 type CldMediaImageProps = {
   src: string;
@@ -55,6 +55,8 @@ export function CldMediaImage({
     );
   }
 
+  const unoptimized = isApiProxyImage(src);
+
   return (
     <Image
       src={src}
@@ -66,6 +68,7 @@ export function CldMediaImage({
       className={className}
       style={style}
       priority={priority}
+      unoptimized={unoptimized}
     />
   );
 }

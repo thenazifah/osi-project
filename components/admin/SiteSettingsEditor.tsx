@@ -139,7 +139,11 @@ export function SiteSettingsEditor({
   const save = () => {
     setMessage(null);
     startTransition(async () => {
-      await saveSiteSettings(settings);
+      const result = await saveSiteSettings(settings);
+      if (!result.success) {
+        setMessage(result.error ?? "Failed to save site settings.");
+        return;
+      }
       setMessage("Site settings saved. Landing page, header, footer, and hero updated.");
       router.refresh();
     });
@@ -147,7 +151,11 @@ export function SiteSettingsEditor({
 
   const seed = () => {
     startTransition(async () => {
-      await seedSiteSettingsFromDefaults();
+      const result = await seedSiteSettingsFromDefaults();
+      if (!result.success) {
+        setMessage(result.error ?? "Failed to reset site settings.");
+        return;
+      }
       setMessage("Reset to bundled defaults. Reloading…");
       router.refresh();
     });
