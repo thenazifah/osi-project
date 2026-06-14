@@ -1,9 +1,9 @@
 import { mkdir, writeFile } from "fs/promises";
 import { join } from "path";
 import {
-  canUploadToFirebaseStorage,
-  uploadSiteImageToFirebaseStorage,
-} from "@/lib/site-image-storage";
+  canUploadToVercelBlob,
+  uploadSiteImageToBlob,
+} from "@/lib/site-image-blob";
 
 const MAX_BYTES = 5 * 1024 * 1024;
 const ALLOWED_TYPES = new Set([
@@ -62,14 +62,10 @@ export async function uploadSiteImage(
 
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  if (isServerlessHost() || canUploadToFirebaseStorage()) {
-    const cloud = await uploadSiteImageToFirebaseStorage(
-      buffer,
-      file.type,
-      imageKey
-    );
-    if (cloud.url || cloud.error || isServerlessHost()) {
-      return cloud;
+  if (isServerlessHost() || canUploadToVercelBlob()) {
+    const blob = await uploadSiteImageToBlob(buffer, file.type, imageKey);
+    if (blob.url || blob.error || isServerlessHost()) {
+      return blob;
     }
   }
 
@@ -78,12 +74,12 @@ export async function uploadSiteImage(
   } catch (e) {
     const message = e instanceof Error ? e.message : "Image upload failed.";
     if (message.includes("EROFS") || message.includes("read-only")) {
-      if (canUploadToFirebaseStorage()) {
-        return uploadSiteImageToFirebaseStorage(buffer, file.type, imageKey);
+      if (canUploadToVercelBlob()) {
+        return uploadSiteImageToBlob(buffer, file.type, imageKey);
       }
       return {
         error:
-          "Cannot save images on this host. Set NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET and FIREBASE_SERVICE_ACCOUNT_KEY on Vercel.",
+          "Cannot save images on this host. Connect Vercel Blob in the Vercel Dashboard (Storage → Blob), then redeploy.",
       };
     }
     return { error: message };

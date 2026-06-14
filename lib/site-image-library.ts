@@ -1,6 +1,6 @@
 import { readdir } from "fs/promises";
 import { extname, join } from "path";
-import { listFirebaseSiteImages } from "@/lib/site-image-storage";
+import { listBlobSiteImages } from "@/lib/site-image-blob";
 
 const IMAGE_DIRS = ["export", "products", "site"] as const;
 const IMAGE_EXT = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif"]);
@@ -34,15 +34,15 @@ async function listLocalSiteImages(): Promise<SiteImageOption[]> {
 }
 
 export async function listSiteImageLibrary(): Promise<SiteImageOption[]> {
-  const [local, cloud] = await Promise.all([
+  const [local, blob] = await Promise.all([
     listLocalSiteImages(),
-    listFirebaseSiteImages(),
+    listBlobSiteImages(),
   ]);
 
   const seen = new Set<string>();
   const merged: SiteImageOption[] = [];
 
-  for (const item of [...cloud, ...local]) {
+  for (const item of [...blob, ...local]) {
     if (seen.has(item.url)) continue;
     seen.add(item.url);
     merged.push(item);

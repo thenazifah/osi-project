@@ -9,8 +9,6 @@ import {
 } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
-import { getStorage } from "firebase-admin/storage";
-import { resolveFirebaseStorageBucket, listFirebaseStorageBucketCandidates } from "@/lib/firebase-storage-bucket";
 
 export type AdminConfigStatus = {
   ready: boolean;
@@ -99,15 +97,12 @@ function initAdmin(): App {
   const serviceAccount = parseServiceAccount(raw);
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 
-  const storageBucket = resolveFirebaseStorageBucket(serviceAccount);
-
   return initializeApp({
     credential: cert(serviceAccount),
     projectId:
       (typeof serviceAccount.projectId === "string"
         ? serviceAccount.projectId
         : undefined) ?? projectId,
-    ...(storageBucket ? { storageBucket } : {}),
   });
 }
 
@@ -126,20 +121,4 @@ export function getAdminDb() {
 
 export function getAdminAuth() {
   return getAuth(getAdminApp());
-}
-
-export function getAdminStorage() {
-  return getStorage(getAdminApp());
-}
-
-export function getAdminStorageBucketName(): string | null {
-  const app = getApps()[0];
-  if (app?.options.storageBucket) {
-    return app.options.storageBucket;
-  }
-  const raw = loadServiceAccountJson();
-  if (raw) {
-    return resolveFirebaseStorageBucket(parseServiceAccount(raw));
-  }
-  return listFirebaseStorageBucketCandidates()[0] ?? null;
 }
