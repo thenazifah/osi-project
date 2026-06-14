@@ -10,7 +10,7 @@ import {
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
-import { resolveFirebaseStorageBucket } from "@/lib/firebase-storage-bucket";
+import { resolveFirebaseStorageBucket, listFirebaseStorageBucketCandidates } from "@/lib/firebase-storage-bucket";
 
 export type AdminConfigStatus = {
   ready: boolean;
@@ -141,5 +141,5 @@ export function getAdminStorageBucketName(): string | null {
   if (raw) {
     return resolveFirebaseStorageBucket(parseServiceAccount(raw));
   }
-  return resolveFirebaseStorageBucket();
+  return listFirebaseStorageBucketCandidates()[0] ?? null;
 }
